@@ -20,15 +20,20 @@
     var CONFIG = {"hostname":"yoursite.com","root":"/","scheme":"Pisces","version":"7.7.2","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":false,"show_result":false,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":false,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}}};
   </script>
 
-  <meta property="og:type" content="website">
-<meta property="og:title" content="共你云雨">
-<meta property="og:url" content="http://yoursite.com/archives/2020/03/index.html">
+  <meta name="description" content="数据类型远不止基础学到的那些东西">
+<meta property="og:type" content="article">
+<meta property="og:title" content="数据类型">
+<meta property="og:url" content="http://yoursite.com/2020/03/09/%E6%95%B0%E6%8D%AE%E7%B1%BB%E5%9E%8B/index.html">
 <meta property="og:site_name" content="共你云雨">
+<meta property="og:description" content="数据类型远不止基础学到的那些东西">
 <meta property="og:locale" content="zh_CN">
+<meta property="article:published_time" content="2020-03-09T08:46:39.377Z">
+<meta property="article:modified_time" content="2020-03-09T08:46:40.863Z">
 <meta property="article:author" content="Edison">
+<meta property="article:tag" content="js">
 <meta name="twitter:card" content="summary">
 
-<link rel="canonical" href="http://yoursite.com/archives/2020/03/">
+<link rel="canonical" href="http://yoursite.com/2020/03/09/%E6%95%B0%E6%8D%AE%E7%B1%BB%E5%9E%8B/">
 
 
 <script id="page-configurations">
@@ -36,11 +41,11 @@
   CONFIG.page = {
     sidebar: "",
     isHome : false,
-    isPost : false
+    isPost : true
   };
 </script>
 
-  <title>归档 | 共你云雨</title>
+  <title>数据类型 | 共你云雨</title>
   
 
 
@@ -150,232 +155,108 @@
           <div class="content">
             
 
+  <div class="posts-expand">
+      
   
   
-  
-  <div class="post-block">
-    <div class="posts-collapse">
-      <div class="collection-title">
-        <span class="collection-header">嗯..! 目前共计 22 篇日志。 继续努力。</span>
-      </div>
+  <article itemscope itemtype="http://schema.org/Article" class="post-block " lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2020/03/09/%E6%95%B0%E6%8D%AE%E7%B1%BB%E5%9E%8B/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="Edison">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="共你云雨">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          数据类型
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+              
+
+              <time title="创建时间：2020-03-09 16:46:39 / 修改时间：16:46:40" itemprop="dateCreated datePublished" datetime="2020-03-09T16:46:39+08:00">2020-03-09</time>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
 
       
-    <div class="collection-year">
-      <h1 class="collection-header">2020</h1>
+        <p>数据类型远不止基础学到的那些东西</p>
+<a id="more"></a>
+<h2 id="分类"><a href="#分类" class="headerlink" title="分类"></a>分类</h2><p>整体上分为两大类：基本（值）类型；对象（引用）类型。</p>
+<h3 id="基本（值）类型"><a href="#基本（值）类型" class="headerlink" title="基本（值）类型"></a>基本（值）类型</h3><blockquote>
+<ul>
+<li>String</li>
+<li>Boolean</li>
+<li>Number</li>
+<li>Null</li>
+<li>Undefined</li>
+</ul>
+</blockquote>
+<h3 id="对象（引用）类型"><a href="#对象（引用）类型" class="headerlink" title="对象（引用）类型"></a>对象（引用）类型</h3><pre><code>&gt; Object   以下都是Object
+&gt; Function  可以执行的对象
+&gt; Array     有下标的对象，并且数据都是有顺序的</code></pre><h2 id="判断"><a href="#判断" class="headerlink" title="判断"></a>判断</h2><blockquote>
+<ul>
+<li>typeof   返回数据类型的字符串表达式</li>
+<li>instanceof    专门判断对象的具体类型（函数还是数组）  </li>
+<li>===    全等，不会做类型的转换，不要使用==。</li>
+</ul>
+</blockquote>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">let</span> a;</span><br><span class="line"><span class="built_in">console</span>.log(a,<span class="keyword">typeof</span> a)   <span class="comment">//==&gt;undefined,"undefined"</span></span><br><span class="line"><span class="keyword">let</span> a=<span class="number">3</span>;</span><br><span class="line"><span class="built_in">console</span>.log(tyopof a===<span class="string">"number"</span>)   <span class="comment">//==&gt;true  在判断数据类型时，不要用大写！</span></span><br></pre></td></tr></table></figure>
+
+<p>A instanceof B   :  指A是否为B的一个实例化对象，正确返回true，错误返回false。</p>
+<p>这里要特别注意，在使用对象的属性时，一定不要直接写属性，一定一定要在属性前带上对象名。</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">let</span> a=&#123;</span><br><span class="line">    b:[<span class="string">"h"</span>,<span class="string">"e"</span>,<span class="number">1</span>,<span class="number">2</span>,<span class="string">"l"</span>],</span><br><span class="line">    c:<span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123;<span class="built_in">console</span>.log(<span class="string">"hello"</span>)&#125;</span><br><span class="line">&#125;</span><br><span class="line"><span class="built_in">console</span>.log(a <span class="keyword">instanceof</span> <span class="built_in">Object</span>);</span><br><span class="line"><span class="built_in">console</span>.log(a.b <span class="keyword">instanceof</span> <span class="built_in">Array</span>);</span><br><span class="line"><span class="built_in">console</span>.log(a.c <span class="keyword">instanceof</span> <span class="built_in">Function</span>);</span><br><span class="line"><span class="built_in">console</span>.log(a.b <span class="keyword">instanceof</span> <span class="built_in">Object</span>);</span><br><span class="line"><span class="built_in">console</span>.log(a.c <span class="keyword">instanceof</span> <span class="built_in">Object</span>);</span><br><span class="line"><span class="built_in">console</span>.log(<span class="keyword">typeof</span> a);</span><br><span class="line"> <span class="built_in">console</span>.log(<span class="keyword">typeof</span> a.b);     <span class="comment">//==&gt; 这里a.b是Array，但是使用typeof显示是object，下面的function正常显示。</span></span><br><span class="line"><span class="built_in">console</span>.log(<span class="keyword">typeof</span> a.c);</span><br></pre></td></tr></table></figure>
     </div>
 
-  <article itemscope itemtype="http://schema.org/Article">
-    <header class="post-header">
+    
+    
+    
 
-      <div class="post-meta">
-        <time itemprop="dateCreated"
-              datetime="2020-03-09T16:46:42+08:00"
-              content="2020-03-09">
-          03-09
-        </time>
-      </div>
+      <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/tags/js/" rel="tag"># js</a>
+          </div>
 
-      <h2 class="post-title">
-          <a class="post-title-link" href="/2020/03/09/%E6%AD%A3%E5%88%99%E8%A1%A8%E8%BE%BE%E5%BC%8F/" itemprop="url">
-            <span itemprop="name">正则表达式</span>
-          </a>
-      </h2>
-
-    </header>
-  </article>
-
-  <article itemscope itemtype="http://schema.org/Article">
-    <header class="post-header">
-
-      <div class="post-meta">
-        <time itemprop="dateCreated"
-              datetime="2020-03-09T16:46:41+08:00"
-              content="2020-03-09">
-          03-09
-        </time>
-      </div>
-
-      <h2 class="post-title">
-          <a class="post-title-link" href="/2020/03/09/%E5%BE%AE%E4%BF%A1%E5%B0%8F%E7%A8%8B%E5%BA%8F%E7%AC%94%E8%AE%B0/" itemprop="url">
-            <span itemprop="name">微信小程序学习笔记</span>
-          </a>
-      </h2>
-
-    </header>
-  </article>
-
-  <article itemscope itemtype="http://schema.org/Article">
-    <header class="post-header">
-
-      <div class="post-meta">
-        <time itemprop="dateCreated"
-              datetime="2020-03-09T16:46:41+08:00"
-              content="2020-03-09">
-          03-09
-        </time>
-      </div>
-
-      <h2 class="post-title">
-          <a class="post-title-link" href="/2020/03/09/%E6%95%B0%E6%8D%AE%E2%80%94%E5%8F%98%E9%87%8F%E2%80%94%E5%86%85%E5%AD%98%E6%A6%82%E5%BF%B5%E8%BE%A8%E6%9E%90/" itemprop="url">
-            <span itemprop="name">数据—变量—内存概念辨析</span>
-          </a>
-      </h2>
-
-    </header>
-  </article>
-
-  <article itemscope itemtype="http://schema.org/Article">
-    <header class="post-header">
-
-      <div class="post-meta">
-        <time itemprop="dateCreated"
-              datetime="2020-03-09T16:46:41+08:00"
-              content="2020-03-09">
-          03-09
-        </time>
-      </div>
-
-      <h2 class="post-title">
-          <a class="post-title-link" href="/2020/03/09/%E9%9D%A2%E5%90%91%E5%AF%B9%E8%B1%A1%E7%9A%84%E7%A8%8B%E5%BA%8F%E8%AE%BE%E8%AE%A1/" itemprop="url">
-            <span itemprop="name">面向对象的程序设计(基于ES5)</span>
-          </a>
-      </h2>
-
-    </header>
-  </article>
-
-  <article itemscope itemtype="http://schema.org/Article">
-    <header class="post-header">
-
-      <div class="post-meta">
-        <time itemprop="dateCreated"
-              datetime="2020-03-09T16:46:41+08:00"
-              content="2020-03-09">
-          03-09
-        </time>
-      </div>
-
-      <h2 class="post-title">
-          <a class="post-title-link" href="/2020/03/09/%E9%9D%A2%E5%90%91%E5%AF%B9%E8%B1%A1%E7%BC%96%E7%A8%8B/" itemprop="url">
-            <span itemprop="name">面向对象编程--类的创建，数据的封装</span>
-          </a>
-      </h2>
-
-    </header>
-  </article>
-
-  <article itemscope itemtype="http://schema.org/Article">
-    <header class="post-header">
-
-      <div class="post-meta">
-        <time itemprop="dateCreated"
-              datetime="2020-03-09T16:46:40+08:00"
-              content="2020-03-09">
-          03-09
-        </time>
-      </div>
-
-      <h2 class="post-title">
-          <a class="post-title-link" href="/2020/03/09/%E7%AE%80%E5%8D%95%E5%B7%A5%E5%8E%82%E6%A8%A1%E5%BC%8F/" itemprop="url">
-            <span itemprop="name">简单工厂模式</span>
-          </a>
-      </h2>
-
-    </header>
-  </article>
-
-  <article itemscope itemtype="http://schema.org/Article">
-    <header class="post-header">
-
-      <div class="post-meta">
-        <time itemprop="dateCreated"
-              datetime="2020-03-09T16:46:40+08:00"
-              content="2020-03-09">
-          03-09
-        </time>
-      </div>
-
-      <h2 class="post-title">
-          <a class="post-title-link" href="/2020/03/09/%E5%87%BD%E6%95%B0/" itemprop="url">
-            <span itemprop="name">函数IIFE（关于匿名函数自调用）</span>
-          </a>
-      </h2>
-
-    </header>
-  </article>
-
-  <article itemscope itemtype="http://schema.org/Article">
-    <header class="post-header">
-
-      <div class="post-meta">
-        <time itemprop="dateCreated"
-              datetime="2020-03-09T16:46:40+08:00"
-              content="2020-03-09">
-          03-09
-        </time>
-      </div>
-
-      <h2 class="post-title">
-          <a class="post-title-link" href="/2020/03/09/%E5%85%B3%E4%BA%8E%E6%95%B0%E6%8D%AE%E7%B1%BB%E5%9E%8B%E7%9A%84%E5%87%A0%E4%B8%AA%E9%97%AE%E9%A2%98/" itemprop="url">
-            <span itemprop="name">关于数据类型的几个问题</span>
-          </a>
-      </h2>
-
-    </header>
-  </article>
-
-  <article itemscope itemtype="http://schema.org/Article">
-    <header class="post-header">
-
-      <div class="post-meta">
-        <time itemprop="dateCreated"
-              datetime="2020-03-09T16:46:40+08:00"
-              content="2020-03-09">
-          03-09
-        </time>
-      </div>
-
-      <h2 class="post-title">
-          <a class="post-title-link" href="/2020/03/09/%E5%AF%B9%E8%B1%A1/" itemprop="url">
-            <span itemprop="name">对象</span>
-          </a>
-      </h2>
-
-    </header>
-  </article>
-
-  <article itemscope itemtype="http://schema.org/Article">
-    <header class="post-header">
-
-      <div class="post-meta">
-        <time itemprop="dateCreated"
-              datetime="2020-03-09T16:46:40+08:00"
-              content="2020-03-09">
-          03-09
-        </time>
-      </div>
-
-      <h2 class="post-title">
-          <a class="post-title-link" href="/2020/03/09/node%E7%AC%94%E8%AE%B0%EF%BC%88%E4%B8%80%EF%BC%89/" itemprop="url">
-            <span itemprop="name">node学习笔记（一）</span>
-          </a>
-      </h2>
-
-    </header>
-  </article>
+        
 
 
+        
+    <div class="post-nav">
+      <div class="post-nav-item">
+    <a href="/2020/03/09/vue%E7%BB%84%E4%BB%B6%E6%B7%B1%E5%85%A5%E7%90%86%E8%A7%A3/" rel="prev" title="vue组件的深入理解">
+      <i class="fa fa-chevron-left"></i> vue组件的深入理解
+    </a></div>
+      <div class="post-nav-item">
+    <a href="/2020/03/09/%E8%BF%99%E6%98%AF%E6%88%91%E7%9A%84%E7%AC%AC%E4%B8%80%E4%B8%AA%E5%9F%BA%E4%BA%8Egithub%E7%9A%84hexo%E5%8D%9A%E5%AE%A2/" rel="next" title="这是我的第一个基于github的hexo博客">
+      这是我的第一个基于github的hexo博客 <i class="fa fa-chevron-right"></i>
+    </a></div>
     </div>
+      </footer>
+    
+  </article>
+  
+  
+  
+
   </div>
-  
-  
-  
-
-  
-  <nav class="pagination">
-    <span class="page-number current">1</span><a class="page-number" href="/archives/2020/03/page/2/">2</a><a class="page-number" href="/archives/2020/03/page/3/">3</a><a class="extend next" rel="next" href="/archives/2020/03/page/2/"><i class="fa fa-angle-right" aria-label="下一页"></i></a>
-  </nav>
-
 
 
           </div>
@@ -426,6 +307,7 @@
 
       <!--noindex-->
       <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#分类"><span class="nav-number">1.</span> <span class="nav-text">分类</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#基本（值）类型"><span class="nav-number">1.1.</span> <span class="nav-text">基本（值）类型</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#对象（引用）类型"><span class="nav-number">1.2.</span> <span class="nav-text">对象（引用）类型</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#判断"><span class="nav-number">2.</span> <span class="nav-text">判断</span></a></li></ol></div>
       </div>
       <!--/noindex-->
 

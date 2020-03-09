@@ -20,19 +20,20 @@
     var CONFIG = {"hostname":"yoursite.com","root":"/","scheme":"Pisces","version":"7.7.2","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":false,"show_result":false,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":false,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}}};
   </script>
 
-  <meta name="description" content="Welcome to Hexo! This is your very first post. Check documentation for more info. If you get any problems when using Hexo, you can find the answer in troubleshooting or you can ask me on GitHub. Quick">
+  <meta name="description" content="正则表达式学习笔记">
 <meta property="og:type" content="article">
-<meta property="og:title" content="Hello World">
-<meta property="og:url" content="http://yoursite.com/2020/03/09/hello-world/index.html">
+<meta property="og:title" content="正则表达式">
+<meta property="og:url" content="http://yoursite.com/2020/03/09/%E6%AD%A3%E5%88%99%E8%A1%A8%E8%BE%BE%E5%BC%8F/index.html">
 <meta property="og:site_name" content="共你云雨">
-<meta property="og:description" content="Welcome to Hexo! This is your very first post. Check documentation for more info. If you get any problems when using Hexo, you can find the answer in troubleshooting or you can ask me on GitHub. Quick">
+<meta property="og:description" content="正则表达式学习笔记">
 <meta property="og:locale" content="zh_CN">
-<meta property="article:published_time" content="2020-03-09T05:42:28.858Z">
-<meta property="article:modified_time" content="2020-03-09T05:42:28.858Z">
+<meta property="article:published_time" content="2020-03-09T08:46:42.105Z">
+<meta property="article:modified_time" content="2020-03-09T08:46:42.939Z">
 <meta property="article:author" content="Edison">
+<meta property="article:tag" content="js">
 <meta name="twitter:card" content="summary">
 
-<link rel="canonical" href="http://yoursite.com/2020/03/09/hello-world/">
+<link rel="canonical" href="http://yoursite.com/2020/03/09/%E6%AD%A3%E5%88%99%E8%A1%A8%E8%BE%BE%E5%BC%8F/">
 
 
 <script id="page-configurations">
@@ -44,7 +45,7 @@
   };
 </script>
 
-  <title>Hello World | 共你云雨</title>
+  <title>正则表达式 | 共你云雨</title>
   
 
 
@@ -159,7 +160,7 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block " lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2020/03/09/hello-world/">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2020/03/09/%E6%AD%A3%E5%88%99%E8%A1%A8%E8%BE%BE%E5%BC%8F/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="image" content="/images/avatar.gif">
@@ -172,7 +173,7 @@
     </span>
       <header class="post-header">
         <h1 class="post-title" itemprop="name headline">
-          Hello World
+          正则表达式
         </h1>
 
         <div class="post-meta">
@@ -182,7 +183,7 @@
               </span>
               <span class="post-meta-item-text">发表于</span>
 
-              <time title="创建时间：2020-03-09 13:42:28" itemprop="dateCreated datePublished" datetime="2020-03-09T13:42:28+08:00">2020-03-09</time>
+              <time title="创建时间：2020-03-09 16:46:42" itemprop="dateCreated datePublished" datetime="2020-03-09T16:46:42+08:00">2020-03-09</time>
             </span>
 
           
@@ -196,19 +197,67 @@
     <div class="post-body" itemprop="articleBody">
 
       
-        <p>Welcome to <a href="https://hexo.io/" target="_blank" rel="noopener">Hexo</a>! This is your very first post. Check <a href="https://hexo.io/docs/" target="_blank" rel="noopener">documentation</a> for more info. If you get any problems when using Hexo, you can find the answer in <a href="https://hexo.io/docs/troubleshooting.html" target="_blank" rel="noopener">troubleshooting</a> or you can ask me on <a href="https://github.com/hexojs/hexo/issues" target="_blank" rel="noopener">GitHub</a>.</p>
-<h2 id="Quick-Start"><a href="#Quick-Start" class="headerlink" title="Quick Start"></a>Quick Start</h2><h3 id="Create-a-new-post"><a href="#Create-a-new-post" class="headerlink" title="Create a new post"></a>Create a new post</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo new <span class="string">"My New Post"</span></span><br></pre></td></tr></table></figure>
+        <hr>
+<h2 id="正则表达式学习笔记"><a href="#正则表达式学习笔记" class="headerlink" title="正则表达式学习笔记"></a>正则表达式学习笔记</h2><a id="more"></a>
 
-<p>More info: <a href="https://hexo.io/docs/writing.html" target="_blank" rel="noopener">Writing</a></p>
-<h3 id="Run-server"><a href="#Run-server" class="headerlink" title="Run server"></a>Run server</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo server</span><br></pre></td></tr></table></figure>
+<h2 id="Start"><a href="#Start" class="headerlink" title="Start"></a>Start</h2><pre><code>现在想验证一串美国的邮政编码，格式为十进制代码：99999-9999</code></pre><p>不使用正则表达式代码：</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">isThisAZipCode</span>(<span class="params">candidate</span>)</span>&#123;</span><br><span class="line">	<span class="keyword">if</span>(<span class="keyword">typeof</span> candidate!==<span class="string">"string"</span>||candidate.length!=<span class="number">10</span>)</span><br><span class="line">		<span class="keyword">return</span> <span class="literal">false</span></span><br><span class="line">		<span class="built_in">console</span>.log(<span class="string">"false"</span>)		</span><br><span class="line">	<span class="keyword">for</span>(<span class="keyword">let</span> n=<span class="number">0</span>;n&lt;candidate.length;n++)&#123;</span><br><span class="line">		<span class="keyword">let</span> c=candidate[n]</span><br><span class="line">		<span class="keyword">switch</span>(n)&#123;</span><br><span class="line">			<span class="keyword">case</span> <span class="number">0</span>:</span><br><span class="line">			<span class="keyword">case</span> <span class="number">1</span>:</span><br><span class="line">			<span class="keyword">case</span> <span class="number">2</span>:</span><br><span class="line">			<span class="keyword">case</span> <span class="number">3</span>:</span><br><span class="line">			<span class="keyword">case</span> <span class="number">4</span>:</span><br><span class="line">			<span class="keyword">case</span> <span class="number">6</span>:</span><br><span class="line">			<span class="keyword">case</span> <span class="number">7</span>:</span><br><span class="line">			<span class="keyword">case</span> <span class="number">8</span>:</span><br><span class="line">			<span class="keyword">case</span> <span class="number">9</span>:</span><br><span class="line">				<span class="keyword">if</span>(c&lt;<span class="string">"0"</span>||c&gt;<span class="string">"9"</span>)</span><br><span class="line">					<span class="built_in">console</span>.log(<span class="string">"false"</span>)</span><br><span class="line">					<span class="keyword">return</span> <span class="literal">false</span></span><br><span class="line">				<span class="keyword">break</span></span><br><span class="line">			<span class="keyword">case</span> <span class="number">5</span>:</span><br><span class="line">				<span class="keyword">if</span>(c!=<span class="string">"-"</span>)</span><br><span class="line">					<span class="built_in">console</span>.log(<span class="string">"false"</span>)</span><br><span class="line">					<span class="keyword">return</span> <span class="literal">false</span></span><br><span class="line">				<span class="keyword">break</span></span><br><span class="line">		&#125;</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="built_in">console</span>.log(<span class="string">"true"</span>)</span><br><span class="line">	<span class="keyword">return</span> <span class="literal">true</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 
-<p>More info: <a href="https://hexo.io/docs/server.html" target="_blank" rel="noopener">Server</a></p>
-<h3 id="Generate-static-files"><a href="#Generate-static-files" class="headerlink" title="Generate static files"></a>Generate static files</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo generate</span><br></pre></td></tr></table></figure>
+<p>这种代码看起来很繁琐，这时就可以使用正则表达式</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">isThisAZipCode</span>(<span class="params">candidate</span>)</span></span><br><span class="line"><span class="function">    <span class="title">return</span> /^\<span class="title">d</span></span>&#123;<span class="number">5</span>&#125;-\d&#123;<span class="number">4</span>&#125;$/.test(candidate)</span><br></pre></td></tr></table></figure>
 
-<p>More info: <a href="https://hexo.io/docs/generating.html" target="_blank" rel="noopener">Generating</a></p>
-<h3 id="Deploy-to-remote-sites"><a href="#Deploy-to-remote-sites" class="headerlink" title="Deploy to remote sites"></a>Deploy to remote sites</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo deploy</span><br></pre></td></tr></table></figure>
+<h2 id="正则表达式说明"><a href="#正则表达式说明" class="headerlink" title="正则表达式说明"></a>正则表达式说明</h2><pre><code>创建方法
+1.字面量表达式
+2.创建RegExp的实例
 
-<p>More info: <a href="https://hexo.io/docs/one-command-deployment.html" target="_blank" rel="noopener">Deployment</a></p>
+！！！当正则表达式在开发环境是明确的，推荐优先使用字面量语法；当需要在运行时动态创建字符串来构建正则表达式时，则使用构造函数的方式。</code></pre><ul>
+<li>5个修饰符<ul>
+<li>i 对大小写不敏感</li>
+<li>g 查找所有匹配项</li>
+<li>m 允许多行匹配</li>
+<li>y 开启粘贴匹配</li>
+<li>u 允许使用Unicode点转义符</li>
+</ul>
+</li>
+</ul>
+<p>在字面量末尾添加修饰符(如/test/ig),或者作为第2个参数传给RegExp构造函数(new RegExp(“ test”, “ig”))</p>
+<h2 id="术语和操作符"><a href="#术语和操作符" class="headerlink" title="术语和操作符"></a>术语和操作符</h2><ul>
+<li>精确匹配：必须要精准的匹配到完整的字符串    /test/</li>
+<li>匹配字符集：<ul>
+<li>只需要匹配其中的一个或者多个：[abc]</li>
+<li>或者不匹配指定的这几个字符：[^abc]</li>
+<li>限定范围：[a-z]</li>
+</ul>
+</li>
+<li>转义：\</li>
+<li>起止符号：？？？？</li>
+<li>重复出现：如果想匹配4个重复的字符可以使用/aaaa/，那么如果要匹配任意数量的呢？<ul>
+<li>指定可选字符（最多出现一次）：/t?est/   —&gt;test,est</li>
+<li>指定字符必须出现最少一次：/t+est/     —&gt;test ttest tttest</li>
+<li>指定字符必须出现0次1次或者多次：/t*est/     —&gt;est test ttest</li>
+<li>指定重复次数：/a{4}/        —&gt;aaaa</li>
+<li>指定循环次数的范围：/a{4,10}/        —&gt;aaaa aaaaa … aaaaaaaaaa</li>
+<li>指定开放区间：/a{4,}/     —&gt;aaaa aaaaa … aaaaaaaaaaaaaa…</li>
+<li>这些运算符都是贪婪的，即会匹配所有的可能，而非贪婪模式则只会进行最小限度的匹配： 如果有字符串aaa那么/a+/会匹配全部的a，如果非贪婪/a+?/那么只会匹配一个a</li>
+</ul>
+</li>
+<li>预定义字符集：有些字符无法通过字面量表达出来<ul>
+<li>\t:水平制表符 （相当于tab键）</li>
+<li>\b:空格</li>
+<li>\r:回车符</li>
+<li>\f:换页符</li>
+<li>\h:换行符</li>
+<li>\d:等价于/0-9/</li>
+<li>\D:匹配除了十进制数字外的任意字符。等价于/^0-9/</li>
+<li>\w:等价于/0-9a-zA-Z_/</li>
+<li>\W:匹配除了字母，下划线，数字。等价于/^0-9a-zA-Z_/</li>
+<li>\s:匹配任意空白字符。</li>
+<li>\S:匹配除了空白字符以外的任意字符。</li>
+<li>\b:匹配单词边界。</li>
+<li>\B:匹配单词内部。</li>
+</ul>
+</li>
+</ul>
 
     </div>
 
@@ -217,6 +266,9 @@
     
 
       <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/tags/js/" rel="tag"># js</a>
+          </div>
 
         
 
@@ -224,13 +276,10 @@
         
     <div class="post-nav">
       <div class="post-nav-item">
-    <a href="/2019/06/19/%E4%BD%A0%E6%87%82%E6%88%91%E6%84%8F%E6%80%9D%E5%90%97/" rel="prev" title="你懂我意思吗">
-      <i class="fa fa-chevron-left"></i> 你懂我意思吗
+    <a href="/2020/03/09/%E5%BE%AE%E4%BF%A1%E5%B0%8F%E7%A8%8B%E5%BA%8F%E7%AC%94%E8%AE%B0/" rel="prev" title="微信小程序学习笔记">
+      <i class="fa fa-chevron-left"></i> 微信小程序学习笔记
     </a></div>
-      <div class="post-nav-item">
-    <a href="/2020/03/09/SPA&MVVM/" rel="next" title="SPA&MVVM两种设计模式思想简单分析">
-      SPA&MVVM两种设计模式思想简单分析 <i class="fa fa-chevron-right"></i>
-    </a></div>
+      <div class="post-nav-item"></div>
     </div>
       </footer>
     
@@ -290,7 +339,7 @@
 
       <!--noindex-->
       <div class="post-toc-wrap sidebar-panel">
-          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#Quick-Start"><span class="nav-number">1.</span> <span class="nav-text">Quick Start</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Create-a-new-post"><span class="nav-number">1.1.</span> <span class="nav-text">Create a new post</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Run-server"><span class="nav-number">1.2.</span> <span class="nav-text">Run server</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Generate-static-files"><span class="nav-number">1.3.</span> <span class="nav-text">Generate static files</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Deploy-to-remote-sites"><span class="nav-number">1.4.</span> <span class="nav-text">Deploy to remote sites</span></a></li></ol></li></ol></div>
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#正则表达式学习笔记"><span class="nav-number">1.</span> <span class="nav-text">正则表达式学习笔记</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Start"><span class="nav-number">2.</span> <span class="nav-text">Start</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#正则表达式说明"><span class="nav-number">3.</span> <span class="nav-text">正则表达式说明</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#术语和操作符"><span class="nav-number">4.</span> <span class="nav-text">术语和操作符</span></a></li></ol></div>
       </div>
       <!--/noindex-->
 

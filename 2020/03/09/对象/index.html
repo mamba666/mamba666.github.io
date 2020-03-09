@@ -20,15 +20,20 @@
     var CONFIG = {"hostname":"yoursite.com","root":"/","scheme":"Pisces","version":"7.7.2","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":false,"show_result":false,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":false,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}}};
   </script>
 
-  <meta property="og:type" content="website">
-<meta property="og:title" content="共你云雨">
-<meta property="og:url" content="http://yoursite.com/archives/2020/03/index.html">
+  <meta name="description" content="对象的深入">
+<meta property="og:type" content="article">
+<meta property="og:title" content="对象">
+<meta property="og:url" content="http://yoursite.com/2020/03/09/%E5%AF%B9%E8%B1%A1/index.html">
 <meta property="og:site_name" content="共你云雨">
+<meta property="og:description" content="对象的深入">
 <meta property="og:locale" content="zh_CN">
+<meta property="article:published_time" content="2020-03-09T08:46:40.875Z">
+<meta property="article:modified_time" content="2020-03-09T08:46:42.155Z">
 <meta property="article:author" content="Edison">
+<meta property="article:tag" content="js">
 <meta name="twitter:card" content="summary">
 
-<link rel="canonical" href="http://yoursite.com/archives/2020/03/">
+<link rel="canonical" href="http://yoursite.com/2020/03/09/%E5%AF%B9%E8%B1%A1/">
 
 
 <script id="page-configurations">
@@ -36,11 +41,11 @@
   CONFIG.page = {
     sidebar: "",
     isHome : false,
-    isPost : false
+    isPost : true
   };
 </script>
 
-  <title>归档 | 共你云雨</title>
+  <title>对象 | 共你云雨</title>
   
 
 
@@ -150,232 +155,95 @@
           <div class="content">
             
 
+  <div class="posts-expand">
+      
   
   
-  
-  <div class="post-block">
-    <div class="posts-collapse">
-      <div class="collection-title">
-        <span class="collection-header">嗯..! 目前共计 22 篇日志。 继续努力。</span>
-      </div>
+  <article itemscope itemtype="http://schema.org/Article" class="post-block " lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2020/03/09/%E5%AF%B9%E8%B1%A1/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="Edison">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="共你云雨">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          对象
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+              
+
+              <time title="创建时间：2020-03-09 16:46:40 / 修改时间：16:46:42" itemprop="dateCreated datePublished" datetime="2020-03-09T16:46:40+08:00">2020-03-09</time>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
 
       
-    <div class="collection-year">
-      <h1 class="collection-header">2020</h1>
-    </div>
+        <p>对象的深入</p>
+<a id="more"></a>
+<h2 id="什么是对象？"><a href="#什么是对象？" class="headerlink" title="什么是对象？"></a>什么是对象？</h2><p>对象就是用来保存多个数据的容器，变量也可以保存数据，但是只能保存一个数据。</p>
+<h2 id="为什么要用对象？"><a href="#为什么要用对象？" class="headerlink" title="为什么要用对象？"></a>为什么要用对象？</h2><p>可以统一管理多个数据</p>
+<h2 id="对象由什么组成？"><a href="#对象由什么组成？" class="headerlink" title="对象由什么组成？"></a>对象由什么组成？</h2><p>属性（属性名和属性值）和方法（函数）</p>
+<h2 id="什么情况必须使用-去调用对象属性或方法？"><a href="#什么情况必须使用-去调用对象属性或方法？" class="headerlink" title="什么情况必须使用[]去调用对象属性或方法？"></a>什么情况必须使用[]去调用对象属性或方法？</h2><p>1.属性名包含特殊字符时</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//不会报错</span></span><br><span class="line">p[<span class="string">"age-age"</span>]=<span class="number">18</span>;</span><br><span class="line"><span class="built_in">console</span>.log(p[<span class="string">"age-age"</span>]);</span><br><span class="line"></span><br><span class="line"><span class="comment">//会报错</span></span><br><span class="line">p.age-age=<span class="number">18</span>;</span><br><span class="line"><span class="built_in">console</span>.log(p.age-age);</span><br></pre></td></tr></table></figure>
 
-  <article itemscope itemtype="http://schema.org/Article">
-    <header class="post-header">
+<p>2.变量名不确定时</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">let</span> a=<span class="string">"age"</span>;</span><br><span class="line"><span class="keyword">let</span> v=<span class="number">18</span>;</span><br><span class="line"></span><br><span class="line"><span class="comment">//报错</span></span><br><span class="line">p.a=v;</span><br><span class="line"><span class="built_in">console</span>.log(p.age);</span><br><span class="line"></span><br><span class="line"><span class="comment">//正确</span></span><br><span class="line">p[a]=v;</span><br><span class="line"><span class="built_in">console</span>.log(p.age);</span><br></pre></td></tr></table></figure>
 
-      <div class="post-meta">
-        <time itemprop="dateCreated"
-              datetime="2020-03-09T16:46:42+08:00"
-              content="2020-03-09">
-          03-09
-        </time>
-      </div>
-
-      <h2 class="post-title">
-          <a class="post-title-link" href="/2020/03/09/%E6%AD%A3%E5%88%99%E8%A1%A8%E8%BE%BE%E5%BC%8F/" itemprop="url">
-            <span itemprop="name">正则表达式</span>
-          </a>
-      </h2>
-
-    </header>
-  </article>
-
-  <article itemscope itemtype="http://schema.org/Article">
-    <header class="post-header">
-
-      <div class="post-meta">
-        <time itemprop="dateCreated"
-              datetime="2020-03-09T16:46:41+08:00"
-              content="2020-03-09">
-          03-09
-        </time>
-      </div>
-
-      <h2 class="post-title">
-          <a class="post-title-link" href="/2020/03/09/%E5%BE%AE%E4%BF%A1%E5%B0%8F%E7%A8%8B%E5%BA%8F%E7%AC%94%E8%AE%B0/" itemprop="url">
-            <span itemprop="name">微信小程序学习笔记</span>
-          </a>
-      </h2>
-
-    </header>
-  </article>
-
-  <article itemscope itemtype="http://schema.org/Article">
-    <header class="post-header">
-
-      <div class="post-meta">
-        <time itemprop="dateCreated"
-              datetime="2020-03-09T16:46:41+08:00"
-              content="2020-03-09">
-          03-09
-        </time>
-      </div>
-
-      <h2 class="post-title">
-          <a class="post-title-link" href="/2020/03/09/%E6%95%B0%E6%8D%AE%E2%80%94%E5%8F%98%E9%87%8F%E2%80%94%E5%86%85%E5%AD%98%E6%A6%82%E5%BF%B5%E8%BE%A8%E6%9E%90/" itemprop="url">
-            <span itemprop="name">数据—变量—内存概念辨析</span>
-          </a>
-      </h2>
-
-    </header>
-  </article>
-
-  <article itemscope itemtype="http://schema.org/Article">
-    <header class="post-header">
-
-      <div class="post-meta">
-        <time itemprop="dateCreated"
-              datetime="2020-03-09T16:46:41+08:00"
-              content="2020-03-09">
-          03-09
-        </time>
-      </div>
-
-      <h2 class="post-title">
-          <a class="post-title-link" href="/2020/03/09/%E9%9D%A2%E5%90%91%E5%AF%B9%E8%B1%A1%E7%9A%84%E7%A8%8B%E5%BA%8F%E8%AE%BE%E8%AE%A1/" itemprop="url">
-            <span itemprop="name">面向对象的程序设计(基于ES5)</span>
-          </a>
-      </h2>
-
-    </header>
-  </article>
-
-  <article itemscope itemtype="http://schema.org/Article">
-    <header class="post-header">
-
-      <div class="post-meta">
-        <time itemprop="dateCreated"
-              datetime="2020-03-09T16:46:41+08:00"
-              content="2020-03-09">
-          03-09
-        </time>
-      </div>
-
-      <h2 class="post-title">
-          <a class="post-title-link" href="/2020/03/09/%E9%9D%A2%E5%90%91%E5%AF%B9%E8%B1%A1%E7%BC%96%E7%A8%8B/" itemprop="url">
-            <span itemprop="name">面向对象编程--类的创建，数据的封装</span>
-          </a>
-      </h2>
-
-    </header>
-  </article>
-
-  <article itemscope itemtype="http://schema.org/Article">
-    <header class="post-header">
-
-      <div class="post-meta">
-        <time itemprop="dateCreated"
-              datetime="2020-03-09T16:46:40+08:00"
-              content="2020-03-09">
-          03-09
-        </time>
-      </div>
-
-      <h2 class="post-title">
-          <a class="post-title-link" href="/2020/03/09/%E7%AE%80%E5%8D%95%E5%B7%A5%E5%8E%82%E6%A8%A1%E5%BC%8F/" itemprop="url">
-            <span itemprop="name">简单工厂模式</span>
-          </a>
-      </h2>
-
-    </header>
-  </article>
-
-  <article itemscope itemtype="http://schema.org/Article">
-    <header class="post-header">
-
-      <div class="post-meta">
-        <time itemprop="dateCreated"
-              datetime="2020-03-09T16:46:40+08:00"
-              content="2020-03-09">
-          03-09
-        </time>
-      </div>
-
-      <h2 class="post-title">
-          <a class="post-title-link" href="/2020/03/09/%E5%87%BD%E6%95%B0/" itemprop="url">
-            <span itemprop="name">函数IIFE（关于匿名函数自调用）</span>
-          </a>
-      </h2>
-
-    </header>
-  </article>
-
-  <article itemscope itemtype="http://schema.org/Article">
-    <header class="post-header">
-
-      <div class="post-meta">
-        <time itemprop="dateCreated"
-              datetime="2020-03-09T16:46:40+08:00"
-              content="2020-03-09">
-          03-09
-        </time>
-      </div>
-
-      <h2 class="post-title">
-          <a class="post-title-link" href="/2020/03/09/%E5%85%B3%E4%BA%8E%E6%95%B0%E6%8D%AE%E7%B1%BB%E5%9E%8B%E7%9A%84%E5%87%A0%E4%B8%AA%E9%97%AE%E9%A2%98/" itemprop="url">
-            <span itemprop="name">关于数据类型的几个问题</span>
-          </a>
-      </h2>
-
-    </header>
-  </article>
-
-  <article itemscope itemtype="http://schema.org/Article">
-    <header class="post-header">
-
-      <div class="post-meta">
-        <time itemprop="dateCreated"
-              datetime="2020-03-09T16:46:40+08:00"
-              content="2020-03-09">
-          03-09
-        </time>
-      </div>
-
-      <h2 class="post-title">
-          <a class="post-title-link" href="/2020/03/09/%E5%AF%B9%E8%B1%A1/" itemprop="url">
-            <span itemprop="name">对象</span>
-          </a>
-      </h2>
-
-    </header>
-  </article>
-
-  <article itemscope itemtype="http://schema.org/Article">
-    <header class="post-header">
-
-      <div class="post-meta">
-        <time itemprop="dateCreated"
-              datetime="2020-03-09T16:46:40+08:00"
-              content="2020-03-09">
-          03-09
-        </time>
-      </div>
-
-      <h2 class="post-title">
-          <a class="post-title-link" href="/2020/03/09/node%E7%AC%94%E8%AE%B0%EF%BC%88%E4%B8%80%EF%BC%89/" itemprop="url">
-            <span itemprop="name">node学习笔记（一）</span>
-          </a>
-      </h2>
-
-    </header>
-  </article>
-
+<p>上面的错误产生是因为中括号运算符总是能代替点运算符。但点运算符却不一定能全部代替中括号运算符。</p>
 
     </div>
+
+    
+    
+    
+
+      <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/tags/js/" rel="tag"># js</a>
+          </div>
+
+        
+
+
+        
+    <div class="post-nav">
+      <div class="post-nav-item">
+    <a href="/2020/03/09/node%E7%AC%94%E8%AE%B0%EF%BC%88%E4%B8%80%EF%BC%89/" rel="prev" title="node学习笔记（一）">
+      <i class="fa fa-chevron-left"></i> node学习笔记（一）
+    </a></div>
+      <div class="post-nav-item">
+    <a href="/2020/03/09/%E5%85%B3%E4%BA%8E%E6%95%B0%E6%8D%AE%E7%B1%BB%E5%9E%8B%E7%9A%84%E5%87%A0%E4%B8%AA%E9%97%AE%E9%A2%98/" rel="next" title="关于数据类型的几个问题">
+      关于数据类型的几个问题 <i class="fa fa-chevron-right"></i>
+    </a></div>
+    </div>
+      </footer>
+    
+  </article>
+  
+  
+  
+
   </div>
-  
-  
-  
-
-  
-  <nav class="pagination">
-    <span class="page-number current">1</span><a class="page-number" href="/archives/2020/03/page/2/">2</a><a class="page-number" href="/archives/2020/03/page/3/">3</a><a class="extend next" rel="next" href="/archives/2020/03/page/2/"><i class="fa fa-angle-right" aria-label="下一页"></i></a>
-  </nav>
-
 
 
           </div>
@@ -426,6 +294,7 @@
 
       <!--noindex-->
       <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#什么是对象？"><span class="nav-number">1.</span> <span class="nav-text">什么是对象？</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#为什么要用对象？"><span class="nav-number">2.</span> <span class="nav-text">为什么要用对象？</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#对象由什么组成？"><span class="nav-number">3.</span> <span class="nav-text">对象由什么组成？</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#什么情况必须使用-去调用对象属性或方法？"><span class="nav-number">4.</span> <span class="nav-text">什么情况必须使用[]去调用对象属性或方法？</span></a></li></ol></div>
       </div>
       <!--/noindex-->
 
