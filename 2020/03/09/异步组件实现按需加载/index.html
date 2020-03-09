@@ -20,15 +20,22 @@
     var CONFIG = {"hostname":"yoursite.com","root":"/","scheme":"Pisces","version":"7.7.2","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":false,"show_result":false,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":false,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}}};
   </script>
 
-  <meta property="og:type" content="website">
-<meta property="og:title" content="共你云雨">
-<meta property="og:url" content="http://yoursite.com/tags/hello-world/index.html">
+  <meta name="description" content="为什么要有这个东西呢，道理很简单，因为vue时单页应用，这回导致一个问题，就是第一次加载时会变得很慢，因为它在第一次加载时九八所有的页面就加载完了   假设有5个页面，那么第一就要加载5个页面，但是如果只想看第一个页面，那么其他4个页面时没有必要加载的，这样会浪费导致体验不行，影响性能。   所以，引入了按需加载，即访问那儿一个页面就加载哪儿一个">
+<meta property="og:type" content="article">
+<meta property="og:title" content="异步组件实现按需加载">
+<meta property="og:url" content="http://yoursite.com/2020/03/09/%E5%BC%82%E6%AD%A5%E7%BB%84%E4%BB%B6%E5%AE%9E%E7%8E%B0%E6%8C%89%E9%9C%80%E5%8A%A0%E8%BD%BD/index.html">
 <meta property="og:site_name" content="共你云雨">
+<meta property="og:description" content="为什么要有这个东西呢，道理很简单，因为vue时单页应用，这回导致一个问题，就是第一次加载时会变得很慢，因为它在第一次加载时九八所有的页面就加载完了   假设有5个页面，那么第一就要加载5个页面，但是如果只想看第一个页面，那么其他4个页面时没有必要加载的，这样会浪费导致体验不行，影响性能。   所以，引入了按需加载，即访问那儿一个页面就加载哪儿一个">
 <meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="http://yoursite.com/images/1.jpg">
+<meta property="article:published_time" content="2020-03-09T08:53:36.780Z">
+<meta property="article:modified_time" content="2020-03-09T09:13:32.901Z">
 <meta property="article:author" content="Edison">
+<meta property="article:tag" content="vue小技巧">
 <meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="http://yoursite.com/images/1.jpg">
 
-<link rel="canonical" href="http://yoursite.com/tags/hello-world/">
+<link rel="canonical" href="http://yoursite.com/2020/03/09/%E5%BC%82%E6%AD%A5%E7%BB%84%E4%BB%B6%E5%AE%9E%E7%8E%B0%E6%8C%89%E9%9C%80%E5%8A%A0%E8%BD%BD/">
 
 
 <script id="page-configurations">
@@ -36,11 +43,11 @@
   CONFIG.page = {
     sidebar: "",
     isHome : false,
-    isPost : false
+    isPost : true
   };
 </script>
 
-  <title>标签: hello world | 共你云雨</title>
+  <title>异步组件实现按需加载 | 共你云雨</title>
   
 
 
@@ -150,50 +157,101 @@
           <div class="content">
             
 
+  <div class="posts-expand">
+      
   
   
-  
-  <div class="post-block">
-    <div class="posts-collapse">
-      <div class="collection-title">
-        <h1 class="collection-header">hello world
-          <small>标签</small>
+  <article itemscope itemtype="http://schema.org/Article" class="post-block " lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2020/03/09/%E5%BC%82%E6%AD%A5%E7%BB%84%E4%BB%B6%E5%AE%9E%E7%8E%B0%E6%8C%89%E9%9C%80%E5%8A%A0%E8%BD%BD/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="Edison">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="共你云雨">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          异步组件实现按需加载
         </h1>
-      </div>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+              
+
+              <time title="创建时间：2020-03-09 16:53:36 / 修改时间：17:13:32" itemprop="dateCreated datePublished" datetime="2020-03-09T16:53:36+08:00">2020-03-09</time>
+            </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/vue/" itemprop="url" rel="index"><span itemprop="name">vue</span></a>
+                </span>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
 
       
-    <div class="collection-year">
-      <h1 class="collection-header">2020</h1>
+        <a id="more"></a>
+
+<blockquote>
+<p>为什么要有这个东西呢，道理很简单，因为vue时单页应用，这回导致一个问题，就是第一次加载时会变得很慢，因为它在第一次加载时九八所有的页面就加载完了</p>
+</blockquote>
+<blockquote>
+<p>假设有5个页面，那么第一就要加载5个页面，但是如果只想看第一个页面，那么其他4个页面时没有必要加载的，这样会浪费导致体验不行，影响性能。</p>
+</blockquote>
+<blockquote>
+<p>所以，引入了按需加载，即访问那儿一个页面就加载哪儿一个 </p>
+</blockquote>
+<p><img src="/images/1.jpg" alt=""></p>
+
     </div>
 
-  <article itemscope itemtype="http://schema.org/Article">
-    <header class="post-header">
+    
+    
+    
 
-      <div class="post-meta">
-        <time itemprop="dateCreated"
-              datetime="2020-03-09T16:46:39+08:00"
-              content="2020-03-09">
-          03-09
-        </time>
-      </div>
+      <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/tags/vue%E5%B0%8F%E6%8A%80%E5%B7%A7/" rel="tag"># vue小技巧</a>
+          </div>
 
-      <h2 class="post-title">
-          <a class="post-title-link" href="/2020/03/09/hello-world(1)/" itemprop="url">
-            <span itemprop="name">Hello World</span>
-          </a>
-      </h2>
+        
 
-    </header>
+
+        
+    <div class="post-nav">
+      <div class="post-nav-item">
+    <a href="/2020/03/09/%E6%AD%A3%E5%88%99%E8%A1%A8%E8%BE%BE%E5%BC%8F/" rel="prev" title="正则表达式">
+      <i class="fa fa-chevron-left"></i> 正则表达式
+    </a></div>
+      <div class="post-nav-item"></div>
+    </div>
+      </footer>
+    
   </article>
+  
+  
+  
 
-    </div>
   </div>
-  
-  
-  
-
-  
-
 
 
           </div>
