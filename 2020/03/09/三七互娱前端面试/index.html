@@ -1,0 +1,461 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 4.2.0">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/logo.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/logo.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/logo.png">
+  <link rel="mask-icon" href="/images/logo.png" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+<link rel="stylesheet" href="/lib/font-awesome/css/font-awesome.min.css">
+
+<script id="hexo-configurations">
+    var NexT = window.NexT || {};
+    var CONFIG = {"hostname":"yoursite.com","root":"/","scheme":"Pisces","version":"7.7.2","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":false,"show_result":false,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":false,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}}};
+  </script>
+
+  <meta name="description" content="click look more">
+<meta property="og:type" content="article">
+<meta property="og:title" content="三七互娱前端面试">
+<meta property="og:url" content="http://yoursite.com/2020/03/09/%E4%B8%89%E4%B8%83%E4%BA%92%E5%A8%B1%E5%89%8D%E7%AB%AF%E9%9D%A2%E8%AF%95/index.html">
+<meta property="og:site_name" content="共你云雨">
+<meta property="og:description" content="click look more">
+<meta property="og:locale" content="zh_CN">
+<meta property="article:published_time" content="2020-03-09T13:23:08.795Z">
+<meta property="article:modified_time" content="2020-03-09T13:23:08.796Z">
+<meta property="article:author" content="Edison">
+<meta name="twitter:card" content="summary">
+
+<link rel="canonical" href="http://yoursite.com/2020/03/09/%E4%B8%89%E4%B8%83%E4%BA%92%E5%A8%B1%E5%89%8D%E7%AB%AF%E9%9D%A2%E8%AF%95/">
+
+
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome : false,
+    isPost : true
+  };
+</script>
+
+  <title>三七互娱前端面试 | 共你云雨</title>
+  
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="container use-motion">
+    <div class="headband"></div>
+	<a href="https://github.com/mamba666" target="_blank" rel="noopener" class="github-corner" aria-label="View source on GitHub"><svg width="80" height="80" viewBox="0 0 250 250" style="fill:#151513; color:#fff; position: absolute; top: 0; border: 0; right: 0;" aria-hidden="true"><path d="M0,0 L115,115 L130,115 L142,142 L250,250 L250,0 Z"></path><path d="M128.3,109.0 C113.8,99.7 119.0,89.6 119.0,89.6 C122.0,82.7 120.5,78.6 120.5,78.6 C119.2,72.0 123.4,76.3 123.4,76.3 C127.3,80.9 125.5,87.3 125.5,87.3 C122.9,97.6 130.6,101.9 134.4,103.2" fill="currentColor" style="transform-origin: 130px 106px;" class="octo-arm"></path><path d="M115.0,115.0 C114.9,115.1 118.7,116.5 119.8,115.4 L133.7,101.6 C136.9,99.2 139.9,98.4 142.2,98.6 C133.8,88.0 127.5,74.4 143.8,58.0 C148.5,53.4 154.0,51.2 159.7,51.0 C160.3,49.4 163.2,43.6 171.4,40.1 C171.4,40.1 176.1,42.5 178.8,56.2 C183.1,58.6 187.2,61.8 190.9,65.4 C194.5,69.0 197.7,73.2 200.1,77.6 C213.8,80.2 216.3,84.9 216.3,84.9 C212.7,93.1 206.9,96.0 205.4,96.6 C205.1,102.4 203.0,107.8 198.3,112.5 C181.9,128.9 168.3,122.5 157.7,114.1 C157.9,116.9 156.7,120.9 152.7,124.9 L141.0,136.5 C139.8,137.7 141.6,141.9 141.8,141.8 Z" fill="currentColor" class="octo-body"></path></svg></a><style>.github-corner:hover .octo-arm{animation:octocat-wave 560ms ease-in-out}@keyframes octocat-wave{0%,100%{transform:rotate(0)}20%,60%{transform:rotate(-25deg)}40%,80%{transform:rotate(10deg)}}@media (max-width:500px){.github-corner:hover .octo-arm{animation:none}.github-corner .octo-arm{animation:octocat-wave 560ms ease-in-out}}</style>
+
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切换导航栏">
+      <span class="toggle-line toggle-line-first"></span>
+      <span class="toggle-line toggle-line-middle"></span>
+      <span class="toggle-line toggle-line-last"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <div>
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">共你云雨</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+    </div>
+  </div>
+</div>
+
+
+<nav class="site-nav">
+  
+  <ul id="menu" class="menu">
+        <li class="menu-item menu-item-home">
+
+    <a href="/" rel="section"><i class="fa fa-fw fa-home"></i>首页</a>
+
+  </li>
+        <li class="menu-item menu-item-tags">
+
+    <a href="/tags/" rel="section"><i class="fa fa-fw fa-tags"></i>标签</a>
+
+  </li>
+        <li class="menu-item menu-item-categories">
+
+    <a href="/categories/" rel="section"><i class="fa fa-fw fa-th"></i>分类</a>
+
+  </li>
+        <li class="menu-item menu-item-archives">
+
+    <a href="/archives/" rel="section"><i class="fa fa-fw fa-archive"></i>归档</a>
+
+  </li>
+  </ul>
+
+</nav>
+</div>
+    </header>
+
+    
+  <div class="back-to-top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+
+
+    <main class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+
+          <div class="content">
+            
+
+  <div class="posts-expand">
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block " lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2020/03/09/%E4%B8%89%E4%B8%83%E4%BA%92%E5%A8%B1%E5%89%8D%E7%AB%AF%E9%9D%A2%E8%AF%95/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="Edison">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="共你云雨">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          三七互娱前端面试
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              <time title="创建时间：2020-03-09 21:23:08" itemprop="dateCreated datePublished" datetime="2020-03-09T21:23:08+08:00">2020-03-09</time>
+            </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/%E9%9D%A2%E8%AF%95/" itemprop="url" rel="index"><span itemprop="name">面试</span></a>
+                </span>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+        <p>click look more</p>
+<a id="more"></a>
+
+<blockquote>
+<p>明天下午就要参加三七互娱的前端笔试了，但是心里没底，没有做过题，所以今天恶补一下。一下题目均为三七互娱前端题</p>
+</blockquote>
+<hr>
+<h1 id="一、用js写出一个冒泡排序算法。"><a href="#一、用js写出一个冒泡排序算法。" class="headerlink" title="一、用js写出一个冒泡排序算法。"></a>一、用js写出一个冒泡排序算法。</h1><blockquote>
+<ol>
+<li>看到这个题我是懵的，因为冒泡排序我已经忘了具体是啥了。</li>
+<li>知识点：冒泡排序算法</li>
+</ol>
+</blockquote>
+<p>首先解释一下冒泡排序算法：好比有一个水缸，现在有 N 个水泡在里面，并且杂乱无章的竖直排列。然后因为自然规律，水泡大的会先浮出来。所以算法来了，就是从水缸底部开始依次比较，如果最底部的大于它上面的那个，就往上浮动，然后小的那个就被挤下去。如此，就两两比较，直到最大的到最上面，第一轮结束。第二轮，又从最底部开始，与上相同，直到重复了 N-1 次。</p>
+<p>其实跟以前学C语言做那种有形状的字母排序是一个道理。核心就是有一个空的地方可以存放大的，然后换位置。</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">let</span> bubbleSort=<span class="function"><span class="params">array</span>=&gt;</span>&#123;</span><br><span class="line">	<span class="keyword">let</span> len=array.length</span><br><span class="line">	<span class="keyword">let</span> temp</span><br><span class="line">	<span class="keyword">for</span>(<span class="keyword">let</span> i=<span class="number">0</span>;i&lt;len<span class="number">-1</span>;i++)&#123;</span><br><span class="line">		<span class="keyword">for</span>(<span class="keyword">let</span> j=<span class="number">0</span>;j&lt;len<span class="number">-1</span>-i;j++)&#123;</span><br><span class="line">			<span class="keyword">if</span>(array[j]&gt;array[j+<span class="number">1</span>])&#123;</span><br><span class="line">                  temp=array[j];</span><br><span class="line">                  array[j]=array[j+<span class="number">1</span>];</span><br><span class="line">                  array[j+<span class="number">1</span>]=temp;</span><br><span class="line">            &#125;	</span><br><span class="line">		&#125;</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">let</span> array=[<span class="number">1</span>,<span class="number">2</span>,<span class="number">3</span>,<span class="number">6</span>,<span class="number">8</span>,<span class="number">5</span>,<span class="number">4</span>]</span><br><span class="line"><span class="built_in">console</span>.log(bubbleSort(array)) <span class="comment">//1234568</span></span><br></pre></td></tr></table></figure>
+
+<h1 id="二-、CSS中的选择器的优先级是怎么样的？如何优化选择器？"><a href="#二-、CSS中的选择器的优先级是怎么样的？如何优化选择器？" class="headerlink" title="二 、CSS中的选择器的优先级是怎么样的？如何优化选择器？"></a>二 、CSS中的选择器的优先级是怎么样的？如何优化选择器？</h1><p>优先级：行内样式&gt;id&gt;class&gt;标签</p>
+<p>优化：</p>
+<ol>
+<li>避免使用通配符，因为css属性是可以继承的，如果说在通配符中设置了颜色，那么有时候想让某个字颜色是继承的父级元素，那么这时不会生效，而是通配符所设置的颜色。所以通配符的使用要慎重。</li>
+<li>尽量少操作标签，而是使用class。</li>
+<li>通过继承去少写一些重复的代码。</li>
+<li>尽量少使用后代选择器，因为后代选择器不仅选择子代，还会选择孙子。。。。。哈哈哈。意思就是选择的太多了！但是，还是要分情况，因为只使用子代选择器可能会造成代码量过多，所以要灵活使用</li>
+</ol>
+<h1 id="三-、使用HTML5写出一个页面，包含头部、页头、页脚、文字内容和图片"><a href="#三-、使用HTML5写出一个页面，包含头部、页头、页脚、文字内容和图片" class="headerlink" title="三 、使用HTML5写出一个页面，包含头部、页头、页脚、文字内容和图片"></a>三 、使用HTML5写出一个页面，包含头部、页头、页脚、文字内容和图片</h1><blockquote>
+<p>考察的是h5的语义化标签，常用的有header、footer、nav（导航栏标签，定义导航栏）、section、video、audio、article（独立的内容区域，文本类型）、aside（页面的侧边栏去使用）、details（展示详情，使用场景比如说点击展开详情）、mark（会给一个字段添加背景色，并且不能被修改）、progress（进度条，但是丑）、section（类似于平时用div去包裹一个组件使用）、datalist（模糊查询）、canvas（大名鼎鼎的画布，还没学习哈哈哈）、dialog（聊天框）等等</p>
+</blockquote>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">header</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">nav</span>&gt;</span><span class="tag">&lt;/<span class="name">nav</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">header</span>&gt;</span></span><br><span class="line"></span><br><span class="line"><span class="tag">&lt;<span class="name">section</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">aside</span>&gt;</span><span class="tag">&lt;/<span class="name">aside</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">article</span>&gt;</span></span><br><span class="line">        <span class="comment">&lt;!--以下省略标签符号--&gt;</span></span><br><span class="line">        hgroup</span><br><span class="line">        p</span><br><span class="line">        dialog</span><br><span class="line">    <span class="tag">&lt;/<span class="name">article</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">section</span>&gt;</span></span><br><span class="line"></span><br><span class="line"><span class="tag">&lt;<span class="name">footer</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">footer</span>&gt;</span></span><br></pre></td></tr></table></figure>
+
+<h1 id="四-、前端页面的优化方法有哪些？有什么优化工具？"><a href="#四-、前端页面的优化方法有哪些？有什么优化工具？" class="headerlink" title="四 、前端页面的优化方法有哪些？有什么优化工具？"></a>四 、前端页面的优化方法有哪些？有什么优化工具？</h1><p>优化方法：</p>
+<ol>
+<li>减少http请求，特别是vue在请求http时，要将请求放在父组件中，不然每个子组件都去请求一遍就很浪费性能</li>
+<li>CSS写在顶部，JavaScript写在尾部或异步</li>
+<li>延时加载图片</li>
+<li>使用iconfont</li>
+<li>使用CDN</li>
+<li>使用缓存，在vue中可以使用keep-alive，这样重复访问一个页面时就不会重新去请求，而是从缓存中取出来直接使用。</li>
+</ol>
+<p>优化工具：</p>
+<ol>
+<li>真实用户浏览页面分析：OneAPM Browser Insight（统计分析网站流量，定位网站性能瓶颈）</li>
+<li>页面结构分析工具： PageSpeed（google官方的页面载入速度检测工具）</li>
+</ol>
+<h1 id="五-、创建子类Child，使用原型和构造函数的方式继承父类People的方法，并调用say函数说出姓名和年龄"><a href="#五-、创建子类Child，使用原型和构造函数的方式继承父类People的方法，并调用say函数说出姓名和年龄" class="headerlink" title="五 、创建子类Child，使用原型和构造函数的方式继承父类People的方法，并调用say函数说出姓名和年龄"></a>五 、创建子类Child，使用原型和构造函数的方式继承父类People的方法，并调用say函数说出姓名和年龄</h1><blockquote>
+<p>考察原型和原型链,JS三座大山自不必说</p>
+</blockquote>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">People</span>(<span class="params"></span>)</span>&#123;</span><br><span class="line">	<span class="keyword">this</span>.name=<span class="string">"edison"</span></span><br><span class="line">	<span class="keyword">this</span>.age=<span class="number">22</span></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">People.prototype.say=<span class="function"><span class="keyword">function</span>(<span class="params">age,name</span>)</span>&#123;</span><br><span class="line">	<span class="built_in">console</span>.log(<span class="string">"my name is "</span>+name+<span class="string">" and i am "</span>+age)</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">let</span> child=<span class="keyword">new</span> People()</span><br><span class="line">child.say(<span class="number">23</span>,<span class="string">"bruce"</span>) <span class="comment">//my name is bruce and i am 23</span></span><br><span class="line">child.__proto__.say(<span class="number">23</span>,<span class="string">"bruce"</span>) <span class="comment">//和上面效果一样，不过时调用了__proto__</span></span><br></pre></td></tr></table></figure>
+
+<h1 id="六、2016-12-12类型的日期格式校验正则表达式"><a href="#六、2016-12-12类型的日期格式校验正则表达式" class="headerlink" title="六、2016-12-12类型的日期格式校验正则表达式"></a>六、2016-12-12类型的日期格式校验正则表达式</h1><blockquote>
+<p>考察正则，这是短板没学过，恶补一下</p>
+</blockquote>
+<h1 id="七-、使用ajax（可使用jQuery框架，若使用其他框架请注明）写一个跨域异步获取JSON数据方案；说说能否使用JS进行跨域异步post数据"><a href="#七-、使用ajax（可使用jQuery框架，若使用其他框架请注明）写一个跨域异步获取JSON数据方案；说说能否使用JS进行跨域异步post数据" class="headerlink" title="七 、使用ajax（可使用jQuery框架，若使用其他框架请注明）写一个跨域异步获取JSON数据方案；说说能否使用JS进行跨域异步post数据"></a>七 、使用ajax（可使用jQuery框架，若使用其他框架请注明）写一个跨域异步获取JSON数据方案；说说能否使用JS进行跨域异步post数据</h1><p>使用post参考<a href="https://developer.mozilla.org/zh-CN/docs/Web/HTTP/Access_control_CORS" target="_blank" rel="noopener">https://developer.mozilla.org/zh-CN/docs/Web/HTTP/Access_control_CORS</a></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line">&#x2F;&#x2F;使用vue</span><br><span class="line">&#x2F;&#x2F;</span><br><span class="line">&#x2F;&#x2F;这是在页面中请求axios，即ajax</span><br><span class="line">axios.get(&quot;api&#x2F;index.json&quot;)</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">&#x2F;&#x2F;这是在webpack配置跨域</span><br><span class="line">proxy:&#123;</span><br><span class="line">	&#x2F;&#x2F;一旦遇到api开头的就直接转到target对应的网址</span><br><span class="line">	&quot;&#x2F;api&quot;:&#123;</span><br><span class="line">		target:&quot;http:&#x2F;&#x2F;localhost:8080&quot;,</span><br><span class="line">		&#x2F;&#x2F;使用正则，意思是一旦遇到api，就替换为mooc</span><br><span class="line">		pathRewrite:&#123;</span><br><span class="line">			&quot;^&#x2F;api&quot;:&quot;&#x2F;mook&quot;</span><br><span class="line">		&#125;</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h1 id="八-、考察样式"><a href="#八-、考察样式" class="headerlink" title="八 、考察样式"></a>八 、考察样式</h1><blockquote>
+<p>常见的背景颜色、文字居中、边框、文字阴影、模糊等</p>
+</blockquote>
+<h1 id="九-、对数组testArray进行以下操作：a-从前面删除一个数字-b-从前面增加一个数字5-c-给数组从小到大进行排序-d-反转数组-e-在数组61之后加入62、63、64"><a href="#九-、对数组testArray进行以下操作：a-从前面删除一个数字-b-从前面增加一个数字5-c-给数组从小到大进行排序-d-反转数组-e-在数组61之后加入62、63、64" class="headerlink" title="九 、对数组testArray进行以下操作：a.从前面删除一个数字 b.从前面增加一个数字5 c.给数组从小到大进行排序 d. 反转数组 e.在数组61之后加入62、63、64"></a>九 、对数组testArray进行以下操作：a.从前面删除一个数字 b.从前面增加一个数字5 c.给数组从小到大进行排序 d. 反转数组 e.在数组61之后加入62、63、64</h1><blockquote>
+<p>考察常见的数组操作，给定的数组为[3,4,61,8,1]</p>
+</blockquote>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">let</span> testArray=[<span class="number">3</span>,<span class="number">4</span>,<span class="number">61</span>,<span class="number">8</span>,<span class="number">1</span>]</span><br><span class="line"></span><br><span class="line"><span class="comment">// a</span></span><br><span class="line">testArray.shift()</span><br><span class="line"><span class="comment">//b</span></span><br><span class="line">testArray.unshift(<span class="number">5</span>)</span><br><span class="line"><span class="comment">//c</span></span><br><span class="line">testArray.sort(<span class="function">(<span class="params">a,b</span>)=&gt;</span>a-b)</span><br><span class="line"><span class="comment">//d</span></span><br><span class="line">testArray.reverse()</span><br><span class="line"><span class="comment">// e.</span></span><br><span class="line">testArray.splice(<span class="number">1</span>,<span class="number">0</span>,<span class="number">62</span>,<span class="number">63</span>,<span class="number">64</span>)</span><br></pre></td></tr></table></figure>
+    </div>
+
+    
+    
+    
+
+      <footer class="post-footer">
+
+        
+
+
+        
+    <div class="post-nav">
+      <div class="post-nav-item">
+    <a href="/2020/03/09/%E4%B8%80%E9%83%A8%E5%88%86%E6%89%8B%E6%9C%BA%E4%B8%8D%E6%94%AF%E6%8C%81promise/" rel="prev" title="一部分手机不支持promise">
+      <i class="fa fa-chevron-left"></i> 一部分手机不支持promise
+    </a></div>
+      <div class="post-nav-item">
+    <a href="/2020/03/09/%E9%87%91%E5%B1%B1%E5%8A%9E%E5%85%AC2020%E6%A0%A1%E6%8B%9B%E5%89%8D%E7%AB%AF%E5%BC%80%E5%8F%91%E5%B7%A5%E7%A8%8B%E5%B8%88%E7%AC%94%E8%AF%95%E9%A2%98/" rel="next" title="金山办公2020校招前端开发工程师笔试题">
+      金山办公2020校招前端开发工程师笔试题 <i class="fa fa-chevron-right"></i>
+    </a></div>
+    </div>
+      </footer>
+    
+  </article>
+  
+  
+  
+
+  </div>
+
+
+          </div>
+          
+
+<script>
+  window.addEventListener('tabs:register', () => {
+    let { activeClass } = CONFIG.comments;
+    if (CONFIG.comments.storage) {
+      activeClass = localStorage.getItem('comments_active') || activeClass;
+    }
+    if (activeClass) {
+      let activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      if (activeTab) {
+        activeTab.click();
+      }
+    }
+  });
+  if (CONFIG.comments.storage) {
+    window.addEventListener('tabs:click', event => {
+      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+      let commentClass = event.target.classList[1];
+      localStorage.setItem('comments_active', commentClass);
+    });
+  }
+</script>
+
+        </div>
+          
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line toggle-line-first"></span>
+    <span class="toggle-line toggle-line-middle"></span>
+    <span class="toggle-line toggle-line-last"></span>
+  </div>
+
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#一、用js写出一个冒泡排序算法。"><span class="nav-number">1.</span> <span class="nav-text">一、用js写出一个冒泡排序算法。</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#二-、CSS中的选择器的优先级是怎么样的？如何优化选择器？"><span class="nav-number">2.</span> <span class="nav-text">二 、CSS中的选择器的优先级是怎么样的？如何优化选择器？</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#三-、使用HTML5写出一个页面，包含头部、页头、页脚、文字内容和图片"><span class="nav-number">3.</span> <span class="nav-text">三 、使用HTML5写出一个页面，包含头部、页头、页脚、文字内容和图片</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#四-、前端页面的优化方法有哪些？有什么优化工具？"><span class="nav-number">4.</span> <span class="nav-text">四 、前端页面的优化方法有哪些？有什么优化工具？</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#五-、创建子类Child，使用原型和构造函数的方式继承父类People的方法，并调用say函数说出姓名和年龄"><span class="nav-number">5.</span> <span class="nav-text">五 、创建子类Child，使用原型和构造函数的方式继承父类People的方法，并调用say函数说出姓名和年龄</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#六、2016-12-12类型的日期格式校验正则表达式"><span class="nav-number">6.</span> <span class="nav-text">六、2016-12-12类型的日期格式校验正则表达式</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#七-、使用ajax（可使用jQuery框架，若使用其他框架请注明）写一个跨域异步获取JSON数据方案；说说能否使用JS进行跨域异步post数据"><span class="nav-number">7.</span> <span class="nav-text">七 、使用ajax（可使用jQuery框架，若使用其他框架请注明）写一个跨域异步获取JSON数据方案；说说能否使用JS进行跨域异步post数据</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#八-、考察样式"><span class="nav-number">8.</span> <span class="nav-text">八 、考察样式</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#九-、对数组testArray进行以下操作：a-从前面删除一个数字-b-从前面增加一个数字5-c-给数组从小到大进行排序-d-反转数组-e-在数组61之后加入62、63、64"><span class="nav-number">9.</span> <span class="nav-text">九 、对数组testArray进行以下操作：a.从前面删除一个数字 b.从前面增加一个数字5 c.给数组从小到大进行排序 d. 反转数组 e.在数组61之后加入62、63、64</span></a></li></ol></div>
+      </div>
+      <!--/noindex-->
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+  <p class="site-author-name" itemprop="name">Edison</p>
+  <div class="site-description" itemprop="description"></div>
+</div>
+<div class="site-state-wrap motion-element">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">39</span>
+          <span class="site-state-item-name">日志</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+            <a href="/categories/">
+          
+        <span class="site-state-item-count">12</span>
+        <span class="site-state-item-name">分类</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+            <a href="/tags/">
+          
+        <span class="site-state-item-count">9</span>
+        <span class="site-state-item-name">标签</span></a>
+      </div>
+  </nav>
+</div>
+
+
+
+      </div>
+
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+    </main>
+
+    <footer class="footer">
+      <div class="footer-inner">
+        
+
+<div class="copyright">
+</div>
+  <div class="powered-by">山高水远  一定相见
+  </div>
+<div></div>
+<div class="theme-info">
+  <div class="powered-by"></div>
+  <span class="post-count">至今已写22.3k字</span>
+</div>
+
+        
+
+
+
+
+
+
+
+
+      </div>
+    </footer>
+  </div>
+
+  
+  <script src="/lib/anime.min.js"></script>
+  <script src="/lib/velocity/velocity.min.js"></script>
+  <script src="/lib/velocity/velocity.ui.min.js"></script>
+
+<script src="/js/utils.js"></script>
+
+<script src="/js/motion.js"></script>
+
+
+<script src="/js/schemes/pisces.js"></script>
+
+
+<script src="/js/next-boot.js"></script>
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  
+
+</body>
+</html>
