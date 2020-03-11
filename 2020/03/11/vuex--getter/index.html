@@ -20,20 +20,20 @@
     var CONFIG = {"hostname":"yoursite.com","root":"/","scheme":"Pisces","version":"7.7.2","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":false,"show_result":false,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":false,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},"path":"./public/search.xml"};
   </script>
 
-  <meta name="description" content="代码示意 123456&lt;div id&#x3D;&quot;app&quot;&gt;    &lt;!-- &amp;#123;&amp;#123;&amp;#125;&amp;#125;：插值表达式 --&gt;    &lt;h4&gt;&amp;#123;&amp;#123;msg&amp;#125;&amp;#125;&lt;&#x2F;h4&gt;    &lt;!-- v-model：指令 --&gt;    &lt;input type&#x3D;&quot;text&quot; v-model&#x3D;&quot;msg">
+  <meta name="description" content="click look more">
 <meta property="og:type" content="article">
-<meta property="og:title" content="hello vue">
-<meta property="og:url" content="http://yoursite.com/2020/03/09/vue%E5%88%9D%E8%AF%95%E7%89%9B%E5%88%80-hello%20vue/index.html">
+<meta property="og:title" content="vuex--getter">
+<meta property="og:url" content="http://yoursite.com/2020/03/11/vuex--getter/index.html">
 <meta property="og:site_name" content="共你云雨">
-<meta property="og:description" content="代码示意 123456&lt;div id&#x3D;&quot;app&quot;&gt;    &lt;!-- &amp;#123;&amp;#123;&amp;#125;&amp;#125;：插值表达式 --&gt;    &lt;h4&gt;&amp;#123;&amp;#123;msg&amp;#125;&amp;#125;&lt;&#x2F;h4&gt;    &lt;!-- v-model：指令 --&gt;    &lt;input type&#x3D;&quot;text&quot; v-model&#x3D;&quot;msg">
+<meta property="og:description" content="click look more">
 <meta property="og:locale" content="zh_CN">
-<meta property="article:published_time" content="2020-03-09T08:46:39.322Z">
-<meta property="article:modified_time" content="2020-03-10T02:25:13.440Z">
+<meta property="article:published_time" content="2020-03-11T06:15:41.087Z">
+<meta property="article:modified_time" content="2020-03-11T07:02:28.896Z">
 <meta property="article:author" content="Edison">
-<meta property="article:tag" content="vue小技巧">
+<meta property="article:tag" content="vuex">
 <meta name="twitter:card" content="summary">
 
-<link rel="canonical" href="http://yoursite.com/2020/03/09/vue%E5%88%9D%E8%AF%95%E7%89%9B%E5%88%80-hello%20vue/">
+<link rel="canonical" href="http://yoursite.com/2020/03/11/vuex--getter/">
 
 
 <script id="page-configurations">
@@ -45,7 +45,7 @@
   };
 </script>
 
-  <title>hello vue | 共你云雨</title>
+  <title>vuex--getter | 共你云雨</title>
   
 
 
@@ -160,7 +160,7 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block " lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2020/03/09/vue%E5%88%9D%E8%AF%95%E7%89%9B%E5%88%80-hello%20vue/">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2020/03/11/vuex--getter/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="image" content="/images/avatar.gif">
@@ -173,7 +173,7 @@
     </span>
       <header class="post-header">
         <h1 class="post-title" itemprop="name headline">
-          hello vue
+          vuex--getter
         </h1>
 
         <div class="post-meta">
@@ -182,16 +182,10 @@
                 <i class="fa fa-calendar-o"></i>
               </span>
               <span class="post-meta-item-text">发表于</span>
+              
 
-              <time title="创建时间：2020-03-09 16:46:39" itemprop="dateCreated datePublished" datetime="2020-03-09T16:46:39+08:00">2020-03-09</time>
+              <time title="创建时间：2020-03-11 14:15:41 / 修改时间：15:02:28" itemprop="dateCreated datePublished" datetime="2020-03-11T14:15:41+08:00">2020-03-11</time>
             </span>
-              <span class="post-meta-item">
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-calendar-check-o"></i>
-                </span>
-                <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2020-03-10 10:25:13" itemprop="dateModified" datetime="2020-03-10T10:25:13+08:00">2020-03-10</time>
-              </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
                 <i class="fa fa-folder-o"></i>
@@ -213,11 +207,35 @@
     <div class="post-body" itemprop="articleBody">
 
       
-        <hr>
-<p>代码示意</p>
-<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">div</span> <span class="attr">id</span>=<span class="string">"app"</span>&gt;</span></span><br><span class="line">    <span class="comment">&lt;!-- &#123;&#123;&#125;&#125;：插值表达式 --&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">h4</span>&gt;</span>&#123;&#123;msg&#125;&#125;<span class="tag">&lt;/<span class="name">h4</span>&gt;</span></span><br><span class="line">    <span class="comment">&lt;!-- v-model：指令 --&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">input</span> <span class="attr">type</span>=<span class="string">"text"</span> <span class="attr">v-model</span>=<span class="string">"msg"</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br></pre></td></tr></table></figure>
+        <p>click look more</p>
+<a id="more"></a>
 
-<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> vm=<span class="keyword">new</span> Vue(&#123;</span><br><span class="line">    <span class="comment">//key:value</span></span><br><span class="line">    <span class="comment">//key的取值为vue框架定义的具有特定意义的相关属性</span></span><br><span class="line">    <span class="comment">//在API中所有以选项开头的都是可以作为key值的</span></span><br><span class="line">    </span><br><span class="line">    <span class="comment">//el:element select DOM选择器</span></span><br><span class="line">    el:<span class="string">"#app"</span>,<span class="comment">//vue实例和页面容器的关联,同时取值要遵循css的语法，并且只针对第一个匹配的元素生效！  el实现方法时docuemnt.querySelector(el);</span></span><br><span class="line"></span><br><span class="line">    <span class="comment">//实例的数据仓库</span></span><br><span class="line">    data:&#123;</span><br><span class="line">        msg:<span class="string">"msg111"</span></span><br><span class="line">    &#125;</span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure>
+<h1 id="what’s-Getter"><a href="#what’s-Getter" class="headerlink" title="what’s Getter ?"></a>what’s Getter ?</h1><blockquote>
+<p>假设一个场景，我们需要计算总价，但是state里面只有单品价格和卖出的个数。所以总价为state.price * state.num 。不难发现，总价是依赖state的，并且与它保持响应式的关系。即state变化总价才会变化。这样看是不是有点想computed计算属性？</p>
+</blockquote>
+<blockquote>
+<p>如果这样想也没错，因为getter实际上也可以理解为store的计算属性。要注意，getter的值会被缓存起来</p>
+</blockquote>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> store=<span class="keyword">new</span> Vuex.Store(&#123;</span><br><span class="line">	state:&#123;</span><br><span class="line">		todos:[</span><br><span class="line">			&#123; <span class="attr">id</span>: <span class="number">1</span>, <span class="attr">text</span>: <span class="string">'...'</span>, <span class="attr">done</span>: <span class="literal">true</span> &#125;,</span><br><span class="line">			&#123; <span class="attr">id</span>: <span class="number">2</span>, <span class="attr">text</span>: <span class="string">'...'</span>, <span class="attr">done</span>: <span class="literal">false</span>&#125;</span><br><span class="line">		]</span><br><span class="line">	&#125;,</span><br><span class="line">	getters:&#123;</span><br><span class="line">	<span class="comment">//Getter第一个参数为state</span></span><br><span class="line">		doneTodos:<span class="function"><span class="params">state</span>=&gt;</span>&#123;</span><br><span class="line">		<span class="comment">//filter() 方法创建一个新数组, 其包含通过所提供函数实现的测试的所有元素。 </span></span><br><span class="line">			<span class="keyword">return</span> state.todos.filter(<span class="function"><span class="params">todo</span>=&gt;</span>todo.done)</span><br><span class="line">		&#125;</span><br><span class="line">	&#125;</span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure>
+
+<h1 id="通过属性访问"><a href="#通过属性访问" class="headerlink" title="通过属性访问"></a>通过属性访问</h1><blockquote>
+<p>Getter会被store.getters暴露。即如果想在组件中使用doneTodos就需要这样写：this.$store.getters.doneTodos</p>
+</blockquote>
+<blockquote>
+<p>上面提到过，getter的一个参数是state，那么第二个参数可以是另外一个getter</p>
+</blockquote>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">getters:&#123;</span><br><span class="line">	doneTodos:<span class="function">(<span class="params">state,getters</span>)=&gt;</span>&#123;</span><br><span class="line">		.....</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h1 id="通过方法访问"><a href="#通过方法访问" class="headerlink" title="通过方法访问"></a>通过方法访问</h1><p>先看一段代码</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">getters:&#123;</span><br><span class="line">	<span class="comment">//双箭头函数的意思就是调用doneTodos的时候，实际上返回的是一个参数为id的函数</span></span><br><span class="line">	doneTodos:<span class="function"><span class="params">state</span>=&gt;</span><span class="function"><span class="params">id</span>=&gt;</span>&#123;</span><br><span class="line">		....</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">//在组件中调用，好像和属性调用方法没有什么太大的区别，但是要注意看！dongTodos有一个参数，这个参数是用来传递给id的</span></span><br><span class="line"><span class="keyword">this</span>.$store.gettters.doneTodos(<span class="number">2</span>)</span><br></pre></td></tr></table></figure>
+
+<blockquote>
+<p>以下是官方文档的描述：你也可以通过让 getter 返回一个函数，来实现给 getter 传参。在你对 store 里的数组进行查询时非常有用。注意，getter 在通过方法访问时，每次都会去进行调用，而不会缓存结果。</p>
+</blockquote>
+<h1 id="mapGetters"><a href="#mapGetters" class="headerlink" title="mapGetters"></a>mapGetters</h1><blockquote>
+<p>使用方法和mapState差不多</p>
+</blockquote>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">computed:&#123;</span><br><span class="line">	...mapState([<span class="string">"todos"</span>]),</span><br><span class="line">	...mapState(&#123;</span><br><span class="line">		currentTodos:<span class="string">"todos"</span></span><br><span class="line">	&#125;),</span><br><span class="line">	...mapGetters([<span class="string">"doneTodos"</span>]),</span><br><span class="line">	<span class="comment">// 把 `this.currentDone` 映射为 `this.$store.getters.doneTodos`</span></span><br><span class="line">	...mapGetters(&#123;</span><br><span class="line">		currentDone:<span class="string">"doneTodos"</span></span><br><span class="line">	&#125;)</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
     </div>
 
     
@@ -226,7 +244,7 @@
 
       <footer class="post-footer">
           <div class="post-tags">
-              <a href="/tags/vue%E5%B0%8F%E6%8A%80%E5%B7%A7/" rel="tag"># vue小技巧</a>
+              <a href="/tags/vuex/" rel="tag"># vuex</a>
           </div>
 
         
@@ -235,13 +253,10 @@
         
     <div class="post-nav">
       <div class="post-nav-item">
-    <a href="/2020/03/09/v-cloak%E7%9A%84%E7%94%A8%E6%B3%95%E5%8F%8A%E6%84%8F%E4%B9%89/" rel="prev" title="v-cloak指令">
-      <i class="fa fa-chevron-left"></i> v-cloak指令
+    <a href="/2020/03/11/vuex--state/" rel="prev" title="vuex--state">
+      <i class="fa fa-chevron-left"></i> vuex--state
     </a></div>
-      <div class="post-nav-item">
-    <a href="/2020/03/09/Vue%E4%B8%AD%E7%9A%84%E5%8A%A8%E7%94%BB%E7%89%B9%E6%95%88/" rel="next" title="vue动画特效">
-      vue动画特效 <i class="fa fa-chevron-right"></i>
-    </a></div>
+      <div class="post-nav-item"></div>
     </div>
       </footer>
     
@@ -301,6 +316,7 @@
 
       <!--noindex-->
       <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#what’s-Getter"><span class="nav-number">1.</span> <span class="nav-text">what’s Getter ?</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#通过属性访问"><span class="nav-number">2.</span> <span class="nav-text">通过属性访问</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#通过方法访问"><span class="nav-number">3.</span> <span class="nav-text">通过方法访问</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#mapGetters"><span class="nav-number">4.</span> <span class="nav-text">mapGetters</span></a></li></ol></div>
       </div>
       <!--/noindex-->
 

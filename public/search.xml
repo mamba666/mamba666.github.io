@@ -1,6 +1,45 @@
 <?xml version="1.0" encoding="utf-8"?>
 <search>
   <entry>
+    <title>vuex--getter</title>
+    <url>/2020/03/11/vuex--getter/</url>
+    <content><![CDATA[<p>click look more</p>
+<a id="more"></a>
+
+<h1 id="what’s-Getter"><a href="#what’s-Getter" class="headerlink" title="what’s Getter ?"></a>what’s Getter ?</h1><blockquote>
+<p>假设一个场景，我们需要计算总价，但是state里面只有单品价格和卖出的个数。所以总价为state.price * state.num 。不难发现，总价是依赖state的，并且与它保持响应式的关系。即state变化总价才会变化。这样看是不是有点想computed计算属性？</p>
+</blockquote>
+<blockquote>
+<p>如果这样想也没错，因为getter实际上也可以理解为store的计算属性。要注意，getter的值会被缓存起来</p>
+</blockquote>
+<figure class="highlight js"><table><tr><td class="code"><pre><span class="line"><span class="keyword">const</span> store=<span class="keyword">new</span> Vuex.Store(&#123;</span><br><span class="line">	state:&#123;</span><br><span class="line">		todos:[</span><br><span class="line">			&#123; <span class="attr">id</span>: <span class="number">1</span>, <span class="attr">text</span>: <span class="string">'...'</span>, <span class="attr">done</span>: <span class="literal">true</span> &#125;,</span><br><span class="line">			&#123; <span class="attr">id</span>: <span class="number">2</span>, <span class="attr">text</span>: <span class="string">'...'</span>, <span class="attr">done</span>: <span class="literal">false</span>&#125;</span><br><span class="line">		]</span><br><span class="line">	&#125;,</span><br><span class="line">	getters:&#123;</span><br><span class="line">	<span class="comment">//Getter第一个参数为state</span></span><br><span class="line">		doneTodos:<span class="function"><span class="params">state</span>=&gt;</span>&#123;</span><br><span class="line">		<span class="comment">//filter() 方法创建一个新数组, 其包含通过所提供函数实现的测试的所有元素。 </span></span><br><span class="line">			<span class="keyword">return</span> state.todos.filter(<span class="function"><span class="params">todo</span>=&gt;</span>todo.done)</span><br><span class="line">		&#125;</span><br><span class="line">	&#125;</span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure>
+
+<h1 id="通过属性访问"><a href="#通过属性访问" class="headerlink" title="通过属性访问"></a>通过属性访问</h1><blockquote>
+<p>Getter会被store.getters暴露。即如果想在组件中使用doneTodos就需要这样写：this.$store.getters.doneTodos</p>
+</blockquote>
+<blockquote>
+<p>上面提到过，getter的一个参数是state，那么第二个参数可以是另外一个getter</p>
+</blockquote>
+<figure class="highlight js"><table><tr><td class="code"><pre><span class="line">getters:&#123;</span><br><span class="line">	doneTodos:<span class="function">(<span class="params">state,getters</span>)=&gt;</span>&#123;</span><br><span class="line">		.....</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h1 id="通过方法访问"><a href="#通过方法访问" class="headerlink" title="通过方法访问"></a>通过方法访问</h1><p>先看一段代码</p>
+<figure class="highlight js"><table><tr><td class="code"><pre><span class="line">getters:&#123;</span><br><span class="line">	<span class="comment">//双箭头函数的意思就是调用doneTodos的时候，实际上返回的是一个参数为id的函数</span></span><br><span class="line">	doneTodos:<span class="function"><span class="params">state</span>=&gt;</span><span class="function"><span class="params">id</span>=&gt;</span>&#123;</span><br><span class="line">		....</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">//在组件中调用，好像和属性调用方法没有什么太大的区别，但是要注意看！dongTodos有一个参数，这个参数是用来传递给id的</span></span><br><span class="line"><span class="keyword">this</span>.$store.gettters.doneTodos(<span class="number">2</span>)</span><br></pre></td></tr></table></figure>
+
+<blockquote>
+<p>以下是官方文档的描述：你也可以通过让 getter 返回一个函数，来实现给 getter 传参。在你对 store 里的数组进行查询时非常有用。注意，getter 在通过方法访问时，每次都会去进行调用，而不会缓存结果。</p>
+</blockquote>
+<h1 id="mapGetters"><a href="#mapGetters" class="headerlink" title="mapGetters"></a>mapGetters</h1><blockquote>
+<p>使用方法和mapState差不多</p>
+</blockquote>
+<figure class="highlight js"><table><tr><td class="code"><pre><span class="line">computed:&#123;</span><br><span class="line">	...mapState([<span class="string">"todos"</span>]),</span><br><span class="line">	...mapState(&#123;</span><br><span class="line">		currentTodos:<span class="string">"todos"</span></span><br><span class="line">	&#125;),</span><br><span class="line">	...mapGetters([<span class="string">"doneTodos"</span>]),</span><br><span class="line">	<span class="comment">// 把 `this.currentDone` 映射为 `this.$store.getters.doneTodos`</span></span><br><span class="line">	...mapGetters(&#123;</span><br><span class="line">		currentDone:<span class="string">"doneTodos"</span></span><br><span class="line">	&#125;)</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>]]></content>
+      <categories>
+        <category>vue</category>
+      </categories>
+      <tags>
+        <tag>vuex</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>vuex--state</title>
     <url>/2020/03/11/vuex--state/</url>
     <content><![CDATA[<p>click look more</p>
