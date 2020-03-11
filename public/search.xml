@@ -1,6 +1,88 @@
 <?xml version="1.0" encoding="utf-8"?>
 <search>
   <entry>
+    <title>深入理解JS异步</title>
+    <url>/2020/03/11/%E6%B7%B1%E5%85%A5%E7%90%86%E8%A7%A3JS%E5%BC%82%E6%AD%A5/</url>
+    <content><![CDATA[<p>click look more</p>
+<a id="more"></a>
+
+<blockquote>
+<p>学到这个阶段也就是查漏补缺应对面试了，项目相反可以放一放，唯一遗憾的是之前花那么多时间做项目却没有好好边做边总结，这是一大误区。这篇文章将深入理解JS中的异步，包括几个面试题，又通过面试题牵引出更多知识点。</p>
+</blockquote>
+<h1 id="什么是单线程，和异步有什么关系？"><a href="#什么是单线程，和异步有什么关系？" class="headerlink" title="什么是单线程，和异步有什么关系？"></a>什么是单线程，和异步有什么关系？</h1><h2 id="自我理解"><a href="#自我理解" class="headerlink" title="自我理解"></a>自我理解</h2><blockquote>
+<p>自我理解就是单行道，不能超车，只能一个接着一个，如果有一辆车熄火，那么后面所有的车都得等待，这就会导致堵塞，在程序中也是一样的道理。</p>
+<p>异步的话还是这个场景，但是现在是双行道或者更多，尽管出口还是单行道。但是却有了质的改变，如果车熄火了，那么就把这辆车移动到非主干道上，后面的车不会因为它而堵塞。当这辆车修好后，就继续回到路上。</p>
+</blockquote>
+<h3 id="JS为什么要设计成单线程？"><a href="#JS为什么要设计成单线程？" class="headerlink" title="JS为什么要设计成单线程？"></a>JS为什么要设计成单线程？</h3><blockquote>
+<p>这是因为js起初只是一个脚本语言，用来配合浏览器工作，而浏览器又涉及到DOM的渲染，并且JS也可以操作DOM，所以在JSJ执行的时候，DOM渲染会暂停。可以预见，假如又执行JS，并且浏览器还在渲染DOM就很可能出错。上面说的是JS和浏览器，那么JS与JS呢？如果两端JS都操作同一个DOM，那么肯定会出错，所以JS为了避免DOM渲染冲突出错，就设计成了单线程</p>
+</blockquote>
+<h4 id="web-worker"><a href="#web-worker" class="headerlink" title="web worker"></a>web worker</h4><blockquote>
+<p>了解即可，但是并不能代替异步</p>
+</blockquote>
+<blockquote>
+<p>web worker 设计来就是要让浏览器一直运行良好，如果不让主线程先执行，你web worker 计算量大还是会卡死浏览器。那么有没有web worker 都没有什么区别了</p>
+</blockquote>
+<h1 id="什么是event-loop-？"><a href="#什么是event-loop-？" class="headerlink" title="什么是event-loop ？"></a>什么是event-loop ？</h1><blockquote>
+<p>event-loop是JS异步的具体解决方案，先执行所有的函数，如果是同步函数就直接执行，遇到异步函数就放入到异步队列中，当所有的同步函数都执行完了，在开始event-loop异步函数</p>
+</blockquote>
+<h2 id="理解-event-loop工作流程"><a href="#理解-event-loop工作流程" class="headerlink" title="理解 event-loop工作流程"></a>理解 event-loop工作流程</h2><p>来看一个例子：会一次打印出3 2 1</p>
+<figure class="highlight js"><table><tr><td class="code"><pre><span class="line"><span class="comment">//A</span></span><br><span class="line">setTimeout(<span class="function"><span class="params">()</span>=&gt;</span>&#123;</span><br><span class="line">	<span class="built_in">console</span>.log(<span class="number">1</span>)</span><br><span class="line">&#125;,<span class="number">100</span>)</span><br><span class="line"><span class="comment">//B</span></span><br><span class="line">setTimeout(<span class="function"><span class="params">()</span>=&gt;</span>&#123;</span><br><span class="line">	<span class="built_in">console</span>.log(<span class="number">2</span>)</span><br><span class="line">&#125;)</span><br><span class="line"><span class="comment">//C</span></span><br><span class="line"><span class="built_in">console</span>.log(<span class="number">3</span>)</span><br></pre></td></tr></table></figure>
+
+<h3 id="常见的一个误区"><a href="#常见的一个误区" class="headerlink" title="常见的一个误区"></a>常见的一个误区</h3><blockquote>
+<p>根据开始所说：<strong>如果是同步函数就直接执行，遇到异步函数就放入到异步队列中</strong>。可能会想遇到第一个异步函数时就直接放进去，然后等待主程序执行完就打印1。但实际工作流程如下：</p>
+</blockquote>
+<p>1.从头开始执行。先明确一个概念，在计算机中，1ms也是很久很久的。<br>2.碰到了异步A，但是有一个100ms的延迟，所以会在100ms后放入异步队列<br>3.碰到了异步B，它没有延迟，所以被直接放入异步队列<br>4.碰到了同步C，所以直接打印 1<br>5.接下来没有函数了，就开始event-loop异步队列，发现里面只有一个异步B，所以被调入到主进程中，直接打印2<br>6.接下来event-loop又到异步队列，但是异步A还在等待<br>7.经过100ms后，异步A终于到了异步队列，此时event-loop发现了它，于是马上将他带入主线程，立刻打印出1 。<strong>需要注意，在这100ms中，event-loop一直在异步队列中检测</strong></p>
+<p>以上就是event-loop的一个工作流程。</p>
+<h1 id="Promise"><a href="#Promise" class="headerlink" title="Promise"></a>Promise</h1><p>简单的使用promise。</p>
+<figure class="highlight js"><table><tr><td class="code"><pre><span class="line"><span class="comment">// 创建一个简单的promise</span></span><br><span class="line"></span><br><span class="line"><span class="comment">// 构造函数Promise在初始化一个实例的时候，有两个参数：resolve、reject</span></span><br><span class="line"><span class="comment">// 并且两个参数都是函数，分工不同。</span></span><br><span class="line"><span class="comment">// resolve表示成功兑现承若，reject表示不能兑现</span></span><br><span class="line"><span class="keyword">const</span> promise=<span class="keyword">new</span> <span class="built_in">Promise</span>(<span class="function">(<span class="params">resolve,reject</span>)=&gt;</span>&#123;</span><br><span class="line">	<span class="comment">// 直接调用resolve，当然也可以调用reject</span></span><br><span class="line">	resolve(<span class="string">"edison"</span>)</span><br><span class="line">	<span class="comment">// reject("error")</span></span><br><span class="line">&#125;)</span><br><span class="line"></span><br><span class="line"><span class="comment">//调用promise对象的内置方法then</span></span><br><span class="line"><span class="comment">//then又传入两个callback，一个是当promise中resolve后调用；一个是reject后调用</span></span><br><span class="line">promise.then(<span class="function"><span class="params">lwj</span>=&gt;</span>&#123;</span><br><span class="line">	<span class="built_in">console</span>.log(<span class="string">"edison===lwj"</span>)</span><br><span class="line">&#125;,err=&gt;&#123;</span><br><span class="line">	<span class="built_in">console</span>.log(<span class="string">"Error"</span>)</span><br><span class="line">&#125;)</span><br><span class="line"><span class="comment">//resolve就输出"edison===lwj"    reject就输出"Error"</span></span><br></pre></td></tr></table></figure>
+
+<h2 id="了解回调函数所带来的问题"><a href="#了解回调函数所带来的问题" class="headerlink" title="了解回调函数所带来的问题"></a>了解回调函数所带来的问题</h2><blockquote>
+<p>在了解如何简单使用promise后，肯定会想，为什么需要promise？这就涉及到callback所带来的一些问题</p>
+</blockquote>
+<p>但是这里步展开讲，了解一下即可。重点是掌握promise</p>
+<p>1.错误难以处理<br>2.当有多个callback时，会造成回调地狱<br>3.并行任务棘手</p>
+<h2 id="深入研究promise"><a href="#深入研究promise" class="headerlink" title="深入研究promise"></a>深入研究promise</h2><blockquote>
+<p>promise对象是用于作为异步任务结果的<strong>占位符</strong>，它代表了一个此刻没有获得但是在未来可能会获得的值。基于此，promise对象的声明周期有不同的状态。</p>
+</blockquote>
+<blockquote>
+<p>一个promise对象从Pending开始，如果调用了resolve，就会进入 ；如果调用了reject，就会进入Rejected</p>
+</blockquote>
+<h3 id="拒绝promise（捕获异常）"><a href="#拒绝promise（捕获异常）" class="headerlink" title="拒绝promise（捕获异常）"></a>拒绝promise（捕获异常）</h3><p>有两种拒绝方式：</p>
+<ol>
+<li>显示拒绝，即调用了reject，在此之前我们的then都是传入了两个参数，现在可以将第二个参数去掉，使用.catch()。当reject后就会直接调用.catch()</li>
+<li>隐式拒绝，即程序出现错误</li>
+</ol>
+<h3 id="Promise-all-amp-Promise-race"><a href="#Promise-all-amp-Promise-race" class="headerlink" title="Promise.all &amp; Promise.race"></a>Promise.all &amp; Promise.race</h3><blockquote>
+<p>这两函数干嘛的呢？ 别急，看代码</p>
+</blockquote>
+<figure class="highlight js"><table><tr><td class="code"><pre><span class="line"><span class="comment">//看代码能发现，Promise.all传入的是一个promise对象的数组</span></span><br><span class="line"><span class="comment">//然后会返回一个data，也是数组，最后可以打印出来</span></span><br><span class="line"><span class="comment">//简单理解就是需要等所有promise对象执行完才执行then</span></span><br><span class="line"><span class="built_in">Promise</span>.all([promise1,promise2]).then(<span class="function"><span class="params">data</span>=&gt;</span>&#123;</span><br><span class="line">	<span class="built_in">console</span>.log(data[<span class="number">0</span>])</span><br><span class="line">	<span class="built_in">console</span>.log(data[<span class="number">1</span>])</span><br><span class="line">&#125;)</span><br><span class="line"></span><br><span class="line"><span class="comment">//比较发现，传入的参数都是一样的，但是！</span></span><br><span class="line"><span class="comment">//race意味速度，即意思只要有一个promise resolve，那么</span></span><br><span class="line"><span class="comment">//就会返回data</span></span><br><span class="line"><span class="comment">//有点比谁快的意思</span></span><br><span class="line"><span class="comment">//简单理解就是只要有一个promise对象执行完就执行then</span></span><br><span class="line"><span class="built_in">Promise</span>.race([promise1,promise2]).then(<span class="function"><span class="params">data</span>=&gt;</span>&#123;</span><br><span class="line">	<span class="built_in">console</span>.log(data)</span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure>
+
+<h1 id="浅谈async-await"><a href="#浅谈async-await" class="headerlink" title="浅谈async/await"></a>浅谈async/await</h1><blockquote>
+<p>async/await是ES7的语法，也是为了解决异步，是终极方案。</p>
+</blockquote>
+<blockquote>
+<p>实际上，promise的then只是对回调函数进行了拆分，避免了回调地狱。</p>
+</blockquote>
+<p>看一个例子，可以发现这种写法更加简洁，类似于同步</p>
+<figure class="highlight js"><table><tr><td class="code"><pre><span class="line"><span class="comment">//async表明当前函数依赖于一个异步返回的值</span></span><br><span class="line"><span class="keyword">async</span> <span class="function"><span class="keyword">function</span> <span class="title">x</span>(<span class="params"></span>)</span>&#123;</span><br><span class="line">	<span class="comment">//在异步函数前，使用await，用来告诉JS引擎</span></span><br><span class="line">	<span class="comment">//在不阻塞应用执行的时候，在这里等待异步执行结果</span></span><br><span class="line">	<span class="keyword">const</span> y=<span class="keyword">await</span> setTimeout(<span class="function"><span class="params">()</span>=&gt;</span>&#123;</span><br><span class="line">		<span class="built_in">console</span>.log(<span class="number">1</span>)</span><br><span class="line">	&#125;,<span class="number">100</span>)</span><br><span class="line">	<span class="keyword">const</span> z=<span class="keyword">await</span> setTimeout(<span class="function"><span class="params">()</span>=&gt;</span>&#123;</span><br><span class="line">		<span class="built_in">console</span>.log(<span class="number">2</span>)</span><br><span class="line">	&#125;,<span class="number">100</span>)</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>总结几点：</p>
+<ol>
+<li>async/await是写异步代码的新方式，以前的方法有回调函数和Promise。</li>
+<li>async/await是<strong><u>基于Promise实现</u></strong>的，它不能用于普通的回调函数。</li>
+<li>async/await与Promise一样，是非阻塞的。</li>
+<li>async/await使得异步代码看起来像同步代码，这正是它的魔力所在。</li>
+</ol>
+<p>但是要注意，这永远改变不了JS单线程的本质！</p>
+]]></content>
+      <categories>
+        <category>面试</category>
+      </categories>
+      <tags>
+        <tag>js</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>vuex--getter</title>
     <url>/2020/03/11/vuex--getter/</url>
     <content><![CDATA[<p>click look more</p>
