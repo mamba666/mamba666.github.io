@@ -4,6 +4,150 @@
   
     
     <entry>
+      <title>Koa2与Vue前后端分离实践</title>
+      <link href="/2020/03/18/koa2%E4%B8%8Evue%E5%AE%9E%E7%8E%B0%E5%89%8D%E5%90%8E%E7%AB%AF%E5%88%86%E7%A6%BB/"/>
+      <url>/2020/03/18/koa2%E4%B8%8Evue%E5%AE%9E%E7%8E%B0%E5%89%8D%E5%90%8E%E7%AB%AF%E5%88%86%E7%A6%BB/</url>
+      
+        <content type="html"><![CDATA[<p>click look more</p><a id="more"></a><blockquote><p>折煞我也！！！！   简直颠覆认知</p></blockquote><p>不多讲了，直接看vue.config.js代码。可以发现很多注释掉的代码，并且是曾经让我琢磨了很久的代码，因为解决了我的mook数据的显示问题。但时至今日，才自己真正摸索出来前后端分离应该如何做。并且曾经听说过，其实没有必要写mooc数据，这个是后话了。接下来讲讲在组件中如何跨域</p><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> path = <span class="built_in">require</span>(<span class="string">'path'</span>);</span><br><span class="line"><span class="comment">//const mockdataindex=require("./mock/index.json")</span></span><br><span class="line"><span class="comment">//const mockdatacity=require("./mock/city.json")</span></span><br><span class="line"><span class="comment">//const mockdatadetail=require("./mock/detail.json")</span></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">resolve</span>(<span class="params">dir</span>) </span>&#123;</span><br><span class="line">    <span class="keyword">return</span> path.join(__dirname, dir);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="built_in">module</span>.exports = &#123;</span><br><span class="line">    lintOnSave: <span class="literal">true</span>,</span><br><span class="line">    chainWebpack: <span class="function">(<span class="params">config</span>) =&gt;</span> &#123;</span><br><span class="line">        config.resolve.alias</span><br><span class="line">        .set(<span class="string">'styles'</span>,resolve(<span class="string">'src/assets/styles'</span>))</span><br><span class="line">        <span class="comment">// 这里只写了两个个，你可以自己再加，按这种格式.set('', resolve(''))</span></span><br><span class="line">        .set(<span class="string">'common'</span>,resolve(<span class="string">'src/common'</span>))</span><br><span class="line">    &#125;,</span><br><span class="line">    devServer:&#123;</span><br><span class="line">        <span class="comment">//当Home.vue中的路径过来时，/api/index.json   因为是api开头，</span></span><br><span class="line">        <span class="comment">//所以这个路径被跨域到 http://localhost:8080/mock/index.json </span></span><br><span class="line">        <span class="comment">//即实际上访问8080时，访问的是http://localhost:8080/mock/index.json</span></span><br><span class="line">        <span class="comment">//这样就拿到了mooc的数据。</span></span><br><span class="line">        <span class="comment">//拿到之后，就回到vue开始执行then。   </span></span><br><span class="line">        <span class="comment">//到此结束！！！！</span></span><br><span class="line">        proxy: &#123;</span><br><span class="line">            <span class="string">'/api'</span>: &#123;</span><br><span class="line">                target: <span class="string">'http://localhost:3000'</span>,</span><br><span class="line">                pathRewrite:&#123;</span><br><span class="line">                    <span class="string">'^/api'</span>:<span class="string">'/api'</span></span><br><span class="line">                &#125;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;,</span><br><span class="line">        <span class="comment">//用来显示假数据，即如果直接访问 http://localhost:8080/api/index.json</span></span><br><span class="line">        <span class="comment">//就会在页面打印mock数据</span></span><br><span class="line">        <span class="comment">// port:8080,</span></span><br><span class="line">        <span class="comment">// before(app)&#123;</span></span><br><span class="line">        <span class="comment">//     app.get('/api/index.json',(req,res,next)=&gt;&#123;</span></span><br><span class="line">        <span class="comment">//         res.json(mockdataindex)</span></span><br><span class="line">        <span class="comment">//     &#125;)</span></span><br><span class="line">        <span class="comment">//     app.get('/api/city.json',(req,res,next)=&gt;&#123;</span></span><br><span class="line">        <span class="comment">//         res.json(mockdatacity)</span></span><br><span class="line">        <span class="comment">//     &#125;)</span></span><br><span class="line">        <span class="comment">//     app.get('/api/detail.json',(req,res,next)=&gt;&#123;</span></span><br><span class="line">        <span class="comment">//         res.json(mockdatadetail)</span></span><br><span class="line">        <span class="comment">//     &#125;)</span></span><br><span class="line">        <span class="comment">// &#125;</span></span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure><p>组件中如何写？这里的getCity实际上就是koa2提供的一个接口。只有在 vue.config.js中设置了跨域才会生效。</p><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">axios.get(<span class="string">"/api/user/getCity"</span>)</span><br></pre></td></tr></table></figure><p>看看koa2中getCity到底做了什么。如果输入<a href="http://localhost:3000/api/user/getCity" target="_blank" rel="noopener">http://localhost:3000/api/user/getCity</a> 就会在页面返回这个json的数据</p><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">router.get(<span class="string">"/getCity"</span>,<span class="keyword">async</span>(ctx,next)=&gt;&#123;</span><br><span class="line">    ctx.body = <span class="built_in">JSON</span>.parse(fs.readFileSync( <span class="string">'./static/city.json'</span>))</span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure><p>那么问题来了，axios.get(“/api/user/getCity”)到底做了什么，导致vue拿到了数据呢？</p><p>缕一缕：</p><ol><li>首先在组件中使用axios调用接口</li><li>到vue.config.js中设置跨域。比如说当进入city页面时，请求了/api/user/getCity。那么在vue.config.js中所有/api开头的请求都会被转发至 <a href="http://localhost:3000" target="_blank" rel="noopener">http://localhost:3000</a> 这个地址。其实这个地址就是我们的koa2服务器。</li><li>此时，在组件中的请求变成了 <a href="http://localhost:3000/api/user/getCity" target="_blank" rel="noopener">http://localhost:3000/api/user/getCity</a> 。但是这里有一个疑问，即koa2中接口的console.log没有被执行，问题来了，city.json又是如何获取到的呢？以后再回来看，先留个坑</li></ol><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">router.get(<span class="string">"/getCity"</span>,<span class="keyword">async</span>(ctx,next)=&gt;&#123;</span><br><span class="line">    <span class="built_in">console</span>.log(<span class="number">1</span>)</span><br><span class="line">    ctx.body = <span class="built_in">JSON</span>.parse(fs.readFileSync( <span class="string">'./static/city.json'</span>))</span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure>]]></content>
+      
+      
+      <categories>
+          
+          <category> koa2 </category>
+          
+      </categories>
+      
+      
+        <tags>
+            
+            <tag> webServer </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
+      <title>koa2实现session</title>
+      <link href="/2020/03/18/koa2%E5%AE%9E%E7%8E%B0session/"/>
+      <url>/2020/03/18/koa2%E5%AE%9E%E7%8E%B0session/</url>
+      
+        <content type="html"><![CDATA[<p>click look more</p><a id="more"></a><h1 id="登录功能"><a href="#登录功能" class="headerlink" title="登录功能"></a>登录功能</h1><blockquote><p>实现登录实际上就是要实现session。需要使用到两个插件： <strong>koa-generic-session</strong>和<strong>koa-redis</strong>。koa-redis也需要依赖基本的redis</p></blockquote><figure class="highlight cmd"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">cnpm install koa-generic-session koa-redis redis -S</span><br></pre></td></tr></table></figure><p>接下来开始在app.js中操作一下</p><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 首先引入两个下载好的插件。其实从官网可以看到这两个插件是同时使用的</span></span><br><span class="line"><span class="keyword">import</span> session <span class="keyword">from</span> <span class="string">'koa-generic-session'</span></span><br><span class="line"><span class="keyword">import</span> redisStore <span class="keyword">from</span> <span class="string">'koa-redis'</span></span><br><span class="line"></span><br><span class="line"><span class="comment">// 在写中间件的时候，要将代码写到注册路由之前</span></span><br><span class="line"><span class="comment">// session的配置</span></span><br><span class="line"><span class="comment">// 加密的key</span></span><br><span class="line">app.keys = [<span class="string">'LWJ#$1997'</span>]</span><br><span class="line">app.use(session(&#123;</span><br><span class="line">  <span class="comment">// 配置cookie</span></span><br><span class="line">  cookie:&#123;</span><br><span class="line">    path: <span class="string">'/'</span>,</span><br><span class="line">    httpOnly: <span class="literal">true</span>,</span><br><span class="line">    <span class="comment">// cookie有效期为一天</span></span><br><span class="line">    maxAge: <span class="number">24</span> * <span class="number">60</span> * <span class="number">60</span> * <span class="number">1000</span>,</span><br><span class="line">    overwrite: <span class="literal">true</span>,</span><br><span class="line">    signed: <span class="literal">true</span></span><br><span class="line">  &#125;,</span><br><span class="line">  <span class="comment">// 配置redis</span></span><br><span class="line">  store:redisStore(&#123;</span><br><span class="line">    <span class="comment">// 先写死本地的redis ，这里应该根据配置环境不同而变化</span></span><br><span class="line">    all:<span class="string">"127.0.0.1:6379"</span></span><br><span class="line">  &#125;)</span><br><span class="line">&#125;))</span><br></pre></td></tr></table></figure><p>接下来做一个测试，看看是否成功</p><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">router.get(<span class="string">"/session-test"</span>,<span class="keyword">async</span>(ctx,next)=&gt;&#123;</span><br><span class="line">    <span class="comment">// 因为在app.js中注册了session，所以这里应该有内容</span></span><br><span class="line">    <span class="keyword">if</span>(ctx.session.viewCount==<span class="literal">null</span>)&#123;</span><br><span class="line">        ctx.session.viewCount=<span class="number">0</span></span><br><span class="line">        <span class="built_in">console</span>.log(<span class="number">1</span>)</span><br><span class="line">    &#125;</span><br><span class="line">    ctx.session.viewCount++</span><br><span class="line"></span><br><span class="line">    ctx.body=&#123;</span><br><span class="line">        errno:<span class="number">0</span>,</span><br><span class="line">        viewCount:ctx.session.viewCount</span><br><span class="line">    &#125;</span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure><p>打开redis-cli进行骚操作。可以看到成功了</p><figure class="highlight cmd"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="number">127</span>.<span class="number">0</span>.<span class="number">0</span>.<span class="number">1</span>:<span class="number">6379</span>&gt; keys</span><br><span class="line">(error) ERR wrong number of arguments <span class="keyword">for</span> 'keys' command</span><br><span class="line"><span class="number">127</span>.<span class="number">0</span>.<span class="number">0</span>.<span class="number">1</span>:<span class="number">6379</span>&gt; keys *</span><br><span class="line"><span class="number">1</span>) "koa:sess:W-c-<span class="number">7</span>RTc09iAXGCAdQW-<span class="number">2</span>wAnTIpq21bK"</span><br><span class="line"><span class="number">127</span>.<span class="number">0</span>.<span class="number">0</span>.<span class="number">1</span>:<span class="number">6379</span>&gt; get koa:sess:W-c-<span class="number">7</span>RTc09iAXGCAdQW-<span class="number">2</span>wAnTIpq21bK</span><br><span class="line">"&#123;\"cookie\":&#123;\"<span class="built_in">path</span>\":\"/\",\"httpOnly\":true,\"maxAge\":<span class="number">86400000</span>,\"overwrite\":true,\"signed\":true&#125;,\"viewCount\":<span class="number">10</span>&#125;"</span><br></pre></td></tr></table></figure><p>既然成功了，那就说明现在不止可以存储viewCount，还可以存储username，password等等</p>]]></content>
+      
+      
+      <categories>
+          
+          <category> koa2 </category>
+          
+      </categories>
+      
+      
+        <tags>
+            
+            <tag> webServer </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
+      <title>koa2处理路由</title>
+      <link href="/2020/03/18/koa2%E5%A4%84%E7%90%86%E8%B7%AF%E7%94%B1/"/>
+      <url>/2020/03/18/koa2%E5%A4%84%E7%90%86%E8%B7%AF%E7%94%B1/</url>
+      
+        <content type="html"><![CDATA[<p>click look more</p><a id="more"></a><ol><li>首先在routes文件夹下新建一个user.js文件</li><li>如下代码</li></ol><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 因为koa2和koa-router是分离的，类似vue和vue-router。所以这里还需要引用一下</span></span><br><span class="line"><span class="keyword">const</span> router = <span class="built_in">require</span>(<span class="string">'koa-router'</span>)()</span><br><span class="line"></span><br><span class="line"><span class="comment">// 给blog.js所有的路由添加一个前缀</span></span><br><span class="line"><span class="comment">// 比如下面的login，就需要通过/api/user/login访问</span></span><br><span class="line">router.prefix(<span class="string">"/api/user"</span>)</span><br><span class="line"></span><br><span class="line"><span class="comment">// 创建一个login路由</span></span><br><span class="line">router.post(<span class="string">"/login"</span>,<span class="keyword">async</span>(ctx,next)=&gt;&#123;</span><br><span class="line">    <span class="comment">//通过ctx.request.body获取用户名密码</span></span><br><span class="line">    <span class="comment">//按理说ctx就包含了request，但是下面已经使用了ctx.body</span></span><br><span class="line">    <span class="comment">//为了做一个区分，就是用ctx.request.body</span></span><br><span class="line">    <span class="keyword">const</span> &#123;username,password&#125;=ctx.request.body</span><br><span class="line">    <span class="comment">//可以直接在页面上打印</span></span><br><span class="line">    ctx.body=&#123;</span><br><span class="line">        username,</span><br><span class="line">        password</span><br><span class="line">    &#125;</span><br><span class="line">&#125;)</span><br><span class="line"></span><br><span class="line"><span class="comment">// 导出router</span></span><br><span class="line"><span class="built_in">module</span>.exports=router</span><br></pre></td></tr></table></figure><ol start="3"><li>导出的router到app.js中要进行引用和注册，不然会NOT FOUND</li></ol><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 引用</span></span><br><span class="line"><span class="keyword">import</span> user <span class="keyword">from</span> <span class="string">'./routes/user'</span></span><br><span class="line"><span class="comment">// 注册</span></span><br><span class="line">app.use(user.routes(), user.allowedMethods())</span><br></pre></td></tr></table></figure><ol start="4"><li>到此路由的使用就差不多了</li></ol>]]></content>
+      
+      
+      <categories>
+          
+          <category> koa2 </category>
+          
+      </categories>
+      
+      
+        <tags>
+            
+            <tag> webServer </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
+      <title>解决不能使用import</title>
+      <link href="/2020/03/18/%E8%A7%A3%E5%86%B3%E4%B8%8D%E8%83%BD%E4%BD%BF%E7%94%A8import/"/>
+      <url>/2020/03/18/%E8%A7%A3%E5%86%B3%E4%B8%8D%E8%83%BD%E4%BD%BF%E7%94%A8import/</url>
+      
+        <content type="html"><![CDATA[<p>click look more</p><a id="more"></a><blockquote><p>在使用koa2时，将脚手架事先写好的代码改为es6的import会报错。表示cannot find module …..</p></blockquote><p>解决办法：</p><p>安装babel全家桶，因为现在还不熟悉babel。先这么着</p><figure class="highlight cmd"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">cnpm install @babel/cli @babel/core @babel/node @babel/runtime @babel/plugin-transform-runtime @babel/preset-env -D</span><br></pre></td></tr></table></figure><p>根目录创建 .babelrc</p><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">&#123;</span><br><span class="line">    &quot;presets&quot;: [&quot;@babel&#x2F;env&quot;],</span><br><span class="line">    &quot;plugins&quot;: [&quot;@babel&#x2F;plugin-transform-runtime&quot;]</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure><p>还有一点需要注意，就是编译代码。意思是运行babelbiuld可以将src中的代码编译保存到dist中</p><figure class="highlight"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">"scripts": &#123;</span><br><span class="line">    "babelbuild": "babel src --out-dir dist"</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>]]></content>
+      
+      
+      <categories>
+          
+          <category> koa2 </category>
+          
+      </categories>
+      
+      
+        <tags>
+            
+            <tag> babel </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
+      <title>koa2之环境搭建</title>
+      <link href="/2020/03/18/koa2%E4%B9%8B%E7%8E%AF%E5%A2%83%E6%90%AD%E5%BB%BA/"/>
+      <url>/2020/03/18/koa2%E4%B9%8B%E7%8E%AF%E5%A2%83%E6%90%AD%E5%BB%BA/</url>
+      
+        <content type="html"><![CDATA[<p>click look more</p><a id="more"></a><ol><li>全局安装</li></ol><figure class="highlight cmd"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">cnpm install koa-generator -g</span><br></pre></td></tr></table></figure><ol start="2"><li>使用koa2初始化项目</li></ol><figure class="highlight cmd"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">koa2 koa-demo</span><br></pre></td></tr></table></figure><ol start="3"><li>安装插件</li></ol><figure class="highlight cmd"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">cnpm install</span><br></pre></td></tr></table></figure><ol start="4"><li>启动</li></ol><figure class="highlight cmd"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">npm run dev</span><br></pre></td></tr></table></figure><p>如图：</p><p><img src="/images/19.png" alt=""></p><ol start="5"><li>安装环境参数插件 cross-env</li></ol><figure class="highlight cmd"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">cnpm install cross-env -D</span><br></pre></td></tr></table></figure>]]></content>
+      
+      
+      <categories>
+          
+          <category> koa2 </category>
+          
+      </categories>
+      
+      
+        <tags>
+            
+            <tag> 环境搭建 </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
+      <title>vue之组件基础</title>
+      <link href="/2020/03/18/vue%E4%B9%8B%E7%BB%84%E4%BB%B6%E5%9F%BA%E7%A1%80/"/>
+      <url>/2020/03/18/vue%E4%B9%8B%E7%BB%84%E4%BB%B6%E5%9F%BA%E7%A1%80/</url>
+      
+        <content type="html"><![CDATA[<p>click look more</p><a id="more"></a><h1 id="基本示例"><a href="#基本示例" class="headerlink" title="基本示例"></a>基本示例</h1><blockquote><p>要格外注意组件中的data是一个函数，而根实例的Vue是一个对象。并且data返回的是一个对象，要使用return</p></blockquote><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 定义一个名为 button-counter 的新组件</span></span><br><span class="line">Vue.component(<span class="string">'button-counter'</span>, &#123;</span><br><span class="line">  data: <span class="function"><span class="keyword">function</span> (<span class="params"></span>) </span>&#123;</span><br><span class="line">    <span class="keyword">return</span> &#123;</span><br><span class="line">      count: <span class="number">0</span></span><br><span class="line">    &#125;</span><br><span class="line">  &#125;,</span><br><span class="line">  template: <span class="string">'&lt;button v-on:click="count++"&gt;You clicked me &#123;&#123; count &#125;&#125; times.&lt;/button&gt;'</span></span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure><h1 id="组件的复用"><a href="#组件的复用" class="headerlink" title="组件的复用"></a>组件的复用</h1><blockquote><p>可以任意次复用组件，要注意每个复用的组件都是独立的，即数据不会相互影响。因为每一个组件都会有一个它的新实例被创建</p></blockquote><h2 id="data-必须是一个函数"><a href="#data-必须是一个函数" class="headerlink" title="data 必须是一个函数"></a>data 必须是一个函数</h2><blockquote><p>之前一直到有这样的疑问，其实这样做的目的是为了让每一个被复用的组件都独立。因为当data为函数时才可以使用return。正因为此，每一个组件都可以维护自己的被返回的对象。</p></blockquote><h1 id="通过-Prop-向子组件传递数据"><a href="#通过-Prop-向子组件传递数据" class="headerlink" title="通过 Prop 向子组件传递数据"></a>通过 Prop 向子组件传递数据</h1><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 全局创建一个组件名为blog-post</span></span><br><span class="line">Vue.component(<span class="string">'blog-post'</span>, &#123;</span><br><span class="line"><span class="comment">//有一个属性为title</span></span><br><span class="line">  props: [<span class="string">'title'</span>],</span><br><span class="line">  <span class="comment">//模板显示title属性值</span></span><br><span class="line">  template: <span class="string">'&lt;h3&gt;&#123;&#123; title &#125;&#125;&lt;/h3&gt;'</span></span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure><p>在template中使用自定义的组件，并且有一个title属性</p><figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">blog-post</span> <span class="attr">title</span>=<span class="string">"My journey with Vue"</span>&gt;</span><span class="tag">&lt;/<span class="name">blog-post</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">blog-post</span> <span class="attr">title</span>=<span class="string">"Blogging with Vue"</span>&gt;</span><span class="tag">&lt;/<span class="name">blog-post</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">blog-post</span> <span class="attr">title</span>=<span class="string">"Why Vue is so fun"</span>&gt;</span><span class="tag">&lt;/<span class="name">blog-post</span>&gt;</span></span><br></pre></td></tr></table></figure><h1 id="单个根元素"><a href="#单个根元素" class="headerlink" title="单个根元素"></a>单个根元素</h1><h1 id="监听子组件事件"><a href="#监听子组件事件" class="headerlink" title="监听子组件事件"></a>监听子组件事件</h1><h2 id="使用事件抛出一个值"><a href="#使用事件抛出一个值" class="headerlink" title="使用事件抛出一个值"></a>使用事件抛出一个值</h2><h2 id="在组件上使用-v-model"><a href="#在组件上使用-v-model" class="headerlink" title="在组件上使用 v-model"></a>在组件上使用 v-model</h2><h1 id="通过插槽分发内容"><a href="#通过插槽分发内容" class="headerlink" title="通过插槽分发内容"></a>通过插槽分发内容</h1><h1 id="动态组件"><a href="#动态组件" class="headerlink" title="动态组件"></a>动态组件</h1><h1 id="解析-DOM-模板时的注意事项"><a href="#解析-DOM-模板时的注意事项" class="headerlink" title="解析 DOM 模板时的注意事项"></a>解析 DOM 模板时的注意事项</h1>]]></content>
+      
+      
+      <categories>
+          
+          <category> vue </category>
+          
+      </categories>
+      
+      
+    </entry>
+    
+    
+    
+    <entry>
       <title>vue之事件处理</title>
       <link href="/2020/03/18/vue%E4%B9%8B%E4%BA%8B%E4%BB%B6%E5%A4%84%E7%90%86/"/>
       <url>/2020/03/18/vue%E4%B9%8B%E4%BA%8B%E4%BB%B6%E5%A4%84%E7%90%86/</url>
