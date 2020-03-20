@@ -28,7 +28,7 @@
 <meta property="og:description" content="click look more">
 <meta property="og:locale" content="zh_CN">
 <meta property="article:published_time" content="2020-03-18T12:51:01.187Z">
-<meta property="article:modified_time" content="2020-03-18T13:17:55.209Z">
+<meta property="article:modified_time" content="2020-03-19T05:53:39.850Z">
 <meta property="article:author" content="Edison">
 <meta property="article:tag" content="webServer">
 <meta name="twitter:card" content="summary">
@@ -182,10 +182,16 @@
                 <i class="fa fa-calendar-o"></i>
               </span>
               <span class="post-meta-item-text">发表于</span>
-              
 
-              <time title="创建时间：2020-03-18 20:51:01 / 修改时间：21:17:55" itemprop="dateCreated datePublished" datetime="2020-03-18T20:51:01+08:00">2020-03-18</time>
+              <time title="创建时间：2020-03-18 20:51:01" itemprop="dateCreated datePublished" datetime="2020-03-18T20:51:01+08:00">2020-03-18</time>
             </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2020-03-19 13:53:39" itemprop="dateModified" datetime="2020-03-19T13:53:39+08:00">2020-03-19</time>
+              </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
                 <i class="fa fa-folder-o"></i>
@@ -227,7 +233,7 @@
 <ol>
 <li>首先在组件中使用axios调用接口</li>
 <li>到vue.config.js中设置跨域。比如说当进入city页面时，请求了/api/user/getCity。那么在vue.config.js中所有/api开头的请求都会被转发至 <a href="http://localhost:3000" target="_blank" rel="noopener">http://localhost:3000</a> 这个地址。其实这个地址就是我们的koa2服务器。</li>
-<li>此时，在组件中的请求变成了 <a href="http://localhost:3000/api/user/getCity" target="_blank" rel="noopener">http://localhost:3000/api/user/getCity</a> 。但是这里有一个疑问，即koa2中接口的console.log没有被执行，问题来了，city.json又是如何获取到的呢？以后再回来看，先留个坑</li>
+<li>此时，在组件中的请求变成了 <a href="http://localhost:3000/api/user/getCity" target="_blank" rel="noopener">http://localhost:3000/api/user/getCity</a> 。</li>
 </ol>
 <figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">router.get(<span class="string">"/getCity"</span>,<span class="keyword">async</span>(ctx,next)=&gt;&#123;</span><br><span class="line">    <span class="built_in">console</span>.log(<span class="number">1</span>)</span><br><span class="line">    ctx.body = <span class="built_in">JSON</span>.parse(fs.readFileSync( <span class="string">'./static/city.json'</span>))</span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure>
     </div>
@@ -250,7 +256,10 @@
     <a href="/2020/03/18/koa2%E5%AE%9E%E7%8E%B0session/" rel="prev" title="koa2实现session">
       <i class="fa fa-chevron-left"></i> koa2实现session
     </a></div>
-      <div class="post-nav-item"></div>
+      <div class="post-nav-item">
+    <a href="/2020/03/19/%E5%88%9D%E8%AF%86nuxt.js/" rel="next" title="初识nuxt.js">
+      初识nuxt.js <i class="fa fa-chevron-right"></i>
+    </a></div>
     </div>
       </footer>
     
@@ -323,14 +332,14 @@
       <div class="site-state-item site-state-posts">
           <a href="/archives/">
         
-          <span class="site-state-item-count">76</span>
+          <span class="site-state-item-count">77</span>
           <span class="site-state-item-name">日志</span>
         </a>
       </div>
       <div class="site-state-item site-state-categories">
             <a href="/categories/">
           
-        <span class="site-state-item-count">13</span>
+        <span class="site-state-item-count">14</span>
         <span class="site-state-item-name">分类</span></a>
       </div>
       <div class="site-state-item site-state-tags">
@@ -365,7 +374,7 @@
 <div></div>
 <div class="theme-info">
   <div class="powered-by"></div>
-  <span class="post-count">至今已写39.1k字</span>
+  <span class="post-count">至今已写39.8k字</span>
 </div>
 
         
