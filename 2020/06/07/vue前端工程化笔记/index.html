@@ -1,0 +1,752 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 4.2.0">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/logo.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/logo.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/logo.png">
+  <link rel="mask-icon" href="/images/logo.png" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+<link rel="stylesheet" href="/lib/font-awesome/css/font-awesome.min.css">
+
+<script id="hexo-configurations">
+    var NexT = window.NexT || {};
+    var CONFIG = {"hostname":"yoursite.com","root":"/","scheme":"Pisces","version":"7.7.2","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":false,"show_result":false,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":false,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},"path":"./public/search.xml"};
+  </script>
+
+  <meta name="description" content="click look more">
+<meta property="og:type" content="article">
+<meta property="og:title" content="ES6模块化笔记以及webpack简单的配置使用">
+<meta property="og:url" content="http://yoursite.com/2020/06/07/vue%E5%89%8D%E7%AB%AF%E5%B7%A5%E7%A8%8B%E5%8C%96%E7%AC%94%E8%AE%B0/index.html">
+<meta property="og:site_name" content="共你云雨">
+<meta property="og:description" content="click look more">
+<meta property="og:locale" content="zh_CN">
+<meta property="article:published_time" content="2020-06-07T15:12:50.952Z">
+<meta property="article:modified_time" content="2020-06-07T15:13:05.813Z">
+<meta property="article:author" content="Edison">
+<meta property="article:tag" content="babel">
+<meta property="article:tag" content="webpack">
+<meta name="twitter:card" content="summary">
+
+<link rel="canonical" href="http://yoursite.com/2020/06/07/vue%E5%89%8D%E7%AB%AF%E5%B7%A5%E7%A8%8B%E5%8C%96%E7%AC%94%E8%AE%B0/">
+
+
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome : false,
+    isPost : true
+  };
+</script>
+
+  <title>ES6模块化笔记以及webpack简单的配置使用 | 共你云雨</title>
+  
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="container use-motion">
+    <div class="headband"></div>
+	<a href="https://github.com/mamba666" target="_blank" rel="noopener" class="github-corner" aria-label="View source on GitHub"><svg width="80" height="80" viewBox="0 0 250 250" style="fill:#151513; color:#fff; position: absolute; top: 0; border: 0; right: 0;" aria-hidden="true"><path d="M0,0 L115,115 L130,115 L142,142 L250,250 L250,0 Z"></path><path d="M128.3,109.0 C113.8,99.7 119.0,89.6 119.0,89.6 C122.0,82.7 120.5,78.6 120.5,78.6 C119.2,72.0 123.4,76.3 123.4,76.3 C127.3,80.9 125.5,87.3 125.5,87.3 C122.9,97.6 130.6,101.9 134.4,103.2" fill="currentColor" style="transform-origin: 130px 106px;" class="octo-arm"></path><path d="M115.0,115.0 C114.9,115.1 118.7,116.5 119.8,115.4 L133.7,101.6 C136.9,99.2 139.9,98.4 142.2,98.6 C133.8,88.0 127.5,74.4 143.8,58.0 C148.5,53.4 154.0,51.2 159.7,51.0 C160.3,49.4 163.2,43.6 171.4,40.1 C171.4,40.1 176.1,42.5 178.8,56.2 C183.1,58.6 187.2,61.8 190.9,65.4 C194.5,69.0 197.7,73.2 200.1,77.6 C213.8,80.2 216.3,84.9 216.3,84.9 C212.7,93.1 206.9,96.0 205.4,96.6 C205.1,102.4 203.0,107.8 198.3,112.5 C181.9,128.9 168.3,122.5 157.7,114.1 C157.9,116.9 156.7,120.9 152.7,124.9 L141.0,136.5 C139.8,137.7 141.6,141.9 141.8,141.8 Z" fill="currentColor" class="octo-body"></path></svg></a><style>.github-corner:hover .octo-arm{animation:octocat-wave 560ms ease-in-out}@keyframes octocat-wave{0%,100%{transform:rotate(0)}20%,60%{transform:rotate(-25deg)}40%,80%{transform:rotate(10deg)}}@media (max-width:500px){.github-corner:hover .octo-arm{animation:none}.github-corner .octo-arm{animation:octocat-wave 560ms ease-in-out}}</style>
+
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切换导航栏">
+      <span class="toggle-line toggle-line-first"></span>
+      <span class="toggle-line toggle-line-middle"></span>
+      <span class="toggle-line toggle-line-last"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <div>
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">共你云雨</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+    </div>
+  </div>
+</div>
+
+
+<nav class="site-nav">
+  
+  <ul id="menu" class="menu">
+        <li class="menu-item menu-item-home">
+
+    <a href="/" rel="section"><i class="fa fa-fw fa-home"></i>首页</a>
+
+  </li>
+        <li class="menu-item menu-item-tags">
+
+    <a href="/tags/" rel="section"><i class="fa fa-fw fa-tags"></i>标签</a>
+
+  </li>
+        <li class="menu-item menu-item-categories">
+
+    <a href="/categories/" rel="section"><i class="fa fa-fw fa-th"></i>分类</a>
+
+  </li>
+        <li class="menu-item menu-item-archives">
+
+    <a href="/archives/" rel="section"><i class="fa fa-fw fa-archive"></i>归档</a>
+
+  </li>
+  </ul>
+
+</nav>
+</div>
+    </header>
+
+    
+  <div class="back-to-top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+
+
+    <main class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+
+          <div class="content">
+            
+
+  <div class="posts-expand">
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block " lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2020/06/07/vue%E5%89%8D%E7%AB%AF%E5%B7%A5%E7%A8%8B%E5%8C%96%E7%AC%94%E8%AE%B0/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="Edison">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="共你云雨">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          ES6模块化笔记以及webpack简单的配置使用
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+              
+
+              <time title="创建时间：2020-06-07 23:12:50 / 修改时间：23:13:05" itemprop="dateCreated datePublished" datetime="2020-06-07T23:12:50+08:00">2020-06-07</time>
+            </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/ES6%E6%A8%A1%E5%9D%97%E5%8C%96/" itemprop="url" rel="index"><span itemprop="name">ES6模块化</span></a>
+                </span>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+        <p>click look more</p>
+<a id="more"></a>
+
+<h3 id="今日目标"><a href="#今日目标" class="headerlink" title="今日目标"></a>今日目标</h3><p>1.能够了解模块化的相关规范<br>2.了解webpack<br>3.了解使用Vue单文件组件<br>4.能够搭建Vue脚手架<br>5.掌握Element-UI的使用 </p>
+<h3 id="1-模块化的分类"><a href="#1-模块化的分类" class="headerlink" title="1.模块化的分类"></a>1.模块化的分类</h3><h4 id="A-浏览器端的模块化"><a href="#A-浏览器端的模块化" class="headerlink" title="A.浏览器端的模块化"></a>A.浏览器端的模块化</h4><pre><code>1).AMD(Asynchronous Module Definition,异步模块定义)
+代表产品为：Require.js
+2).CMD(Common Module Definition,通用模块定义)
+代表产品为：Sea.js</code></pre><h4 id="B-服务器端的模块化"><a href="#B-服务器端的模块化" class="headerlink" title="B.服务器端的模块化"></a>B.服务器端的模块化</h4><pre><code>服务器端的模块化规范是使用CommonJS规范：
+1).使用require引入其他模块或者包
+2).使用exports或者module.exports导出模块成员
+3).一个文件就是一个模块，都拥有独立的作用域</code></pre><h4 id="C-ES6模块化"><a href="#C-ES6模块化" class="headerlink" title="C.ES6模块化"></a>C.ES6模块化</h4><pre><code>ES6模块化规范中定义：
+    1).每一个js文件都是独立的模块
+    2).导入模块成员使用import关键字
+    3).暴露模块成员使用export关键字</code></pre><p>小结：推荐使用ES6模块化，因为AMD，CMD局限使用与浏览器端，而CommonJS在服务器端使用。<br>      ES6模块化是浏览器端和服务器端通用的规范.</p>
+<h3 id="2-在NodeJS中安装babel"><a href="#2-在NodeJS中安装babel" class="headerlink" title="2.在NodeJS中安装babel"></a>2.在NodeJS中安装babel</h3><h4 id="A-安装babel"><a href="#A-安装babel" class="headerlink" title="A.安装babel"></a>A.安装babel</h4><pre><code>打开终端，输入命令：npm install @babel/core @babel/cli @babel/preset-env @babel/node -D
+安装完毕之后，再次输入命令安装：npm install @babel/polyfill -S</code></pre><h4 id="B-创建babel-config-js"><a href="#B-创建babel-config-js" class="headerlink" title="B.创建babel.config.js"></a>B.创建babel.config.js</h4><pre><code>在项目目录中创建babel.config.js文件。
+编辑js文件中的代码如下：
+    const presets = [
+        [&quot;@babel/env&quot;,{
+            targets:{
+                edge:&quot;17&quot;,
+                firefox:&quot;60&quot;,
+                chrome:&quot;67&quot;,
+                safari:&quot;11.1&quot;
+            }
+        }]
+    ]
+    //暴露
+    module.exports = { presets }</code></pre><h4 id="C-创建index-js文件"><a href="#C-创建index-js文件" class="headerlink" title="C.创建index.js文件"></a>C.创建index.js文件</h4><pre><code>在项目目录中创建index.js文件作为入口文件
+在index.js中输入需要执行的js代码，例如：
+    console.log(&quot;ok&quot;);</code></pre><h4 id="D-使用npx执行文件"><a href="#D-使用npx执行文件" class="headerlink" title="D.使用npx执行文件"></a>D.使用npx执行文件</h4><pre><code>打开终端，输入命令：npx babel-node ./index.js</code></pre><h3 id="3-设置默认导入-导出"><a href="#3-设置默认导入-导出" class="headerlink" title="3.设置默认导入/导出"></a>3.设置默认导入/导出</h3><h4 id="A-默认导出"><a href="#A-默认导出" class="headerlink" title="A.默认导出"></a>A.默认导出</h4><pre><code>export default {
+    成员A,
+    成员B,
+    .......
+},如下：
+let num = 100;
+export default{
+    num
+}</code></pre><h4 id="B-默认导入"><a href="#B-默认导入" class="headerlink" title="B.默认导入"></a>B.默认导入</h4><pre><code>import 接收名称 from &quot;模块标识符&quot;，如下：
+import test from &quot;./test.js&quot;</code></pre><p>注意：在一个模块中，只允许使用export default向外默认暴露一次成员，千万不要写多个export default。<br>如果在一个模块中没有向外暴露成员，其他模块引入该模块时将会得到一个空对象 </p>
+<h3 id="4-设置按需导入-导出"><a href="#4-设置按需导入-导出" class="headerlink" title="4.设置按需导入/导出"></a>4.设置按需导入/导出</h3><h4 id="A-按需导出"><a href="#A-按需导出" class="headerlink" title="A.按需导出"></a>A.按需导出</h4><pre><code>export let num = 998;
+export let myName = &quot;jack&quot;;
+export function fn = function(){ console.log(&quot;fn&quot;) }</code></pre><h4 id="B-按需导入"><a href="#B-按需导入" class="headerlink" title="B.按需导入"></a>B.按需导入</h4><pre><code>import { num,fn as printFn ,myName } from &quot;./test.js&quot;
+//同时导入默认导出的成员以及按需导入的成员
+import test,{ num,fn as printFn ,myName } from &quot;./test.js&quot;</code></pre><p>注意：一个模块中既可以按需导入也可以默认导入，一个模块中既可以按需导出也可以默认导出</p>
+<h3 id="5-直接导入并执行代码"><a href="#5-直接导入并执行代码" class="headerlink" title="5.直接导入并执行代码"></a>5.直接导入并执行代码</h3><pre><code>import &quot;./test2.js&quot;;</code></pre><h3 id="6-webpack的概念"><a href="#6-webpack的概念" class="headerlink" title="6.webpack的概念"></a>6.webpack的概念</h3><p>webpack是一个流行的前端项目构建工具，可以解决目前web开发的困境。<br>webpack提供了模块化支持，代码压缩混淆，解决js兼容问题，性能优化等特性，提高了开发效率和项目的可维护性</p>
+<h3 id="7-webpack的基本使用"><a href="#7-webpack的基本使用" class="headerlink" title="7.webpack的基本使用"></a>7.webpack的基本使用</h3><h4 id="A-创建项目目录并初始化"><a href="#A-创建项目目录并初始化" class="headerlink" title="A.创建项目目录并初始化"></a>A.创建项目目录并初始化</h4><pre><code>创建项目，并打开项目所在目录的终端，输入命令：
+    npm init -y</code></pre><h4 id="B-创建首页及js文件"><a href="#B-创建首页及js文件" class="headerlink" title="B.创建首页及js文件"></a>B.创建首页及js文件</h4><pre><code>在项目目录中创建index.html页面，并初始化页面结构：在页面中摆放一个ul，ul里面放置几个li
+在项目目录中创建js文件夹，并在文件夹中创建index.js文件</code></pre><h4 id="C-安装jQuery"><a href="#C-安装jQuery" class="headerlink" title="C.安装jQuery"></a>C.安装jQuery</h4><pre><code>打开项目目录终端，输入命令:
+npm install jQuery -S</code></pre><h4 id="D-导入jQuery"><a href="#D-导入jQuery" class="headerlink" title="D.导入jQuery"></a>D.导入jQuery</h4><pre><code>打开index.js文件，编写代码导入jQuery并实现功能：
+import $ from &quot;jquery&quot;;
+$(function(){
+    $(&quot;li:odd&quot;).css(&quot;background&quot;,&quot;cyan&quot;);
+    $(&quot;li:odd&quot;).css(&quot;background&quot;,&quot;pink&quot;);
+})</code></pre><p>注意：此时项目运行会有错误，因为import $ from “jquery”;这句代码属于ES6的新语法代码，在浏览器中可能会存在兼容性问题<br>所以我们需要webpack来帮助我们解决这个问题。</p>
+<h4 id="E-安装webpack"><a href="#E-安装webpack" class="headerlink" title="E.安装webpack"></a>E.安装webpack</h4><pre><code>1).打开项目目录终端，输入命令:
+npm install webpack webpack-cli -D
+2).然后在项目根目录中，创建一个 webpack.config.js 的配置文件用来配置webpack
+在 webpack.config.js 文件中编写代码进行webpack配置，如下：
+module.exports = {
+    mode:&quot;development&quot;//可以设置为development(开发模式)，production(发布模式)
+}
+补充：mode设置的是项目的编译模式。
+如果设置为development则表示项目处于开发阶段，不会进行压缩和混淆，打包速度会快一些
+如果设置为production则表示项目处于上线发布阶段，会进行压缩和混淆，打包速度会慢一些
+3).修改项目中的package.json文件添加运行脚本dev，如下：
+&quot;scripts&quot;:{
+    &quot;dev&quot;:&quot;webpack&quot;
+}
+注意：scripts节点下的脚本，可以通过 npm run 运行，如：
+运行终端命令：npm run dev
+将会启动webpack进行项目打包
+4).运行dev命令进行项目打包，并在页面中引入项目打包生成的js文件
+打开项目目录终端，输入命令:
+npm run dev
+等待webpack打包完毕之后，找到默认的dist路径中生成的main.js文件，将其引入到html页面中。
+浏览页面查看效果。</code></pre><h3 id="8-设置webpack的打包入口-出口"><a href="#8-设置webpack的打包入口-出口" class="headerlink" title="8.设置webpack的打包入口/出口"></a>8.设置webpack的打包入口/出口</h3><pre><code>在webpack 4.x中，默认会将src/index.js 作为默认的打包入口js文件
+                 默认会将dist/main.js 作为默认的打包输出js文件
+如果不想使用默认的入口/出口js文件，我们可以通过改变 webpack.config.js 来设置入口/出口的js文件，如下：
+const path = require(&quot;path&quot;);
+module.exports = {
+    mode:&quot;development&quot;,
+    //设置入口文件路径
+    entry: path.join(__dirname,&quot;./src/xx.js&quot;),
+    //设置出口文件
+    output:{
+        //设置路径
+        path:path.join(__dirname,&quot;./dist&quot;),
+        //设置文件名
+        filename:&quot;res.js&quot;
+    }
+}</code></pre><h3 id="9-设置webpack的自动打包"><a href="#9-设置webpack的自动打包" class="headerlink" title="9.设置webpack的自动打包"></a>9.设置webpack的自动打包</h3><pre><code>默认情况下，我们更改入口js文件的代码，需要重新运行命令打包webpack，才能生成出口的js文件
+那么每次都要重新执行命令打包，这是一个非常繁琐的事情，那么，自动打包可以解决这样繁琐的操作。
+实现自动打包功能的步骤如下：
+    A.安装自动打包功能的包:webpack-dev-server
+        npm install webpack-dev-server -D
+    B.修改package.json中的dev指令如下：
+        &quot;scripts&quot;:{
+            &quot;dev&quot;:&quot;webpack-dev-server&quot;
+        }
+    C.将引入的js文件路径更改为：&lt;script src=&quot;/bundle.js&quot;&gt;&lt;/script&gt;
+    D.运行npm run dev，进行打包
+    E.打开网址查看效果：http://localhost:8080
+
+注意：webpack-dev-server自动打包的输出文件，默认放到了服务器的根目录中.</code></pre><p>补充：<br>在自动打包完毕之后，默认打开服务器网页，实现方式就是打开package.json文件，修改dev命令：<br>    “dev”: “webpack-dev-server –open –host 127.0.0.1 –port 9999”</p>
+<h3 id="10-配置html-webpack-plugin"><a href="#10-配置html-webpack-plugin" class="headerlink" title="10.配置html-webpack-plugin"></a>10.配置html-webpack-plugin</h3><pre><code>使用html-webpack-plugin 可以生成一个预览页面。
+因为当我们访问默认的 http://localhost:8080/的时候，看到的是一些文件和文件夹，想要查看我们的页面
+还需要点击文件夹点击文件才能查看，那么我们希望默认就能看到一个页面，而不是看到文件夹或者目录。
+实现默认预览页面功能的步骤如下：
+    A.安装默认预览功能的包:html-webpack-plugin
+        npm install html-webpack-plugin -D
+    B.修改webpack.config.js文件，如下：
+        //导入包
+        const HtmlWebpackPlugin = require(&quot;html-webpack-plugin&quot;);
+        //创建对象
+        const htmlPlugin = new HtmlWebpackPlugin({
+            //设置生成预览页面的模板文件
+            template:&quot;./src/index.html&quot;,
+            //设置生成的预览页面名称
+            filename:&quot;index.html&quot;
+        })
+    C.继续修改webpack.config.js文件，添加plugins信息：
+        module.exports = {
+            ......
+            plugins:[ htmlPlugin ]
+        }</code></pre><h3 id="11-webpack中的加载器"><a href="#11-webpack中的加载器" class="headerlink" title="11.webpack中的加载器"></a>11.webpack中的加载器</h3><pre><code>通过loader打包非js模块：默认情况下，webpack只能打包js文件，如果想要打包非js文件，需要调用loader加载器才能打包
+    loader加载器包含：
+        1).less-loader
+        2).sass-loader
+        3).url-loader:打包处理css中与url路径有关的文件
+        4).babel-loader:处理高级js语法的加载器
+        5).postcss-loader
+        6).css-loader,style-loader
+
+注意：指定多个loader时的顺序是固定的，而调用loader的顺序是从后向前进行调用
+
+A.安装style-loader,css-loader来处理样式文件
+    1).安装包
+        npm install style-loader css-loader -D
+    2).配置规则：更改webpack.config.js的module中的rules数组
+    module.exports = {
+        ......
+        plugins:[ htmlPlugin ],
+        module : {
+            rules:[
+                {
+                    //test设置需要匹配的文件类型，支持正则
+                    test:/\.css$/,
+                    //use表示该文件类型需要调用的loader
+                    use:[&apos;style-loader&apos;,&apos;css-loader&apos;]
+                }
+            ]
+        }
+    }
+B.安装less,less-loader处理less文件
+    1).安装包
+        npm install less-loader less -D
+    2).配置规则：更改webpack.config.js的module中的rules数组
+    module.exports = {
+        ......
+        plugins:[ htmlPlugin ],
+        module : {
+            rules:[
+                {
+                    //test设置需要匹配的文件类型，支持正则
+                    test:/\.css$/,
+                    //use表示该文件类型需要调用的loader
+                    use:[&apos;style-loader&apos;,&apos;css-loader&apos;]
+                },
+                {
+                    test:/\.less$/,
+                    use:[&apos;style-loader&apos;,&apos;css-loader&apos;,&apos;less-loader&apos;]
+                }
+            ]
+        }
+    }
+C.安装sass-loader,node-sass处理less文件
+    1).安装包
+        npm install sass-loader node-sass -D
+    2).配置规则：更改webpack.config.js的module中的rules数组
+    module.exports = {
+        ......
+        plugins:[ htmlPlugin ],
+        module : {
+            rules:[
+                {
+                    //test设置需要匹配的文件类型，支持正则
+                    test:/\.css$/,
+                    //use表示该文件类型需要调用的loader
+                    use:[&apos;style-loader&apos;,&apos;css-loader&apos;]
+                },
+                {
+                    test:/\.less$/,
+                    use:[&apos;style-loader&apos;,&apos;css-loader&apos;,&apos;less-loader&apos;]
+                },
+                {
+                    test:/\.scss$/,
+                    use:[&apos;style-loader&apos;,&apos;css-loader&apos;,&apos;sass-loader&apos;]
+                }
+            ]
+        }
+    }
+
+    补充：安装sass-loader失败时，大部分情况是因为网络原因，详情参考：
+    https://segmentfault.com/a/1190000010984731?utm_source=tag-newest
+
+D.安装post-css自动添加css的兼容性前缀（-ie-,-webkit-）
+1).安装包
+    npm install postcss-loader autoprefixer -D
+2).在项目根目录创建并配置postcss.config.js文件
+const autoprefixer = require(&quot;autoprefixer&quot;);
+module.exports = {
+    plugins:[ autoprefixer ]
+}
+3).配置规则：更改webpack.config.js的module中的rules数组
+module.exports = {
+    ......
+    plugins:[ htmlPlugin ],
+    module : {
+        rules:[
+            {
+                //test设置需要匹配的文件类型，支持正则
+                test:/\.css$/,
+                //use表示该文件类型需要调用的loader
+                use:[&apos;style-loader&apos;,&apos;css-loader&apos;,&apos;postcss-loader&apos;]
+            },
+            {
+                test:/\.less$/,
+                use:[&apos;style-loader&apos;,&apos;css-loader&apos;,&apos;less-loader&apos;]
+            },
+            {
+                test:/\.scss$/,
+                use:[&apos;style-loader&apos;,&apos;css-loader&apos;,&apos;sass-loader&apos;]
+            }
+        ]
+    }
+}
+
+E.打包样式表中的图片以及字体文件
+在样式表css中有时候会设置背景图片和设置字体文件，一样需要loader进行处理
+使用url-loader和file-loader来处理打包图片文件以及字体文件
+1).安装包
+    npm install url-loader file-loader -D
+2).配置规则：更改webpack.config.js的module中的rules数组
+module.exports = {
+    ......
+    plugins:[ htmlPlugin ],
+    module : {
+        rules:[
+            {
+                //test设置需要匹配的文件类型，支持正则
+                test:/\.css$/,
+                //use表示该文件类型需要调用的loader
+                use:[&apos;style-loader&apos;,&apos;css-loader&apos;]
+            },
+            {
+                test:/\.less$/,
+                use:[&apos;style-loader&apos;,&apos;css-loader&apos;,&apos;less-loader&apos;]
+            },
+            {
+                test:/\.scss$/,
+                use:[&apos;style-loader&apos;,&apos;css-loader&apos;,&apos;sass-loader&apos;]
+            },{
+                test:/\.jpg|png|gif|bmp|ttf|eot|svg|woff|woff2$/,
+                //limit用来设置字节数，只有小于limit值的图片，才会转换
+                //为base64图片，会让图片加载更快
+                use:&quot;url-loader?limit=16940&quot;
+            }
+        ]
+    }
+}
+
+F.打包js文件中的高级语法：在编写js的时候，有时候我们会使用高版本的js语法
+有可能这些高版本的语法不被兼容，我们需要将之打包为兼容性的js代码
+我们需要安装babel系列的包
+A.安装babel转换器
+    npm install babel-loader @babel/core @babel/runtime -D
+B.安装babel语法插件包
+    npm install @babel/preset-env @babel/plugin-transform-runtime @babel/plugin-proposal-class-properties -D
+C.在项目根目录创建并配置babel.config.js文件
+
+    module.exports = {
+        presets:[&quot;@babel/preset-env&quot;],
+        plugins:[ &quot;@babel/plugin-transform-runtime&quot;, &quot;@babel/plugin-proposal-class-properties&quot; ]
+    }
+D.配置规则：更改webpack.config.js的module中的rules数组
+module.exports = {
+    ......
+    plugins:[ htmlPlugin ],
+    module : {
+        rules:[
+            {
+                //test设置需要匹配的文件类型，支持正则
+                test:/\.css$/,
+                //use表示该文件类型需要调用的loader
+                use:[&apos;style-loader&apos;,&apos;css-loader&apos;]
+            },
+            {
+                test:/\.less$/,
+                use:[&apos;style-loader&apos;,&apos;css-loader&apos;,&apos;less-loader&apos;]
+            },
+            {
+                test:/\.scss$/,
+                use:[&apos;style-loader&apos;,&apos;css-loader&apos;,&apos;sass-loader&apos;]
+            },{
+                test:/\.jpg|png|gif|bmp|ttf|eot|svg|woff|woff2$/,
+                //limit用来设置字节数，只有小于limit值的图片，才会转换
+                //为base64图片
+                use:&quot;url-loader?limit=16940&quot;
+            },{
+                test:/\.js$/,
+                use:&quot;babel-loader&quot;,
+                //exclude为排除项，意思是不要处理node_modules中的js文件
+                exclude:/node_modules/
+            }
+        ]
+    }
+}</code></pre><p>###12.Vue单文件组件<br>传统Vue组件的缺陷：<br>全局定义的组件不能重名，字符串模板缺乏语法高亮，不支持css(当html和js组件化时，css没有参与其中)<br>没有构建步骤限制，只能使用H5和ES5，不能使用预处理器（babel）<br>解决方案：<br>使用Vue单文件组件，每个单文件组件的后缀名都是.vue<br>每一个Vue单文件组件都由三部分组成<br>1).template组件组成的模板区域<br>2).script组成的业务逻辑区域<br>3).style样式区域</p>
+<p>代码如下：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line">&lt;template&gt;</span><br><span class="line"></span><br><span class="line">    组件代码区域</span><br><span class="line"></span><br><span class="line">&lt;&#x2F;template&gt;</span><br><span class="line"></span><br><span class="line">&lt;script&gt;</span><br><span class="line"></span><br><span class="line">    js代码区域</span><br><span class="line"></span><br><span class="line">&lt;&#x2F;script&gt;</span><br><span class="line"></span><br><span class="line">&lt;style scoped&gt;</span><br><span class="line"></span><br><span class="line">    样式代码区域</span><br><span class="line"></span><br><span class="line">&lt;&#x2F;style&gt;</span><br></pre></td></tr></table></figure>
+
+
+
+
+<p>补充：安装Vetur插件可以使得.vue文件中的代码高亮</p>
+<p>配置.vue文件的加载器<br>A.安装vue组件的加载器<br>    npm install vue-loader vue-template-compiler -D<br>B.配置规则：更改webpack.config.js的module中的rules数组<br>    const VueLoaderPlugin = require(“vue-loader/lib/plugin”);<br>    const vuePlugin = new VueLoaderPlugin();<br>    module.exports = {<br>        ……<br>        plugins:[ htmlPlugin, vuePlugin  ],<br>        module : {<br>            rules:[<br>                …//其他规则<br>                {<br>                    test:/.vue$/,<br>                    loader:”vue-loader”,</p>
+<pre><code>            }
+        ]
+    }
+}</code></pre><p>###13.在webpack中使用vue<br>上一节我们安装处理了vue单文件组件的加载器，想要让vue单文件组件能够使用，我们必须要安装vue<br>并使用vue来引用vue单文件组件。<br>A.安装Vue<br>    npm install vue -S<br>B.在index.js中引入vue：import Vue from “vue”<br>C.创建Vue实例对象并指定el，最后使用render函数渲染单文件组件<br>    const vm = new Vue({<br>        el:”#first”,<br>        render:h=&gt;h(app)<br>    })</p>
+<h3 id="14-使用webpack打包发布项目"><a href="#14-使用webpack打包发布项目" class="headerlink" title="14.使用webpack打包发布项目"></a>14.使用webpack打包发布项目</h3><p>在项目上线之前，我们需要将整个项目打包并发布。<br>A.配置package.json<br>    “scripts”:{<br>        “dev”:”webpack-dev-server”,<br>        “build”:”webpack -p”<br>    }<br>B.在项目打包之前，可以将dist目录删除，生成全新的dist目录</p>
+<h3 id="15-Vue脚手架"><a href="#15-Vue脚手架" class="headerlink" title="15.Vue脚手架"></a>15.Vue脚手架</h3><p>Vue脚手架可以快速生成Vue项目基础的架构。<br>A.安装3.x版本的Vue脚手架：<br>    npm install -g @vue/cli<br>B.基于3.x版本的脚手架创建Vue项目：<br>    1).使用命令创建Vue项目<br>        命令：vue create my-project<br>        选择Manually select features(选择特性以创建项目)<br>        勾选特性可以用空格进行勾选。<br>        是否选用历史模式的路由：n<br>        ESLint选择：ESLint + Standard config<br>        何时进行ESLint语法校验：Lint on save<br>        babel，postcss等配置文件如何放置：In dedicated config files(单独使用文件进行配置)<br>        是否保存为模板：n<br>        使用哪个工具安装包：npm<br>    2).基于ui界面创建Vue项目<br>        命令：vue ui<br>        在自动打开的创建项目网页中配置项目信息。<br>    3).基于2.x的旧模板，创建Vue项目<br>        npm install -g @vue/cli-init<br>        vue init webpack my-project</p>
+<p>C.分析Vue脚手架生成的项目结构<br>    node_modules:依赖包目录<br>    public：静态资源目录<br>    src：源码目录<br>    src/assets:资源目录<br>    src/components：组件目录<br>    src/views:视图组件目录<br>    src/App.vue:根组件<br>    src/main.js:入口js<br>    src/router.js:路由js<br>    babel.config.js:babel配置文件<br>    .eslintrc.js:</p>
+<h3 id="16-Vue脚手架的自定义配置"><a href="#16-Vue脚手架的自定义配置" class="headerlink" title="16.Vue脚手架的自定义配置"></a>16.Vue脚手架的自定义配置</h3><pre><code>A.通过 package.json 进行配置 [不推荐使用]
+    &quot;vue&quot;:{
+        &quot;devServer&quot;:{
+            &quot;port&quot;:&quot;9990&quot;,
+            &quot;open&quot;:true
+        }
+    }
+B.通过单独的配置文件进行配置，创建vue.config.js
+    module.exports = {
+        devServer:{
+            port:8888,
+            open:true
+        }
+    }</code></pre><h3 id="17-Element-UI的基本使用"><a href="#17-Element-UI的基本使用" class="headerlink" title="17.Element-UI的基本使用"></a>17.Element-UI的基本使用</h3><p>Element-UI:一套基于2.0的桌面端组件库<br>官网地址：<a href="http://element-cn.eleme.io/#/zh-CN" target="_blank" rel="noopener">http://element-cn.eleme.io/#/zh-CN</a><br>A.安装：<br>    npm install element-ui -S<br>B.导入使用：<br>    import ElementUI from “element-ui”;<br>    import “element-ui/lib/theme-chalk/index.css”;</p>
+<pre><code>Vue.use(ElementUI)</code></pre><h3 id="18-按需使用"><a href="#18-按需使用" class="headerlink" title="18.按需使用"></a>18.按需使用</h3><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">module</span>.exports = &#123;</span><br><span class="line">  presets: [</span><br><span class="line">    <span class="string">'@vue/app'</span>, [</span><br><span class="line">      <span class="string">'@babel/preset-env'</span>, &#123;</span><br><span class="line">        modules: <span class="literal">false</span></span><br><span class="line">      &#125;</span><br><span class="line">    ]</span><br><span class="line">  ],</span><br><span class="line">  plugins: [</span><br><span class="line">    [</span><br><span class="line">      <span class="string">'component'</span>,</span><br><span class="line">      &#123;</span><br><span class="line">        <span class="string">'libraryName'</span>: <span class="string">'element-ui'</span>,</span><br><span class="line">        <span class="string">'styleLibraryName'</span>: <span class="string">'theme-chalk'</span></span><br><span class="line">      &#125;</span><br><span class="line">    ]</span><br><span class="line">  ]</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+
+    </div>
+
+    
+    
+    
+
+      <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/tags/babel/" rel="tag"># babel</a>
+              <a href="/tags/webpack/" rel="tag"># webpack</a>
+          </div>
+
+        
+
+
+        
+    <div class="post-nav">
+      <div class="post-nav-item">
+    <a href="/2020/06/01/6.1/" rel="prev" title="6.1">
+      <i class="fa fa-chevron-left"></i> 6.1
+    </a></div>
+      <div class="post-nav-item"></div>
+    </div>
+      </footer>
+    
+  </article>
+  
+  
+  
+
+  </div>
+
+
+          </div>
+          
+
+<script>
+  window.addEventListener('tabs:register', () => {
+    let { activeClass } = CONFIG.comments;
+    if (CONFIG.comments.storage) {
+      activeClass = localStorage.getItem('comments_active') || activeClass;
+    }
+    if (activeClass) {
+      let activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      if (activeTab) {
+        activeTab.click();
+      }
+    }
+  });
+  if (CONFIG.comments.storage) {
+    window.addEventListener('tabs:click', event => {
+      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+      let commentClass = event.target.classList[1];
+      localStorage.setItem('comments_active', commentClass);
+    });
+  }
+</script>
+
+        </div>
+          
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line toggle-line-first"></span>
+    <span class="toggle-line toggle-line-middle"></span>
+    <span class="toggle-line toggle-line-last"></span>
+  </div>
+
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#今日目标"><span class="nav-number">1.</span> <span class="nav-text">今日目标</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#1-模块化的分类"><span class="nav-number">2.</span> <span class="nav-text">1.模块化的分类</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#A-浏览器端的模块化"><span class="nav-number">2.1.</span> <span class="nav-text">A.浏览器端的模块化</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#B-服务器端的模块化"><span class="nav-number">2.2.</span> <span class="nav-text">B.服务器端的模块化</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#C-ES6模块化"><span class="nav-number">2.3.</span> <span class="nav-text">C.ES6模块化</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-在NodeJS中安装babel"><span class="nav-number">3.</span> <span class="nav-text">2.在NodeJS中安装babel</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#A-安装babel"><span class="nav-number">3.1.</span> <span class="nav-text">A.安装babel</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#B-创建babel-config-js"><span class="nav-number">3.2.</span> <span class="nav-text">B.创建babel.config.js</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#C-创建index-js文件"><span class="nav-number">3.3.</span> <span class="nav-text">C.创建index.js文件</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#D-使用npx执行文件"><span class="nav-number">3.4.</span> <span class="nav-text">D.使用npx执行文件</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#3-设置默认导入-导出"><span class="nav-number">4.</span> <span class="nav-text">3.设置默认导入&#x2F;导出</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#A-默认导出"><span class="nav-number">4.1.</span> <span class="nav-text">A.默认导出</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#B-默认导入"><span class="nav-number">4.2.</span> <span class="nav-text">B.默认导入</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#4-设置按需导入-导出"><span class="nav-number">5.</span> <span class="nav-text">4.设置按需导入&#x2F;导出</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#A-按需导出"><span class="nav-number">5.1.</span> <span class="nav-text">A.按需导出</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#B-按需导入"><span class="nav-number">5.2.</span> <span class="nav-text">B.按需导入</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#5-直接导入并执行代码"><span class="nav-number">6.</span> <span class="nav-text">5.直接导入并执行代码</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#6-webpack的概念"><span class="nav-number">7.</span> <span class="nav-text">6.webpack的概念</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#7-webpack的基本使用"><span class="nav-number">8.</span> <span class="nav-text">7.webpack的基本使用</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#A-创建项目目录并初始化"><span class="nav-number">8.1.</span> <span class="nav-text">A.创建项目目录并初始化</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#B-创建首页及js文件"><span class="nav-number">8.2.</span> <span class="nav-text">B.创建首页及js文件</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#C-安装jQuery"><span class="nav-number">8.3.</span> <span class="nav-text">C.安装jQuery</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#D-导入jQuery"><span class="nav-number">8.4.</span> <span class="nav-text">D.导入jQuery</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#E-安装webpack"><span class="nav-number">8.5.</span> <span class="nav-text">E.安装webpack</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#8-设置webpack的打包入口-出口"><span class="nav-number">9.</span> <span class="nav-text">8.设置webpack的打包入口&#x2F;出口</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#9-设置webpack的自动打包"><span class="nav-number">10.</span> <span class="nav-text">9.设置webpack的自动打包</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#10-配置html-webpack-plugin"><span class="nav-number">11.</span> <span class="nav-text">10.配置html-webpack-plugin</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#11-webpack中的加载器"><span class="nav-number">12.</span> <span class="nav-text">11.webpack中的加载器</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#14-使用webpack打包发布项目"><span class="nav-number">13.</span> <span class="nav-text">14.使用webpack打包发布项目</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#15-Vue脚手架"><span class="nav-number">14.</span> <span class="nav-text">15.Vue脚手架</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#16-Vue脚手架的自定义配置"><span class="nav-number">15.</span> <span class="nav-text">16.Vue脚手架的自定义配置</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#17-Element-UI的基本使用"><span class="nav-number">16.</span> <span class="nav-text">17.Element-UI的基本使用</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#18-按需使用"><span class="nav-number">17.</span> <span class="nav-text">18.按需使用</span></a></li></ol></div>
+      </div>
+      <!--/noindex-->
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+  <p class="site-author-name" itemprop="name">Edison</p>
+  <div class="site-description" itemprop="description"></div>
+</div>
+<div class="site-state-wrap motion-element">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">82</span>
+          <span class="site-state-item-name">日志</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+            <a href="/categories/">
+          
+        <span class="site-state-item-count">16</span>
+        <span class="site-state-item-name">分类</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+            <a href="/tags/">
+          
+        <span class="site-state-item-count">15</span>
+        <span class="site-state-item-name">标签</span></a>
+      </div>
+  </nav>
+</div>
+
+
+
+      </div>
+
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+    </main>
+
+    <footer class="footer">
+      <div class="footer-inner">
+        
+
+<div class="copyright">
+</div>
+  <div class="powered-by">山高水远  一定相见
+  </div>
+<div></div>
+<div class="theme-info">
+  <div class="powered-by"></div>
+  <span class="post-count">至今已写48.7k字</span>
+</div>
+
+        
+
+
+
+
+
+
+
+
+      </div>
+    </footer>
+  </div>
+
+  
+  <script src="/lib/anime.min.js"></script>
+  <script src="/lib/velocity/velocity.min.js"></script>
+  <script src="/lib/velocity/velocity.ui.min.js"></script>
+
+<script src="/js/utils.js"></script>
+
+<script src="/js/motion.js"></script>
+
+
+<script src="/js/schemes/pisces.js"></script>
+
+
+<script src="/js/next-boot.js"></script>
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  
+
+</body>
+</html>
