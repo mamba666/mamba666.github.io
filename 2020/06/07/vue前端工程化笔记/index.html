@@ -28,10 +28,10 @@
 <meta property="og:description" content="click look more">
 <meta property="og:locale" content="zh_CN">
 <meta property="article:published_time" content="2020-06-07T15:12:50.952Z">
-<meta property="article:modified_time" content="2020-06-07T15:13:05.813Z">
+<meta property="article:modified_time" content="2020-06-07T23:07:37.725Z">
 <meta property="article:author" content="Edison">
-<meta property="article:tag" content="babel">
 <meta property="article:tag" content="webpack">
+<meta property="article:tag" content="babel">
 <meta name="twitter:card" content="summary">
 
 <link rel="canonical" href="http://yoursite.com/2020/06/07/vue%E5%89%8D%E7%AB%AF%E5%B7%A5%E7%A8%8B%E5%8C%96%E7%AC%94%E8%AE%B0/">
@@ -183,10 +183,16 @@
                 <i class="fa fa-calendar-o"></i>
               </span>
               <span class="post-meta-item-text">发表于</span>
-              
 
-              <time title="创建时间：2020-06-07 23:12:50 / 修改时间：23:13:05" itemprop="dateCreated datePublished" datetime="2020-06-07T23:12:50+08:00">2020-06-07</time>
+              <time title="创建时间：2020-06-07 23:12:50" itemprop="dateCreated datePublished" datetime="2020-06-07T23:12:50+08:00">2020-06-07</time>
             </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2020-06-08 07:07:37" itemprop="dateModified" datetime="2020-06-08T07:07:37+08:00">2020-06-08</time>
+              </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
                 <i class="fa fa-folder-o"></i>
@@ -212,18 +218,18 @@
 <a id="more"></a>
 
 <h3 id="今日目标"><a href="#今日目标" class="headerlink" title="今日目标"></a>今日目标</h3><p>1.能够了解模块化的相关规范<br>2.了解webpack<br>3.了解使用Vue单文件组件<br>4.能够搭建Vue脚手架<br>5.掌握Element-UI的使用 </p>
-<h3 id="1-模块化的分类"><a href="#1-模块化的分类" class="headerlink" title="1.模块化的分类"></a>1.模块化的分类</h3><h4 id="A-浏览器端的模块化"><a href="#A-浏览器端的模块化" class="headerlink" title="A.浏览器端的模块化"></a>A.浏览器端的模块化</h4><pre><code>1).AMD(Asynchronous Module Definition,异步模块定义)
+<h3 id="模块化的分类"><a href="#模块化的分类" class="headerlink" title="模块化的分类"></a>模块化的分类</h3><h4 id="浏览器端的模块化"><a href="#浏览器端的模块化" class="headerlink" title="浏览器端的模块化"></a>浏览器端的模块化</h4><pre><code>1).AMD(Asynchronous Module Definition,异步模块定义)
 代表产品为：Require.js
 2).CMD(Common Module Definition,通用模块定义)
-代表产品为：Sea.js</code></pre><h4 id="B-服务器端的模块化"><a href="#B-服务器端的模块化" class="headerlink" title="B.服务器端的模块化"></a>B.服务器端的模块化</h4><pre><code>服务器端的模块化规范是使用CommonJS规范：
+代表产品为：Sea.js</code></pre><h4 id="服务器端的模块化"><a href="#服务器端的模块化" class="headerlink" title="服务器端的模块化"></a>服务器端的模块化</h4><pre><code>服务器端的模块化规范是使用CommonJS规范：
 1).使用require引入其他模块或者包
 2).使用exports或者module.exports导出模块成员
-3).一个文件就是一个模块，都拥有独立的作用域</code></pre><h4 id="C-ES6模块化"><a href="#C-ES6模块化" class="headerlink" title="C.ES6模块化"></a>C.ES6模块化</h4><pre><code>ES6模块化规范中定义：
+3).一个文件就是一个模块，都拥有独立的作用域</code></pre><h4 id="ES6模块化"><a href="#ES6模块化" class="headerlink" title="ES6模块化"></a>ES6模块化</h4><pre><code>ES6模块化规范中定义：
     1).每一个js文件都是独立的模块
     2).导入模块成员使用import关键字
     3).暴露模块成员使用export关键字</code></pre><p>小结：推荐使用ES6模块化，因为AMD，CMD局限使用与浏览器端，而CommonJS在服务器端使用。<br>      ES6模块化是浏览器端和服务器端通用的规范.</p>
-<h3 id="2-在NodeJS中安装babel"><a href="#2-在NodeJS中安装babel" class="headerlink" title="2.在NodeJS中安装babel"></a>2.在NodeJS中安装babel</h3><h4 id="A-安装babel"><a href="#A-安装babel" class="headerlink" title="A.安装babel"></a>A.安装babel</h4><pre><code>打开终端，输入命令：npm install @babel/core @babel/cli @babel/preset-env @babel/node -D
-安装完毕之后，再次输入命令安装：npm install @babel/polyfill -S</code></pre><h4 id="B-创建babel-config-js"><a href="#B-创建babel-config-js" class="headerlink" title="B.创建babel.config.js"></a>B.创建babel.config.js</h4><pre><code>在项目目录中创建babel.config.js文件。
+<h3 id="在NodeJS中安装babel"><a href="#在NodeJS中安装babel" class="headerlink" title="在NodeJS中安装babel"></a>在NodeJS中安装babel</h3><h4 id="安装babel"><a href="#安装babel" class="headerlink" title="安装babel"></a>安装babel</h4><pre><code>打开终端，输入命令：npm install @babel/core @babel/cli @babel/preset-env @babel/node -D
+安装完毕之后，再次输入命令安装：npm install @babel/polyfill -S</code></pre><h4 id="创建babel-config-js"><a href="#创建babel-config-js" class="headerlink" title="创建babel.config.js"></a>创建babel.config.js</h4><pre><code>在项目目录中创建babel.config.js文件。
 编辑js文件中的代码如下：
     const presets = [
         [&quot;@babel/env&quot;,{
@@ -236,9 +242,9 @@
         }]
     ]
     //暴露
-    module.exports = { presets }</code></pre><h4 id="C-创建index-js文件"><a href="#C-创建index-js文件" class="headerlink" title="C.创建index.js文件"></a>C.创建index.js文件</h4><pre><code>在项目目录中创建index.js文件作为入口文件
+    module.exports = { presets }</code></pre><h4 id="创建index-js文件"><a href="#创建index-js文件" class="headerlink" title="创建index.js文件"></a>创建index.js文件</h4><pre><code>在项目目录中创建index.js文件作为入口文件
 在index.js中输入需要执行的js代码，例如：
-    console.log(&quot;ok&quot;);</code></pre><h4 id="D-使用npx执行文件"><a href="#D-使用npx执行文件" class="headerlink" title="D.使用npx执行文件"></a>D.使用npx执行文件</h4><pre><code>打开终端，输入命令：npx babel-node ./index.js</code></pre><h3 id="3-设置默认导入-导出"><a href="#3-设置默认导入-导出" class="headerlink" title="3.设置默认导入/导出"></a>3.设置默认导入/导出</h3><h4 id="A-默认导出"><a href="#A-默认导出" class="headerlink" title="A.默认导出"></a>A.默认导出</h4><pre><code>export default {
+    console.log(&quot;ok&quot;);</code></pre><h4 id="使用npx执行文件"><a href="#使用npx执行文件" class="headerlink" title="使用npx执行文件"></a>使用npx执行文件</h4><pre><code>打开终端，输入命令：npx babel-node ./index.js</code></pre><h3 id="设置默认导入-导出"><a href="#设置默认导入-导出" class="headerlink" title="设置默认导入/导出"></a>设置默认导入/导出</h3><h4 id="默认导出"><a href="#默认导出" class="headerlink" title="默认导出"></a>默认导出</h4><pre><code>export default {
     成员A,
     成员B,
     .......
@@ -246,24 +252,24 @@
 let num = 100;
 export default{
     num
-}</code></pre><h4 id="B-默认导入"><a href="#B-默认导入" class="headerlink" title="B.默认导入"></a>B.默认导入</h4><pre><code>import 接收名称 from &quot;模块标识符&quot;，如下：
+}</code></pre><h4 id="默认导入"><a href="#默认导入" class="headerlink" title="默认导入"></a>默认导入</h4><pre><code>import 接收名称 from &quot;模块标识符&quot;，如下：
 import test from &quot;./test.js&quot;</code></pre><p>注意：在一个模块中，只允许使用export default向外默认暴露一次成员，千万不要写多个export default。<br>如果在一个模块中没有向外暴露成员，其他模块引入该模块时将会得到一个空对象 </p>
-<h3 id="4-设置按需导入-导出"><a href="#4-设置按需导入-导出" class="headerlink" title="4.设置按需导入/导出"></a>4.设置按需导入/导出</h3><h4 id="A-按需导出"><a href="#A-按需导出" class="headerlink" title="A.按需导出"></a>A.按需导出</h4><pre><code>export let num = 998;
+<h3 id="设置按需导入-导出"><a href="#设置按需导入-导出" class="headerlink" title="设置按需导入/导出"></a>设置按需导入/导出</h3><h4 id="按需导出"><a href="#按需导出" class="headerlink" title="按需导出"></a>按需导出</h4><pre><code>export let num = 998;
 export let myName = &quot;jack&quot;;
-export function fn = function(){ console.log(&quot;fn&quot;) }</code></pre><h4 id="B-按需导入"><a href="#B-按需导入" class="headerlink" title="B.按需导入"></a>B.按需导入</h4><pre><code>import { num,fn as printFn ,myName } from &quot;./test.js&quot;
+export function fn = function(){ console.log(&quot;fn&quot;) }</code></pre><h4 id="按需导入"><a href="#按需导入" class="headerlink" title="按需导入"></a>按需导入</h4><pre><code>import { num,fn as printFn ,myName } from &quot;./test.js&quot;
 //同时导入默认导出的成员以及按需导入的成员
 import test,{ num,fn as printFn ,myName } from &quot;./test.js&quot;</code></pre><p>注意：一个模块中既可以按需导入也可以默认导入，一个模块中既可以按需导出也可以默认导出</p>
-<h3 id="5-直接导入并执行代码"><a href="#5-直接导入并执行代码" class="headerlink" title="5.直接导入并执行代码"></a>5.直接导入并执行代码</h3><pre><code>import &quot;./test2.js&quot;;</code></pre><h3 id="6-webpack的概念"><a href="#6-webpack的概念" class="headerlink" title="6.webpack的概念"></a>6.webpack的概念</h3><p>webpack是一个流行的前端项目构建工具，可以解决目前web开发的困境。<br>webpack提供了模块化支持，代码压缩混淆，解决js兼容问题，性能优化等特性，提高了开发效率和项目的可维护性</p>
-<h3 id="7-webpack的基本使用"><a href="#7-webpack的基本使用" class="headerlink" title="7.webpack的基本使用"></a>7.webpack的基本使用</h3><h4 id="A-创建项目目录并初始化"><a href="#A-创建项目目录并初始化" class="headerlink" title="A.创建项目目录并初始化"></a>A.创建项目目录并初始化</h4><pre><code>创建项目，并打开项目所在目录的终端，输入命令：
-    npm init -y</code></pre><h4 id="B-创建首页及js文件"><a href="#B-创建首页及js文件" class="headerlink" title="B.创建首页及js文件"></a>B.创建首页及js文件</h4><pre><code>在项目目录中创建index.html页面，并初始化页面结构：在页面中摆放一个ul，ul里面放置几个li
-在项目目录中创建js文件夹，并在文件夹中创建index.js文件</code></pre><h4 id="C-安装jQuery"><a href="#C-安装jQuery" class="headerlink" title="C.安装jQuery"></a>C.安装jQuery</h4><pre><code>打开项目目录终端，输入命令:
-npm install jQuery -S</code></pre><h4 id="D-导入jQuery"><a href="#D-导入jQuery" class="headerlink" title="D.导入jQuery"></a>D.导入jQuery</h4><pre><code>打开index.js文件，编写代码导入jQuery并实现功能：
+<h3 id="直接导入并执行代码"><a href="#直接导入并执行代码" class="headerlink" title="直接导入并执行代码"></a>直接导入并执行代码</h3><pre><code>import &quot;./test2.js&quot;;</code></pre><h3 id="webpack的概念"><a href="#webpack的概念" class="headerlink" title="webpack的概念"></a>webpack的概念</h3><p>webpack是一个流行的前端项目构建工具，可以解决目前web开发的困境。<br>webpack提供了模块化支持，代码压缩混淆，解决js兼容问题，性能优化等特性，提高了开发效率和项目的可维护性</p>
+<h3 id="webpack的基本使用"><a href="#webpack的基本使用" class="headerlink" title="webpack的基本使用"></a>webpack的基本使用</h3><h4 id="创建项目目录并初始化"><a href="#创建项目目录并初始化" class="headerlink" title="创建项目目录并初始化"></a>创建项目目录并初始化</h4><pre><code>创建项目，并打开项目所在目录的终端，输入命令：
+    npm init -y</code></pre><h4 id="创建首页及js文件"><a href="#创建首页及js文件" class="headerlink" title="创建首页及js文件"></a>创建首页及js文件</h4><pre><code>在项目目录中创建index.html页面，并初始化页面结构：在页面中摆放一个ul，ul里面放置几个li
+在项目目录中创建js文件夹，并在文件夹中创建index.js文件</code></pre><h4 id="安装jQuery"><a href="#安装jQuery" class="headerlink" title="安装jQuery"></a>安装jQuery</h4><pre><code>打开项目目录终端，输入命令:
+npm install jQuery -S</code></pre><h4 id="导入jQuery"><a href="#导入jQuery" class="headerlink" title="导入jQuery"></a>导入jQuery</h4><pre><code>打开index.js文件，编写代码导入jQuery并实现功能：
 import $ from &quot;jquery&quot;;
 $(function(){
     $(&quot;li:odd&quot;).css(&quot;background&quot;,&quot;cyan&quot;);
     $(&quot;li:odd&quot;).css(&quot;background&quot;,&quot;pink&quot;);
 })</code></pre><p>注意：此时项目运行会有错误，因为import $ from “jquery”;这句代码属于ES6的新语法代码，在浏览器中可能会存在兼容性问题<br>所以我们需要webpack来帮助我们解决这个问题。</p>
-<h4 id="E-安装webpack"><a href="#E-安装webpack" class="headerlink" title="E.安装webpack"></a>E.安装webpack</h4><pre><code>1).打开项目目录终端，输入命令:
+<h4 id="安装webpack"><a href="#安装webpack" class="headerlink" title="安装webpack"></a>安装webpack</h4><pre><code>1).打开项目目录终端，输入命令:
 npm install webpack webpack-cli -D
 2).然后在项目根目录中，创建一个 webpack.config.js 的配置文件用来配置webpack
 在 webpack.config.js 文件中编写代码进行webpack配置，如下：
@@ -284,7 +290,7 @@ module.exports = {
 打开项目目录终端，输入命令:
 npm run dev
 等待webpack打包完毕之后，找到默认的dist路径中生成的main.js文件，将其引入到html页面中。
-浏览页面查看效果。</code></pre><h3 id="8-设置webpack的打包入口-出口"><a href="#8-设置webpack的打包入口-出口" class="headerlink" title="8.设置webpack的打包入口/出口"></a>8.设置webpack的打包入口/出口</h3><pre><code>在webpack 4.x中，默认会将src/index.js 作为默认的打包入口js文件
+浏览页面查看效果。</code></pre><h3 id="设置webpack的打包入口-出口"><a href="#设置webpack的打包入口-出口" class="headerlink" title="设置webpack的打包入口/出口"></a>设置webpack的打包入口/出口</h3><pre><code>在webpack 4.x中，默认会将src/index.js 作为默认的打包入口js文件
                  默认会将dist/main.js 作为默认的打包输出js文件
 如果不想使用默认的入口/出口js文件，我们可以通过改变 webpack.config.js 来设置入口/出口的js文件，如下：
 const path = require(&quot;path&quot;);
@@ -299,7 +305,7 @@ module.exports = {
         //设置文件名
         filename:&quot;res.js&quot;
     }
-}</code></pre><h3 id="9-设置webpack的自动打包"><a href="#9-设置webpack的自动打包" class="headerlink" title="9.设置webpack的自动打包"></a>9.设置webpack的自动打包</h3><pre><code>默认情况下，我们更改入口js文件的代码，需要重新运行命令打包webpack，才能生成出口的js文件
+}</code></pre><h3 id="设置webpack的自动打包"><a href="#设置webpack的自动打包" class="headerlink" title="设置webpack的自动打包"></a>设置webpack的自动打包</h3><pre><code>默认情况下，我们更改入口js文件的代码，需要重新运行命令打包webpack，才能生成出口的js文件
 那么每次都要重新执行命令打包，这是一个非常繁琐的事情，那么，自动打包可以解决这样繁琐的操作。
 实现自动打包功能的步骤如下：
     A.安装自动打包功能的包:webpack-dev-server
@@ -313,27 +319,8 @@ module.exports = {
     E.打开网址查看效果：http://localhost:8080
 
 注意：webpack-dev-server自动打包的输出文件，默认放到了服务器的根目录中.</code></pre><p>补充：<br>在自动打包完毕之后，默认打开服务器网页，实现方式就是打开package.json文件，修改dev命令：<br>    “dev”: “webpack-dev-server –open –host 127.0.0.1 –port 9999”</p>
-<h3 id="10-配置html-webpack-plugin"><a href="#10-配置html-webpack-plugin" class="headerlink" title="10.配置html-webpack-plugin"></a>10.配置html-webpack-plugin</h3><pre><code>使用html-webpack-plugin 可以生成一个预览页面。
-因为当我们访问默认的 http://localhost:8080/的时候，看到的是一些文件和文件夹，想要查看我们的页面
-还需要点击文件夹点击文件才能查看，那么我们希望默认就能看到一个页面，而不是看到文件夹或者目录。
-实现默认预览页面功能的步骤如下：
-    A.安装默认预览功能的包:html-webpack-plugin
-        npm install html-webpack-plugin -D
-    B.修改webpack.config.js文件，如下：
-        //导入包
-        const HtmlWebpackPlugin = require(&quot;html-webpack-plugin&quot;);
-        //创建对象
-        const htmlPlugin = new HtmlWebpackPlugin({
-            //设置生成预览页面的模板文件
-            template:&quot;./src/index.html&quot;,
-            //设置生成的预览页面名称
-            filename:&quot;index.html&quot;
-        })
-    C.继续修改webpack.config.js文件，添加plugins信息：
-        module.exports = {
-            ......
-            plugins:[ htmlPlugin ]
-        }</code></pre><h3 id="11-webpack中的加载器"><a href="#11-webpack中的加载器" class="headerlink" title="11.webpack中的加载器"></a>11.webpack中的加载器</h3><pre><code>通过loader打包非js模块：默认情况下，webpack只能打包js文件，如果想要打包非js文件，需要调用loader加载器才能打包
+<h3 id="配置html-webpack-plugin"><a href="#配置html-webpack-plugin" class="headerlink" title="配置html-webpack-plugin"></a>配置html-webpack-plugin</h3><p>使用html-webpack-plugin 可以生成一个预览页面。<br>因为当我们访问默认的 <a href="http://localhost:8080/的时候，看到的是一些文件和文件夹，想要查看我们的页面" target="_blank" rel="noopener">http://localhost:8080/的时候，看到的是一些文件和文件夹，想要查看我们的页面</a><br>    还需要点击文件夹点击文件才能查看，那么我们希望默认就能看到一个页面，而不是看到文件夹或者目录。<br>    实现默认预览页面功能的步骤如下：<br>        A.安装默认预览功能的包:html-webpack-plugin<br>            npm install html-webpack-plugin -D<br>        B.修改webpack.config.js文件，如下：<br>            //导入包<br>            const HtmlWebpackPlugin = require(“html-webpack-plugin”);<br>            //创建对象<br>            const htmlPlugin = new HtmlWebpackPlugin({<br>                //设置生成预览页面的模板文件<br>                template:”./src/index.html”,<br>                //设置生成的预览页面名称<br>                filename:”index.html”<br>            })<br>        C.继续修改webpack.config.js文件，添加plugins信息：<br>            module.exports = {<br>                ……<br>                plugins:[ htmlPlugin ]<br>            }</p>
+<h3 id="11-webpack中的加载器"><a href="#11-webpack中的加载器" class="headerlink" title="11.webpack中的加载器"></a>11.webpack中的加载器</h3><pre><code>通过loader打包非js模块：默认情况下，webpack只能打包js文件，如果想要打包非js文件，需要调用loader加载器才能打包
     loader加载器包含：
         1).less-loader
         2).sass-loader
@@ -565,8 +552,8 @@ B.通过单独的配置文件进行配置，创建vue.config.js
 
       <footer class="post-footer">
           <div class="post-tags">
-              <a href="/tags/babel/" rel="tag"># babel</a>
               <a href="/tags/webpack/" rel="tag"># webpack</a>
+              <a href="/tags/babel/" rel="tag"># babel</a>
           </div>
 
         
@@ -578,7 +565,10 @@ B.通过单独的配置文件进行配置，创建vue.config.js
     <a href="/2020/06/01/6.1/" rel="prev" title="6.1">
       <i class="fa fa-chevron-left"></i> 6.1
     </a></div>
-      <div class="post-nav-item"></div>
+      <div class="post-nav-item">
+    <a href="/2020/06/08/%E7%94%B5%E5%95%86%E7%AE%A1%E7%90%86%E5%90%8E%E5%8F%B0%20API%20%E6%8E%A5%E5%8F%A3%E6%96%87%E6%A1%A3/" rel="next" title="电商管理后台 API 接口文档">
+      电商管理后台 API 接口文档 <i class="fa fa-chevron-right"></i>
+    </a></div>
     </div>
       </footer>
     
@@ -638,7 +628,7 @@ B.通过单独的配置文件进行配置，创建vue.config.js
 
       <!--noindex-->
       <div class="post-toc-wrap sidebar-panel">
-          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#今日目标"><span class="nav-number">1.</span> <span class="nav-text">今日目标</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#1-模块化的分类"><span class="nav-number">2.</span> <span class="nav-text">1.模块化的分类</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#A-浏览器端的模块化"><span class="nav-number">2.1.</span> <span class="nav-text">A.浏览器端的模块化</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#B-服务器端的模块化"><span class="nav-number">2.2.</span> <span class="nav-text">B.服务器端的模块化</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#C-ES6模块化"><span class="nav-number">2.3.</span> <span class="nav-text">C.ES6模块化</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-在NodeJS中安装babel"><span class="nav-number">3.</span> <span class="nav-text">2.在NodeJS中安装babel</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#A-安装babel"><span class="nav-number">3.1.</span> <span class="nav-text">A.安装babel</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#B-创建babel-config-js"><span class="nav-number">3.2.</span> <span class="nav-text">B.创建babel.config.js</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#C-创建index-js文件"><span class="nav-number">3.3.</span> <span class="nav-text">C.创建index.js文件</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#D-使用npx执行文件"><span class="nav-number">3.4.</span> <span class="nav-text">D.使用npx执行文件</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#3-设置默认导入-导出"><span class="nav-number">4.</span> <span class="nav-text">3.设置默认导入&#x2F;导出</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#A-默认导出"><span class="nav-number">4.1.</span> <span class="nav-text">A.默认导出</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#B-默认导入"><span class="nav-number">4.2.</span> <span class="nav-text">B.默认导入</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#4-设置按需导入-导出"><span class="nav-number">5.</span> <span class="nav-text">4.设置按需导入&#x2F;导出</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#A-按需导出"><span class="nav-number">5.1.</span> <span class="nav-text">A.按需导出</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#B-按需导入"><span class="nav-number">5.2.</span> <span class="nav-text">B.按需导入</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#5-直接导入并执行代码"><span class="nav-number">6.</span> <span class="nav-text">5.直接导入并执行代码</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#6-webpack的概念"><span class="nav-number">7.</span> <span class="nav-text">6.webpack的概念</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#7-webpack的基本使用"><span class="nav-number">8.</span> <span class="nav-text">7.webpack的基本使用</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#A-创建项目目录并初始化"><span class="nav-number">8.1.</span> <span class="nav-text">A.创建项目目录并初始化</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#B-创建首页及js文件"><span class="nav-number">8.2.</span> <span class="nav-text">B.创建首页及js文件</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#C-安装jQuery"><span class="nav-number">8.3.</span> <span class="nav-text">C.安装jQuery</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#D-导入jQuery"><span class="nav-number">8.4.</span> <span class="nav-text">D.导入jQuery</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#E-安装webpack"><span class="nav-number">8.5.</span> <span class="nav-text">E.安装webpack</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#8-设置webpack的打包入口-出口"><span class="nav-number">9.</span> <span class="nav-text">8.设置webpack的打包入口&#x2F;出口</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#9-设置webpack的自动打包"><span class="nav-number">10.</span> <span class="nav-text">9.设置webpack的自动打包</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#10-配置html-webpack-plugin"><span class="nav-number">11.</span> <span class="nav-text">10.配置html-webpack-plugin</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#11-webpack中的加载器"><span class="nav-number">12.</span> <span class="nav-text">11.webpack中的加载器</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#14-使用webpack打包发布项目"><span class="nav-number">13.</span> <span class="nav-text">14.使用webpack打包发布项目</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#15-Vue脚手架"><span class="nav-number">14.</span> <span class="nav-text">15.Vue脚手架</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#16-Vue脚手架的自定义配置"><span class="nav-number">15.</span> <span class="nav-text">16.Vue脚手架的自定义配置</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#17-Element-UI的基本使用"><span class="nav-number">16.</span> <span class="nav-text">17.Element-UI的基本使用</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#18-按需使用"><span class="nav-number">17.</span> <span class="nav-text">18.按需使用</span></a></li></ol></div>
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#今日目标"><span class="nav-number">1.</span> <span class="nav-text">今日目标</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#模块化的分类"><span class="nav-number">2.</span> <span class="nav-text">模块化的分类</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#浏览器端的模块化"><span class="nav-number">2.1.</span> <span class="nav-text">浏览器端的模块化</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#服务器端的模块化"><span class="nav-number">2.2.</span> <span class="nav-text">服务器端的模块化</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#ES6模块化"><span class="nav-number">2.3.</span> <span class="nav-text">ES6模块化</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#在NodeJS中安装babel"><span class="nav-number">3.</span> <span class="nav-text">在NodeJS中安装babel</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#安装babel"><span class="nav-number">3.1.</span> <span class="nav-text">安装babel</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#创建babel-config-js"><span class="nav-number">3.2.</span> <span class="nav-text">创建babel.config.js</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#创建index-js文件"><span class="nav-number">3.3.</span> <span class="nav-text">创建index.js文件</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#使用npx执行文件"><span class="nav-number">3.4.</span> <span class="nav-text">使用npx执行文件</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#设置默认导入-导出"><span class="nav-number">4.</span> <span class="nav-text">设置默认导入&#x2F;导出</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#默认导出"><span class="nav-number">4.1.</span> <span class="nav-text">默认导出</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#默认导入"><span class="nav-number">4.2.</span> <span class="nav-text">默认导入</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#设置按需导入-导出"><span class="nav-number">5.</span> <span class="nav-text">设置按需导入&#x2F;导出</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#按需导出"><span class="nav-number">5.1.</span> <span class="nav-text">按需导出</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#按需导入"><span class="nav-number">5.2.</span> <span class="nav-text">按需导入</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#直接导入并执行代码"><span class="nav-number">6.</span> <span class="nav-text">直接导入并执行代码</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#webpack的概念"><span class="nav-number">7.</span> <span class="nav-text">webpack的概念</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#webpack的基本使用"><span class="nav-number">8.</span> <span class="nav-text">webpack的基本使用</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#创建项目目录并初始化"><span class="nav-number">8.1.</span> <span class="nav-text">创建项目目录并初始化</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#创建首页及js文件"><span class="nav-number">8.2.</span> <span class="nav-text">创建首页及js文件</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#安装jQuery"><span class="nav-number">8.3.</span> <span class="nav-text">安装jQuery</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#导入jQuery"><span class="nav-number">8.4.</span> <span class="nav-text">导入jQuery</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#安装webpack"><span class="nav-number">8.5.</span> <span class="nav-text">安装webpack</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#设置webpack的打包入口-出口"><span class="nav-number">9.</span> <span class="nav-text">设置webpack的打包入口&#x2F;出口</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#设置webpack的自动打包"><span class="nav-number">10.</span> <span class="nav-text">设置webpack的自动打包</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#配置html-webpack-plugin"><span class="nav-number">11.</span> <span class="nav-text">配置html-webpack-plugin</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#11-webpack中的加载器"><span class="nav-number">12.</span> <span class="nav-text">11.webpack中的加载器</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#14-使用webpack打包发布项目"><span class="nav-number">13.</span> <span class="nav-text">14.使用webpack打包发布项目</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#15-Vue脚手架"><span class="nav-number">14.</span> <span class="nav-text">15.Vue脚手架</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#16-Vue脚手架的自定义配置"><span class="nav-number">15.</span> <span class="nav-text">16.Vue脚手架的自定义配置</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#17-Element-UI的基本使用"><span class="nav-number">16.</span> <span class="nav-text">17.Element-UI的基本使用</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#18-按需使用"><span class="nav-number">17.</span> <span class="nav-text">18.按需使用</span></a></li></ol></div>
       </div>
       <!--/noindex-->
 
@@ -652,14 +642,14 @@ B.通过单独的配置文件进行配置，创建vue.config.js
       <div class="site-state-item site-state-posts">
           <a href="/archives/">
         
-          <span class="site-state-item-count">82</span>
+          <span class="site-state-item-count">83</span>
           <span class="site-state-item-name">日志</span>
         </a>
       </div>
       <div class="site-state-item site-state-categories">
             <a href="/categories/">
           
-        <span class="site-state-item-count">16</span>
+        <span class="site-state-item-count">17</span>
         <span class="site-state-item-name">分类</span></a>
       </div>
       <div class="site-state-item site-state-tags">
@@ -694,7 +684,7 @@ B.通过单独的配置文件进行配置，创建vue.config.js
 <div></div>
 <div class="theme-info">
   <div class="powered-by"></div>
-  <span class="post-count">至今已写48.7k字</span>
+  <span class="post-count">至今已写56.4k字</span>
 </div>
 
         
