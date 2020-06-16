@@ -1,6 +1,100 @@
 <?xml version="1.0" encoding="utf-8"?>
 <search>
   <entry>
+    <title>v-for修改固定渲染值</title>
+    <url>/2020/06/13/%E5%88%97%E8%A1%A8%E5%BE%AA%E7%8E%AF%E4%BF%AE%E6%94%B9%E5%85%B6%E4%B8%AD%E7%9A%84icon/</url>
+    <content><![CDATA[<p>click look more</p>
+<a id="more"></a>
+
+<blockquote>
+<p>有一个需求是左侧菜单栏，使用了列表循环，但是每个一级菜单前都会有一个不同的icon。但是如果使用v-for，就会导致所有icon都是一样的。</p>
+</blockquote>
+<p>解决方案：</p>
+<ol>
+<li>首先在data里面定义好所有需要的icon</li>
+</ol>
+<figure class="highlight js"><table><tr><td class="code"><pre><span class="line">icons: &#123;</span><br><span class="line">    <span class="number">125</span>: <span class="string">'el-icon-user'</span>,</span><br><span class="line">    <span class="number">103</span>: <span class="string">'el-icon-s-management'</span>,</span><br><span class="line">    <span class="number">101</span>: <span class="string">'el-icon-s-shop'</span>,</span><br><span class="line">    <span class="number">102</span>: <span class="string">'el-icon-s-order'</span>,</span><br><span class="line">    <span class="number">145</span>: <span class="string">'el-icon-s-data'</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<ol start="2">
+<li>修改elementUI模板。item.id是关键，v-for时，将key值设置为item.id。icons[item.id]就可以选择当前第item.id的列表，然后设置相对应的icon。</li>
+</ol>
+<p>before</p>
+<figure class="highlight html"><table><tr><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">i</span> <span class="attr">class</span>=<span class="string">"el-icon-xxxx"</span>&gt;</span><span class="tag">&lt;/<span class="name">i</span>&gt;</span></span><br></pre></td></tr></table></figure>
+
+<p>after</p>
+<figure class="highlight html"><table><tr><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">i</span> <span class="attr">:class</span>=<span class="string">"icons[item.id]"</span>&gt;</span><span class="tag">&lt;/<span class="name">i</span>&gt;</span></span><br></pre></td></tr></table></figure>
+
+<h2 id="关于双层v-for"><a href="#关于双层v-for" class="headerlink" title="关于双层v-for"></a>关于双层v-for</h2><blockquote>
+<p>渲染菜单栏，如果有二级菜单，就需要使用到双层v-for。需要注意的是，第二层v-for可以直接使用第一层的item。如果有三级菜单，同理。</p>
+</blockquote>
+]]></content>
+      <categories>
+        <category>vue项目需求</category>
+      </categories>
+      <tags>
+        <tag>vue小技巧</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>双重v-for</title>
+    <url>/2020/06/13/%E5%8F%8C%E9%87%8Dv-for/</url>
+    <content><![CDATA[<p>click look more</p>
+<a id="more"></a>
+
+<blockquote>
+<p>有这么一个需求，获取到的后台数据（数组对象类型）需要渲染到多级菜单中。</p>
+</blockquote>
+<p>这就要使用到v-for循环，并且是双重的。那么怎么办呢？</p>
+<p>由于数据是从父组件中传过来的，所以子组件需要这样获取：</p>
+<figure class="highlight js"><table><tr><td class="code"><pre><span class="line">props: &#123;</span><br><span class="line">  asideMenuList: <span class="built_in">Array</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>然后首先循环一级菜单，由于二级菜单是包含在一级菜单中的，所以先不管，先将一级菜单渲染出来。</p>
+<figure class="highlight html"><table><tr><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">el-submenu</span> <span class="attr">v-for</span>=<span class="string">"(item,index) in asideMenuList"</span> <span class="attr">:key</span>=<span class="string">"index"</span> <span class="attr">index</span>=<span class="string">"index"</span>&gt;</span></span><br></pre></td></tr></table></figure>
+
+<p>那么二级菜单怎么弄呢？难道要将asideMenuList拆分出来吗？这样就麻烦了，由于item是每一个一级菜单的父元素，所以，可以直接将item拿过来用。</p>
+<figure class="highlight html"><table><tr><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">el-menu-item</span> <span class="attr">v-for</span>=<span class="string">"(itemChild,index) in item.children"</span> <span class="attr">:key</span>=<span class="string">"index"</span> <span class="attr">index</span>=<span class="string">"1-1"</span>&gt;</span></span><br></pre></td></tr></table></figure>
+
+<p>总代码：</p>
+<figure class="highlight html"><table><tr><td class="code"><pre><span class="line"><span class="comment">&lt;!-- index 唯一标志 --&gt;</span></span><br><span class="line"><span class="comment">&lt;!-- 一级菜单 --&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">el-submenu</span> <span class="attr">v-for</span>=<span class="string">"(item,index) in asideMenuList"</span> <span class="attr">:key</span>=<span class="string">"index"</span> <span class="attr">index</span>=<span class="string">"index"</span>&gt;</span></span><br><span class="line">  <span class="comment">&lt;!-- 一级菜单模板区域 --&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">template</span> <span class="attr">slot</span>=<span class="string">"title"</span>&gt;</span></span><br><span class="line">    <span class="comment">&lt;!-- 一级菜单的icon和text --&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">i</span> <span class="attr">class</span>=<span class="string">"el-icon-location"</span>&gt;</span><span class="tag">&lt;/<span class="name">i</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">span</span>&gt;</span>&#123;&#123;item.authName&#125;&#125;<span class="tag">&lt;/<span class="name">span</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;/<span class="name">template</span>&gt;</span></span><br><span class="line">  <span class="comment">&lt;!-- 二级菜单 --&gt;</span></span><br><span class="line">  <span class="comment">&lt;!-- 这里想了很久，因为item取出来也是一个数组，只是item有5个</span></span><br><span class="line"><span class="comment">  如果直接 in item 就会渲染5次</span></span><br><span class="line"><span class="comment">  但是item中的children才是子菜单需要的</span></span><br><span class="line"><span class="comment">  所以直接 in item.children 就可以--&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">el-menu-item</span> <span class="attr">v-for</span>=<span class="string">"(itemChild,index) in item.children"</span> <span class="attr">:key</span>=<span class="string">"index"</span> <span class="attr">index</span>=<span class="string">"1-1"</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">template</span> <span class="attr">slot</span>=<span class="string">"title"</span>&gt;</span></span><br><span class="line">      <span class="comment">&lt;!-- 二级菜单的icon和text --&gt;</span></span><br><span class="line">      <span class="tag">&lt;<span class="name">i</span> <span class="attr">class</span>=<span class="string">"el-icon-location"</span>&gt;</span><span class="tag">&lt;/<span class="name">i</span>&gt;</span></span><br><span class="line">      <span class="tag">&lt;<span class="name">span</span>&gt;</span>&#123;&#123;itemChild.authName&#125;&#125;<span class="tag">&lt;/<span class="name">span</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;/<span class="name">template</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;/<span class="name">el-menu-item</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">el-submenu</span>&gt;</span></span><br></pre></td></tr></table></figure>
+
+<h1 id="需要注意"><a href="#需要注意" class="headerlink" title="需要注意"></a>需要注意</h1><ol>
+<li>上面的代码key都用了index，实际上如果数据里面有id的话，最好使用id。这里就不改了。</li>
+<li>elementUI的menu中的index需要字符串，但是id为数值，可以直接 id+’’就能转换为字符串</li>
+</ol>
+]]></content>
+      <categories>
+        <category>vue</category>
+      </categories>
+      <tags>
+        <tag>vue小技巧</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>通过API获取数据以及使用</title>
+    <url>/2020/06/13/%E9%80%9A%E8%BF%87API%E8%8E%B7%E5%8F%96%E6%95%B0%E6%8D%AE%E4%BB%A5%E5%8F%8A%E4%BD%BF%E7%94%A8/</url>
+    <content><![CDATA[<p>click look more</p>
+<a id="more"></a>
+
+<h1 id="如何获取数据？"><a href="#如何获取数据？" class="headerlink" title="如何获取数据？"></a>如何获取数据？</h1><p>首先后端会有一份接口文档，根据文档去写代码。</p>
+<p>比如要获取一份侧边栏的菜单。后端会提供基准地址、API路径（menus）、请求方法（get）。不需要参数传递。</p>
+<p>在知道了这些后，就可以获取数据</p>
+<figure class="highlight js"><table><tr><td class="code"><pre><span class="line">getMuneList()&#123;</span><br><span class="line">	axios.get(<span class="string">'基准地址/menus'</span>).then(<span class="function"><span class="params">res</span>=&gt;</span>&#123;</span><br><span class="line">		<span class="built_in">console</span>.log(res)</span><br><span class="line">    &#125;,err=&gt;&#123;</span><br><span class="line">        <span class="built_in">console</span>.error(err)</span><br><span class="line">    &#125;)</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>其中，res就是从后端获取的数据，但是往往都需要加工一下才能用。可以看到上面的代码其实非常冗余，因为axios返回的是一个Promise，所以可以使用异步的方法。如下：</p>
+<figure class="highlight js"><table><tr><td class="code"><pre><span class="line"><span class="keyword">async</span> getMenuList()&#123;</span><br><span class="line">	<span class="keyword">const</span> &#123;<span class="attr">data</span>:res&#125;=<span class="keyword">await</span> axios.get(<span class="string">'基准地址/menus'</span>)</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h1 id="一些细节"><a href="#一些细节" class="headerlink" title="一些细节"></a>一些细节</h1><blockquote>
+<p>比如这个菜单栏，需要在页面显示的时候就已经渲染出来了，所以，就要使用到vue的生命周期钩子：created。然后再通过这个钩子去调用methods中的getMenuList。</p>
+</blockquote>
+]]></content>
+      <categories>
+        <category>vue</category>
+      </categories>
+      <tags>
+        <tag>axios</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>axios添加token令牌</title>
     <url>/2020/06/13/%E9%80%9A%E8%BF%87axios%E6%B7%BB%E5%8A%A0token%E4%BB%A4%E7%89%8C/</url>
     <content><![CDATA[<p>click look more</p>
