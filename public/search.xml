@@ -1,6 +1,39 @@
 <?xml version="1.0" encoding="utf-8"?>
 <search>
   <entry>
+    <title>使用window.sessionStorage保存激活状态</title>
+    <url>/2020/06/16/%E4%BF%9D%E5%AD%98%E6%BF%80%E6%B4%BB%E7%8A%B6%E6%80%81/</url>
+    <content><![CDATA[<p>click look more</p>
+<a id="more"></a>
+
+<blockquote>
+<p>有一个需求是左侧菜单栏，在被选中后能高亮显示，并且刷新之后也能被高亮显示。</p>
+</blockquote>
+<p>elementUI的菜单组件有一个属性，叫做default-active，描述为：当前激活菜单的 index。但是有一个需求是即使页面刷新了，也要能高亮当前激活菜单。</p>
+<ol>
+<li>首先给子菜单绑定事件getPath(activePath)，参数activePath就是当前子菜单路由。即点击什么子菜单，就保存这个子菜单的路由到sessionStorage中。</li>
+</ol>
+<figure class="highlight js"><table><tr><td class="code"><pre><span class="line"><span class="comment">// 将当前激活菜单路由存储在sessionStorage中</span></span><br><span class="line">getPath(activePath) &#123;</span><br><span class="line">	<span class="built_in">window</span>.sessionStorage.setItem(<span class="string">'activePath'</span>, activePath)</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<ol start="2">
+<li>获取到了当前路由，就要想办法将值传给el-menu中default-active。</li>
+</ol>
+<figure class="highlight js"><table><tr><td class="code"><pre><span class="line">data()&#123;</span><br><span class="line">	<span class="keyword">return</span> &#123;</span><br><span class="line">		path: <span class="string">''</span></span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">created()&#123;</span><br><span class="line">    <span class="comment">// 每次页面加载时，就取出当前页面存储在sessionStorage中的值</span></span><br><span class="line">    <span class="comment">// 然后赋值给path遍历</span></span><br><span class="line">    <span class="keyword">this</span>.path = <span class="built_in">window</span>.sessionStorage.getItem(<span class="string">'activePath'</span>)</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+
+
+
+
+]]></content>
+      <categories>
+        <category>vue项目需求</category>
+      </categories>
+      <tags>
+        <tag>vue小技巧</tag>
+        <tag>elementUI</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>v-for修改固定渲染值</title>
     <url>/2020/06/13/%E5%88%97%E8%A1%A8%E5%BE%AA%E7%8E%AF%E4%BF%AE%E6%94%B9%E5%85%B6%E4%B8%AD%E7%9A%84icon/</url>
     <content><![CDATA[<p>click look more</p>
