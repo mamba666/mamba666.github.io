@@ -1,6 +1,69 @@
 <?xml version="1.0" encoding="utf-8"?>
 <search>
   <entry>
+    <title>API接口为动态参数时</title>
+    <url>/2020/06/22/API%E6%8E%A5%E5%8F%A3%E4%B8%BA%E5%8A%A8%E6%80%81%E5%8F%82%E6%95%B0%E6%97%B6/</url>
+    <content><![CDATA[<p>click look more</p>
+<a id="more"></a>
+
+<blockquote>
+<p>遇到一个接口是动态参数，需要使用模板字符串语法。这里爬了很大的坑，记录一下。</p>
+</blockquote>
+<p>接口：</p>
+<ul>
+<li>users/:uId/state/:type</li>
+</ul>
+<p>基准接口：</p>
+<ul>
+<li><a href="http://127.0.0.1:8888/api/private/v1/" target="_blank" rel="noopener">http://127.0.0.1:8888/api/private/v1/</a></li>
+</ul>
+<p>可以看到接口中又两个冒号的参数，这就是动态参数，如果这样写会报错：</p>
+<figure class="highlight js"><table><tr><td class="code"><pre><span class="line">axios.put(<span class="string">'`http://127.0.0.1:8888/api/private/v1/users/$&#123;xxxx&#125;/state/$&#123;xxxx&#125;'</span><span class="string">`)</span></span><br></pre></td></tr></table></figure>
+
+<p>也不能这样写：</p>
+<figure class="highlight js"><table><tr><td class="code"><pre><span class="line">axios.put(<span class="string">'http://127.0.0.1:8888/api/private/v1/users/:uId/state/:type'</span>,<span class="attr">params</span>:&#123;&#125;)</span><br></pre></td></tr></table></figure>
+
+<p>正确写法：</p>
+<figure class="highlight js"><table><tr><td class="code"><pre><span class="line"><span class="keyword">async</span> changeSwitch(state) &#123;</span><br><span class="line">  <span class="built_in">console</span>.log(state)</span><br><span class="line">  <span class="keyword">const</span> &#123; <span class="attr">data</span>: res &#125; = <span class="keyword">await</span> axios.put(</span><br><span class="line">    <span class="string">'http://127.0.0.1:8888/api/private/v1/'</span> +</span><br><span class="line">      <span class="string">`users/<span class="subst">$&#123;state.id&#125;</span>/state/<span class="subst">$&#123;state.mg_state&#125;</span>`</span></span><br><span class="line">  )</span><br><span class="line">  <span class="built_in">console</span>.log(res)</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+
+
+
+
+
+
+
+
+]]></content>
+      <categories>
+        <category>vue</category>
+      </categories>
+      <tags>
+        <tag>axios</tag>
+        <tag>elementUI</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>表格内使用插槽</title>
+    <url>/2020/06/22/el-table%E4%BD%BF%E7%94%A8%E6%8F%92%E6%A7%BD%E6%98%BE%E7%A4%BA%E5%BC%80%E5%85%B3/</url>
+    <content><![CDATA[<p>click look more</p>
+<a id="more"></a>
+
+<blockquote>
+<p>在一个表格中，有一个需求是显示开关，但是后台的数据是一个布尔值，并且这个开关要显示到一行中的一格中，所以这里就需要使用到插槽了。</p>
+</blockquote>
+<figure class="highlight html"><table><tr><td class="code"><pre><span class="line"><span class="comment">&lt;!-- 这里的x实际上可以叫任何东西,但是后缀只能是row和column --&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">template</span> <span class="attr">v-slot</span>=<span class="string">"x"</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">el-switch</span> <span class="attr">v-model</span>=<span class="string">"x.row.mg_state"</span>&gt;</span><span class="tag">&lt;/<span class="name">el-switch</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">template</span>&gt;</span></span><br></pre></td></tr></table></figure>
+
+<p>但是有一点需要注意，如果在tabel中设置了prop，同时又设置了一个作用域插槽，此时作用域插槽会覆盖prop，所以可以将prop删除。</p>
+]]></content>
+      <categories>
+        <category>vue</category>
+      </categories>
+      <tags>
+        <tag>elementUI</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>为表格项添加索引</title>
     <url>/2020/06/22/%E4%B8%BA%E8%A1%A8%E6%A0%BC%E9%A1%B9%E6%B7%BB%E5%8A%A0%E7%B4%A2%E5%BC%95/</url>
     <content><![CDATA[<p>click look more</p>
