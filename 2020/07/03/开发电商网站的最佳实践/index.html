@@ -1,0 +1,601 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 4.2.0">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/logo.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/logo.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/logo.png">
+  <link rel="mask-icon" href="/images/logo.png" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+<link rel="stylesheet" href="/lib/font-awesome/css/font-awesome.min.css">
+
+<script id="hexo-configurations">
+    var NexT = window.NexT || {};
+    var CONFIG = {"hostname":"yoursite.com","root":"/","scheme":"Pisces","version":"7.7.2","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":false,"show_result":false,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":false,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},"path":"./public/search.xml"};
+  </script>
+
+  <meta name="description" content="click look more 本文着重描述自己在开发类似于淘宝、京东等电商网站（静态、不使用任何框架）时，所遇到的最佳实践（比如header、banner、footer、details and anymore）。">
+<meta property="og:type" content="article">
+<meta property="og:title" content="开发电商网站的最佳实践">
+<meta property="og:url" content="http://yoursite.com/2020/07/03/%E5%BC%80%E5%8F%91%E7%94%B5%E5%95%86%E7%BD%91%E7%AB%99%E7%9A%84%E6%9C%80%E4%BD%B3%E5%AE%9E%E8%B7%B5/index.html">
+<meta property="og:site_name" content="共你云雨">
+<meta property="og:description" content="click look more 本文着重描述自己在开发类似于淘宝、京东等电商网站（静态、不使用任何框架）时，所遇到的最佳实践（比如header、banner、footer、details and anymore）。">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="http://yoursite.com/images/30.png">
+<meta property="og:image" content="http://yoursite.com/images/31.png">
+<meta property="og:image" content="http://yoursite.com/images/32.png">
+<meta property="og:image" content="http://yoursite.com/images/33.png">
+<meta property="og:image" content="http://yoursite.com/images/34.png">
+<meta property="og:image" content="http://yoursite.com/images/36.png">
+<meta property="og:image" content="http://yoursite.com/images/37.png">
+<meta property="og:image" content="http://yoursite.com/images/38.png">
+<meta property="og:image" content="http://yoursite.com/images/39.png">
+<meta property="og:image" content="http://yoursite.com/images/40.png">
+<meta property="og:image" content="http://yoursite.com/images/41.png">
+<meta property="article:published_time" content="2020-07-02T23:59:05.983Z">
+<meta property="article:modified_time" content="2020-07-03T15:58:28.825Z">
+<meta property="article:author" content="Edison">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="http://yoursite.com/images/30.png">
+
+<link rel="canonical" href="http://yoursite.com/2020/07/03/%E5%BC%80%E5%8F%91%E7%94%B5%E5%95%86%E7%BD%91%E7%AB%99%E7%9A%84%E6%9C%80%E4%BD%B3%E5%AE%9E%E8%B7%B5/">
+
+
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome : false,
+    isPost : true
+  };
+</script>
+
+  <title>开发电商网站的最佳实践 | 共你云雨</title>
+  
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="container use-motion">
+    <div class="headband"></div>
+	<a href="https://github.com/mamba666" target="_blank" rel="noopener" class="github-corner" aria-label="View source on GitHub"><svg width="80" height="80" viewBox="0 0 250 250" style="fill:#151513; color:#fff; position: absolute; top: 0; border: 0; right: 0;" aria-hidden="true"><path d="M0,0 L115,115 L130,115 L142,142 L250,250 L250,0 Z"></path><path d="M128.3,109.0 C113.8,99.7 119.0,89.6 119.0,89.6 C122.0,82.7 120.5,78.6 120.5,78.6 C119.2,72.0 123.4,76.3 123.4,76.3 C127.3,80.9 125.5,87.3 125.5,87.3 C122.9,97.6 130.6,101.9 134.4,103.2" fill="currentColor" style="transform-origin: 130px 106px;" class="octo-arm"></path><path d="M115.0,115.0 C114.9,115.1 118.7,116.5 119.8,115.4 L133.7,101.6 C136.9,99.2 139.9,98.4 142.2,98.6 C133.8,88.0 127.5,74.4 143.8,58.0 C148.5,53.4 154.0,51.2 159.7,51.0 C160.3,49.4 163.2,43.6 171.4,40.1 C171.4,40.1 176.1,42.5 178.8,56.2 C183.1,58.6 187.2,61.8 190.9,65.4 C194.5,69.0 197.7,73.2 200.1,77.6 C213.8,80.2 216.3,84.9 216.3,84.9 C212.7,93.1 206.9,96.0 205.4,96.6 C205.1,102.4 203.0,107.8 198.3,112.5 C181.9,128.9 168.3,122.5 157.7,114.1 C157.9,116.9 156.7,120.9 152.7,124.9 L141.0,136.5 C139.8,137.7 141.6,141.9 141.8,141.8 Z" fill="currentColor" class="octo-body"></path></svg></a><style>.github-corner:hover .octo-arm{animation:octocat-wave 560ms ease-in-out}@keyframes octocat-wave{0%,100%{transform:rotate(0)}20%,60%{transform:rotate(-25deg)}40%,80%{transform:rotate(10deg)}}@media (max-width:500px){.github-corner:hover .octo-arm{animation:none}.github-corner .octo-arm{animation:octocat-wave 560ms ease-in-out}}</style>
+
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切换导航栏">
+      <span class="toggle-line toggle-line-first"></span>
+      <span class="toggle-line toggle-line-middle"></span>
+      <span class="toggle-line toggle-line-last"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <div>
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">共你云雨</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+    </div>
+  </div>
+</div>
+
+
+<nav class="site-nav">
+  
+  <ul id="menu" class="menu">
+        <li class="menu-item menu-item-home">
+
+    <a href="/" rel="section"><i class="fa fa-fw fa-home"></i>首页</a>
+
+  </li>
+        <li class="menu-item menu-item-tags">
+
+    <a href="/tags/" rel="section"><i class="fa fa-fw fa-tags"></i>标签</a>
+
+  </li>
+        <li class="menu-item menu-item-categories">
+
+    <a href="/categories/" rel="section"><i class="fa fa-fw fa-th"></i>分类</a>
+
+  </li>
+        <li class="menu-item menu-item-archives">
+
+    <a href="/archives/" rel="section"><i class="fa fa-fw fa-archive"></i>归档</a>
+
+  </li>
+  </ul>
+
+</nav>
+</div>
+    </header>
+
+    
+  <div class="back-to-top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+
+
+    <main class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+
+          <div class="content">
+            
+
+  <div class="posts-expand">
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block " lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2020/07/03/%E5%BC%80%E5%8F%91%E7%94%B5%E5%95%86%E7%BD%91%E7%AB%99%E7%9A%84%E6%9C%80%E4%BD%B3%E5%AE%9E%E8%B7%B5/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="Edison">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="共你云雨">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          开发电商网站的最佳实践
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+              
+
+              <time title="创建时间：2020-07-03 07:59:05 / 修改时间：23:58:28" itemprop="dateCreated datePublished" datetime="2020-07-03T07:59:05+08:00">2020-07-03</time>
+            </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/%E6%9C%80%E4%BD%B3%E5%AE%9E%E8%B7%B5/" itemprop="url" rel="index"><span itemprop="name">最佳实践</span></a>
+                </span>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+        <p>click look more</p>
+<p>本文着重描述自己在开发类似于淘宝、京东等电商网站（静态、不使用任何框架）时，所遇到的最佳实践（比如header、banner、footer、details and anymore）。</p>
+<a id="more"></a>
+
+<h1 id="前期准备工作"><a href="#前期准备工作" class="headerlink" title="前期准备工作"></a>前期准备工作</h1><p>首先要设计好各个文件夹的分工。</p>
+<ol>
+<li>图片类：图片可以分为两类，一类是样式类的，比如logo、background等；还有一类，比如电商网站的轮播图、商品图，因为这些都是需要频繁从后台更换的。所以可以分为img和upload。</li>
+<li>样式类：样式可以分为两类，一类是公共样式，比如每个页面都包含的header、footer、还有版心；另外一类是初始化样式，确保各个浏览器显示同一。所以可以分为common.css和base.css</li>
+<li>其他的就是一些iconfont、js。没啥可说的。</li>
+</ol>
+<h1 id="使用ico图标"><a href="#使用ico图标" class="headerlink" title="使用ico图标"></a>使用ico图标</h1><ol>
+<li>将ico图标放在根目录下</li>
+<li>输入如下代码：</li>
+</ol>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">linK</span> <span class="attr">rel</span>=<span class="string">"shortcut icon"</span> <span class="attr">href</span>=<span class="string">"favicon.ico"</span> <span class="attr">type</span>=<span class="string">"image/x-icon"</span> &gt;</span></span><br></pre></td></tr></table></figure>
+
+<h2 id="制作一个favicon"><a href="#制作一个favicon" class="headerlink" title="制作一个favicon"></a>制作一个favicon</h2><ol>
+<li>首先切图到想要的样子</li>
+<li>找到制作favicon的网站，然后按照步骤来就行，最后将ico文件放入根目录</li>
+</ol>
+<h1 id="网站的优化三大标签"><a href="#网站的优化三大标签" class="headerlink" title="网站的优化三大标签"></a>网站的优化三大标签</h1><blockquote>
+<p>SEO是由英文Search Engine Optimization缩写而来， 中文意译为“搜索引擎优化”！</p>
+</blockquote>
+<blockquote>
+<p>SEO是指通过对网站进行站内优化、网站结构调整、网站内容建设、网站代码优化等和站外优化，从而提高网站的关键词排名以及公司产品的曝光度。 简单的说就是，把产品做好，搜索引擎就会介绍客户来。</p>
+</blockquote>
+<p>以下代码举例均为JD例子</p>
+<h2 id="title"><a href="#title" class="headerlink" title="title"></a>title</h2><blockquote>
+<p>title具有不可替代性，是我们的内页第一个重要标签，是搜索引擎了解网页的入口，和对网页主题归属的最佳判断点。</p>
+</blockquote>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">title</span>&gt;</span>电商购物网站-正品低价、品质保障、配送及时、轻松购物！<span class="tag">&lt;/<span class="name">title</span>&gt;</span></span><br></pre></td></tr></table></figure>
+
+<h2 id="description"><a href="#description" class="headerlink" title="description"></a>description</h2><blockquote>
+<p>对于关键词的作用明显降低，但由于很多搜索引擎，仍然大量采用网页的MATA标签中描述部分作为搜索结果的“内容摘要”。 就是简要说明我们网站的主要做什么的。</p>
+</blockquote>
+<blockquote>
+<p>我们提倡，Description作为网站的总体业务和主题概括，多采用“我们是…”“我们提供…”“×××网作为…”“电话：010…”之类语句。</p>
+</blockquote>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">meta</span> <span class="attr">name</span>=<span class="string">"description"</span> <span class="attr">content</span>=<span class="string">"京东JD.COM-专业的综合网上购物商城,销售家电、数码通讯、电脑、家居百货、服装服饰、母婴、图书、食品等数万个品牌优质商品.便捷、诚信的服务，为您提供愉悦的网上购物体验!"</span>&gt;</span></span><br></pre></td></tr></table></figure>
+
+<h2 id="keywords"><a href="#keywords" class="headerlink" title="keywords"></a>keywords</h2><blockquote>
+<p>Keywords是页面关键词，是搜索引擎关注点之一。Keywords应该限制在6～8个关键词左右，电商类网站可以多 少许。</p>
+</blockquote>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">meta</span> <span class="attr">name</span>=<span class="string">"Keywords"</span> <span class="attr">content</span>=<span class="string">"网上购物,网上商城,手机,笔记本,电脑,MP3,CD,VCD,DV,相机,数码,配件,手表,存储卡,京东"</span>&gt;</span></span><br></pre></td></tr></table></figure>
+
+<h1 id="iconfont"><a href="#iconfont" class="headerlink" title="iconfont"></a>iconfont</h1><ol>
+<li>先去iconfont网站去下载自己想要的</li>
+<li>然后根据步骤引入，就可以使用了</li>
+<li>可以给每个icon图标另外加一个类，用来区别显示，比如颜色、大小等</li>
+<li>制作自己的icon，参照网站的步骤即可</li>
+</ol>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">svg</span> <span class="attr">class</span>=<span class="string">"icon zhengping"</span> <span class="attr">aria-hidden</span>=<span class="string">"true"</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">use</span> <span class="attr">xlink:href</span>=<span class="string">"#icon-tianmaozhengpinbaozhang</span></span></span><br><span class="line"><span class="tag"><span class="string">  "</span>&gt;</span><span class="tag">&lt;/<span class="name">use</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">svg</span>&gt;</span></span><br></pre></td></tr></table></figure>
+
+<figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/* iconfont样式 */</span></span><br><span class="line"><span class="selector-class">.icon</span> &#123;</span><br><span class="line">	<span class="attribute">width</span>: <span class="number">1em</span>;</span><br><span class="line">	<span class="attribute">height</span>: <span class="number">1em</span>;</span><br><span class="line">	<span class="attribute">vertical-align</span>: -<span class="number">0.15em</span>;</span><br><span class="line">	<span class="attribute">fill</span>: currentColor;</span><br><span class="line">	<span class="attribute">overflow</span>: hidden;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="selector-class">.zhengping</span> &#123;</span><br><span class="line">	<span class="attribute">width</span>: <span class="number">32px</span>;</span><br><span class="line">	<span class="attribute">height</span>: <span class="number">32px</span>;</span><br><span class="line">	<span class="attribute">color</span>: red;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h1 id="首页"><a href="#首页" class="headerlink" title="首页"></a>首页</h1><p>首页可以分为顶部、内容区、底部。而他们又可以细分成一个个小小模块。</p>
+<h2 id="顶部"><a href="#顶部" class="headerlink" title="顶部"></a>顶部</h2><h3 id="快捷导航栏-shortcut"><a href="#快捷导航栏-shortcut" class="headerlink" title="快捷导航栏 shortcut"></a>快捷导航栏 shortcut</h3><p>先分析一下，现在电商网站常见的快捷导航栏是什么样子。</p>
+<p>JD:</p>
+<p><img src="/images/30.png" alt=""></p>
+<p>TB：</p>
+<p><img src="/images/31.png" alt=""></p>
+<p>可以发现shortcut都是左右布局的。</p>
+<h4 id="快捷导航栏-shortcut-左侧部分"><a href="#快捷导航栏-shortcut-左侧部分" class="headerlink" title="快捷导航栏 shortcut 左侧部分"></a>快捷导航栏 shortcut 左侧部分</h4><p>先思考：</p>
+<ol>
+<li>首先要想这个要划分成几个模块，是三个（欢迎语句、注册、登录）还是两个（欢迎语句、注册登录）。</li>
+<li>看起来没有差，但是看了TB使用的是三个模块，这里就暂且使用TB方案。</li>
+<li>接下来就要选择使用什么样的html去实现这个：可以使用span、div、ul li等。</li>
+</ol>
+<h5 id="快捷导航栏-shortcut-左侧部分-实现技术的选择"><a href="#快捷导航栏-shortcut-左侧部分-实现技术的选择" class="headerlink" title="快捷导航栏 shortcut 左侧部分 实现技术的选择"></a>快捷导航栏 shortcut 左侧部分 实现技术的选择</h5><blockquote>
+<p>两家实现的技术选择各不相同</p>
+</blockquote>
+<p>TB：在外层使用p包裹，欢迎语句使用em，注册登录使用a。这里使用a的原因是注册登录需要跳转到别的页面。</p>
+<p>JD：直接整个shortcut都是用了ul包裹，左右两部分均为li。</p>
+<blockquote>
+<p>这里不去谈论谁好谁坏，因为只去制作左侧部分，所以选用TB方案。</p>
+</blockquote>
+<h4 id="快捷导航栏-shortcut-右侧部分"><a href="#快捷导航栏-shortcut-右侧部分" class="headerlink" title="快捷导航栏 shortcut 右侧部分"></a>快捷导航栏 shortcut 右侧部分</h4><blockquote>
+<p>两家的右侧部分都是使用的ul包裹li实现的。</p>
+</blockquote>
+<p>各自的做法：</p>
+<p>JD：每一个li之间都是用了竖直的小线去分隔开，然后在li里面包裹a（a里面是显示的文字），并且有的li在鼠标移上去时会有下拉菜单显示。</p>
+<p>TB：并没有在每个li之间都使用竖直的小线分开，而是通过相关性进行的分割。并且，它和JD不同之处在于，它是li包裹div，div在包裹a，即每个li里面比JD都要多一个div。</p>
+<p>没有谁好谁坏，这里使用JD方案。</p>
+<h4 id="快捷导航栏-shortcut-总结"><a href="#快捷导航栏-shortcut-总结" class="headerlink" title="快捷导航栏 shortcut 总结"></a>快捷导航栏 shortcut 总结</h4><ol>
+<li>当有多个颜色需要重复使用的时候，可以单独写一个类去设置，之后再用的时候，直接调用这个类就可以。</li>
+<li>li之间的竖直的小线可以使用li做出来，即每一个竖直的小线是都是一个li。</li>
+</ol>
+<figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="selector-class">.spacer</span>&#123;</span><br><span class="line">	<span class="attribute">overflow</span>: hidden;</span><br><span class="line">	<span class="attribute">margin</span>: <span class="number">11px</span> <span class="number">5px</span> <span class="number">0</span>;</span><br><span class="line">	<span class="attribute">width</span>: <span class="number">1px</span>;</span><br><span class="line">	<span class="attribute">height</span>: <span class="number">10px</span>;</span><br><span class="line">	<span class="attribute">background-color</span>: <span class="number">#ccc</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<ol start="3">
+<li>在使用ul li时，会垂直显示，那么如何显示成水平的呢？让每一个li都左浮动就行</li>
+</ol>
+<figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="selector-class">.fr</span> <span class="selector-tag">li</span> &#123;</span><br><span class="line">	<span class="attribute">float</span>: left</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<ol start="4">
+<li>在使用iconfont的下箭头时，文字会默认对齐他的底部。所以当icon图标过大，文字就会下移。但是icon实际上还是垂直居中于这个li。多用f12找问题。</li>
+</ol>
+<h3 id="头部-header"><a href="#头部-header" class="headerlink" title="头部 header"></a>头部 header</h3><p>先分析一下现在网站的头部怎么写的</p>
+<p><img src="/images/32.png" alt=""></p>
+<p><img src="/images/33.png" alt=""></p>
+<p><img src="/images/34.png" alt=""></p>
+<p>可以发现，基本上都是分为左中右三个模块，分别为logo、search、二维码或者购物车等等。</p>
+<p>以JD举例子，它是最外层一个div包裹一个div（版心），然后在包裹了logo、search等</p>
+<h4 id="头部-header-右侧-logo"><a href="#头部-header-右侧-logo" class="headerlink" title="头部 header 右侧 logo"></a>头部 header 右侧 logo</h4><blockquote>
+<p>logo并不只是放一张图片这么简单，其中有很多学问。</p>
+</blockquote>
+<p>先看看JD的logo的html结构：</p>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">"logo"</span></span></span><br><span class="line">    &lt;h1 class="logo_tit"&gt;</span><br><span class="line">        <span class="tag">&lt;<span class="name">a</span> <span class="attr">href</span>=<span class="string">"//www.jd.com"</span> <span class="attr">class</span>=<span class="string">"logo_tit_lk"</span> <span class="attr">clstag</span>=<span class="string">"h|keycount|head|logo_01"</span>&gt;</span>京东<span class="tag">&lt;/<span class="name">a</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;/<span class="name">h1</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br></pre></td></tr></table></figure>
+
+<ol>
+<li>可以发现里面是用了h1标签，h1又包裹了a。</li>
+<li>并且div h1 a三个标签都是一样大的</li>
+<li>由于a标签是行内，所以要使用display:block</li>
+</ol>
+<ul>
+<li>logo  里面 首先放一个 h1 标签 ，目的是为了提权，告诉搜索引擎，这个地方很重要</li>
+<li>h1里面在放一个链接，可以返回首页的，   给链接一个 大小 和  logo 的背景图片</li>
+<li>连接 里面要放文字（网站名称），为了搜索引擎收录我们。  但是文字不要显示出来<ul>
+<li>要用 text-indent  移到盒子外面 （text-indent: -9999px)   然后overflow:hidden  淘宝的做法</li>
+<li>直接给font-size: 0;  就看不到文字了，  京东的做法。</li>
+</ul>
+</li>
+<li>最后给 连接一个 title  这样鼠标放到logo 上，  就可以看到提示文字了</li>
+</ul>
+<h5 id="遇到的几个小问题"><a href="#遇到的几个小问题" class="headerlink" title="遇到的几个小问题"></a>遇到的几个小问题</h5><ol>
+<li>背景logo图过大，如何让背景图自适应容器的宽高呢？</li>
+</ol>
+<figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">background: url(../img/35.png) no-repeat;</span><br><span class="line"><span class="selector-tag">background-size</span>: <span class="selector-tag">contain</span>;</span><br></pre></td></tr></table></figure>
+
+<p>2.现在的logo写的没有自己现在写的这么简单，以后再去了解。</p>
+<h4 id="头部-header-中间部分-search"><a href="#头部-header-中间部分-search" class="headerlink" title="头部 header 中间部分 search"></a>头部 header 中间部分 search</h4><p>先来看看主流的search怎么做的叭</p>
+<p><img src="/images/36.png" alt=""></p>
+<p><img src="/images/37.png" alt=""></p>
+<p>尽管有小小的差异，但是都是一样的布局：左边为输入框（里面可以放一个相机的icon图标），右边为一个搜索按钮。</p>
+<p>以下为实现search框的html架构</p>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">"search"</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">input</span> <span class="attr">class</span>=<span class="string">"text"</span> <span class="attr">type</span>=<span class="string">"text"</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">button</span> <span class="attr">class</span>=<span class="string">"btn"</span>&gt;</span>搜索<span class="tag">&lt;/<span class="name">button</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br></pre></td></tr></table></figure>
+
+<h5 id="总结样式的写法"><a href="#总结样式的写法" class="headerlink" title="总结样式的写法"></a>总结样式的写法</h5><ol>
+<li>input框</li>
+</ol>
+<figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="selector-class">.text</span> &#123;</span><br><span class="line">	<span class="attribute">box-sizing</span>: border-box;</span><br><span class="line">	<span class="attribute">width</span>: <span class="number">455px</span>;</span><br><span class="line">	<span class="attribute">height</span>: <span class="number">32px</span>;</span><br><span class="line">	<span class="attribute">border</span>: <span class="number">2px</span> solid <span class="number">#E1251b</span>;</span><br><span class="line">	<span class="attribute">padding-left</span>: <span class="number">10px</span>;</span><br><span class="line">	<span class="attribute">color</span>: <span class="number">#999</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>box-sizing: border-box; ：因为value文字需要距离左边有一点距离，如果直接padding，那么整个盒子都会被撑大，使用这个属性就不会被撑大了。</li>
+</ul>
+<ol start="2">
+<li>input修改文字的颜色</li>
+</ol>
+<p>以前修改input里文字颜色，其实只能修改value的文本，一直不知道如何去修改placeholder。</p>
+<figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="selector-class">.text</span><span class="selector-pseudo">::placeholder</span> &#123;</span><br><span class="line">	<span class="attribute">color</span>: <span class="number">#999</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>就明确一点，在input里面的color属性是修改输入的文本颜色（也包括value值）。</li>
+<li>想要修改placeholder，就使用上面的做法。</li>
+</ul>
+<ol start="3">
+<li>button</li>
+</ol>
+<ul>
+<li>默认样式的button很丑，做一下修改，以后会有ui库，但是这里不考虑，只考虑原生。</li>
+<li>input和button之间会有一个空隙，需要解决。</li>
+<li>还有一个问题，就是input和button的四个角并不是直角，如果不设置以下就会有空隙。</li>
+<li>border-radius同时在input中设置</li>
+</ul>
+<figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="selector-class">.btn</span> &#123;</span><br><span class="line">	<span class="attribute">width</span>: <span class="number">82px</span>;</span><br><span class="line">	<span class="attribute">height</span>: <span class="number">36px</span>;</span><br><span class="line">	<span class="attribute">background-color</span>: <span class="number">#E1251b</span>;</span><br><span class="line">	<span class="attribute">border</span>: <span class="number">0</span>;</span><br><span class="line">	<span class="attribute">border-radius</span>: <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h4 id="头部-header-中下部分-hotwords"><a href="#头部-header-中下部分-hotwords" class="headerlink" title="头部 header 中下部分 hotwords"></a>头部 header 中下部分 hotwords</h4><p>先分析：</p>
+<p><img src="/images/38.png" alt=""></p>
+<p><img src="/images/39.png" alt=""></p>
+<p>可以发现，所有的热词，都是与input框左对齐的。接着来看看实现的细节：每一个热词都是一个a标签，所有的a标签都被一个div包裹。</p>
+<p>结构：</p>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">div</span>&gt;</span></span><br><span class="line">	<span class="tag">&lt;<span class="name">a</span>&gt;</span></span><br><span class="line">	<span class="tag">&lt;<span class="name">a</span>&gt;</span></span><br><span class="line">	<span class="tag">&lt;<span class="name">a</span>&gt;</span></span><br><span class="line">	<span class="tag">&lt;<span class="name">a</span>&gt;</span></span><br><span class="line">	....</span><br><span class="line"><span class="tag">&lt;/<span class="name">div</span></span></span><br></pre></td></tr></table></figure>
+
+<h4 id="头部-header-右侧-shopcar"><a href="#头部-header-右侧-shopcar" class="headerlink" title="头部 header 右侧 shopcar"></a>头部 header 右侧 shopcar</h4><p>先分析：</p>
+<p><img src="/images/40.png" alt=""></p>
+<p>其实购物车这个样式已经很少了，只有狗东还在使用。阿里系现在的购物车在快捷导航栏中了。取而代之的是一个二维码，虽然狗东也有二维码展示。</p>
+<p>并且，之前一直搞错了，其实狗东的购物车这个模块其实放在了search模块中。但是不管了，先实现它，以后举一反三即可。</p>
+<p>那么如何拆解这个shopcar结构呢？看起来挺复杂的：</p>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">"shopcar"</span>&gt;</span></span><br><span class="line">	<span class="tag">&lt;<span class="name">svg</span> <span class="attr">class</span>=<span class="string">"icon"</span> <span class="attr">aria-hidden</span>=<span class="string">"true"</span>&gt;</span></span><br><span class="line">		<span class="tag">&lt;<span class="name">use</span> <span class="attr">xlink:href</span>=<span class="string">"#icon-qicheqianlian-"</span>&gt;</span><span class="tag">&lt;/<span class="name">use</span>&gt;</span></span><br><span class="line">	<span class="tag">&lt;/<span class="name">svg</span>&gt;</span></span><br><span class="line">	<span class="tag">&lt;<span class="name">a</span> <span class="attr">href</span>=<span class="string">""</span>&gt;</span>我的购物车<span class="tag">&lt;/<span class="name">a</span>&gt;</span></span><br><span class="line">	<span class="tag">&lt;<span class="name">i</span>&gt;</span>0<span class="tag">&lt;/<span class="name">i</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br></pre></td></tr></table></figure>
+
+<p>其实呢，将里面分成了三个模块：购物车的icon、文本、显示数量。这里的显示数量的实现是有难度的。</p>
+<figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="selector-class">.shopcar</span> <span class="selector-tag">i</span> &#123;</span><br><span class="line">	<span class="attribute">position</span>: absolute;</span><br><span class="line">	<span class="attribute">top</span>: <span class="number">1px</span>;</span><br><span class="line">	<span class="attribute">left</span>: <span class="number">30px</span>;</span><br><span class="line">	<span class="attribute">padding</span>: <span class="number">1px</span> <span class="number">3px</span>;</span><br><span class="line">	<span class="attribute">line-height</span>: <span class="number">12px</span>;</span><br><span class="line">	<span class="attribute">color</span>: <span class="number">#fff</span>;</span><br><span class="line">	<span class="attribute">background-color</span>: <span class="number">#e1251b</span>;</span><br><span class="line">	<span class="attribute">border-radius</span>: <span class="number">7px</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>首先定位为absolute，让计数器可以自由的移动。</li>
+<li>使用padding和background-color来模拟红色圈圈</li>
+<li>line-height控制这个高度</li>
+</ul>
+<h4 id="头部-header-下部-navitems"><a href="#头部-header-下部-navitems" class="headerlink" title="头部 header 下部 navitems"></a>头部 header 下部 navitems</h4><p>先来看看狗东的布局：</p>
+<p><img src="/images/41.png" alt=""></p>
+<p>看着很简单对叭，实际上复杂的一批。首先在最外层包裹了div，然后通过相关性分了三个ul,然后每个li包裹一个a。但是在经过实践后，三个ul都去浮动的话，就会造成错位，最后还是写出了一个ul，后续在去想。</p>
+
+    </div>
+
+    
+    
+    
+
+      <footer class="post-footer">
+
+        
+
+
+        
+    <div class="post-nav">
+      <div class="post-nav-item">
+    <a href="/2020/06/23/6.23/" rel="prev" title="6.23">
+      <i class="fa fa-chevron-left"></i> 6.23
+    </a></div>
+      <div class="post-nav-item"></div>
+    </div>
+      </footer>
+    
+  </article>
+  
+  
+  
+
+  </div>
+
+
+          </div>
+          
+
+<script>
+  window.addEventListener('tabs:register', () => {
+    let { activeClass } = CONFIG.comments;
+    if (CONFIG.comments.storage) {
+      activeClass = localStorage.getItem('comments_active') || activeClass;
+    }
+    if (activeClass) {
+      let activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      if (activeTab) {
+        activeTab.click();
+      }
+    }
+  });
+  if (CONFIG.comments.storage) {
+    window.addEventListener('tabs:click', event => {
+      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+      let commentClass = event.target.classList[1];
+      localStorage.setItem('comments_active', commentClass);
+    });
+  }
+</script>
+
+        </div>
+          
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line toggle-line-first"></span>
+    <span class="toggle-line toggle-line-middle"></span>
+    <span class="toggle-line toggle-line-last"></span>
+  </div>
+
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#前期准备工作"><span class="nav-number">1.</span> <span class="nav-text">前期准备工作</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#使用ico图标"><span class="nav-number">2.</span> <span class="nav-text">使用ico图标</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#制作一个favicon"><span class="nav-number">2.1.</span> <span class="nav-text">制作一个favicon</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#网站的优化三大标签"><span class="nav-number">3.</span> <span class="nav-text">网站的优化三大标签</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#title"><span class="nav-number">3.1.</span> <span class="nav-text">title</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#description"><span class="nav-number">3.2.</span> <span class="nav-text">description</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#keywords"><span class="nav-number">3.3.</span> <span class="nav-text">keywords</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#iconfont"><span class="nav-number">4.</span> <span class="nav-text">iconfont</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#首页"><span class="nav-number">5.</span> <span class="nav-text">首页</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#顶部"><span class="nav-number">5.1.</span> <span class="nav-text">顶部</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#快捷导航栏-shortcut"><span class="nav-number">5.1.1.</span> <span class="nav-text">快捷导航栏 shortcut</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#快捷导航栏-shortcut-左侧部分"><span class="nav-number">5.1.1.1.</span> <span class="nav-text">快捷导航栏 shortcut 左侧部分</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#快捷导航栏-shortcut-左侧部分-实现技术的选择"><span class="nav-number">5.1.1.1.1.</span> <span class="nav-text">快捷导航栏 shortcut 左侧部分 实现技术的选择</span></a></li></ol></li><li class="nav-item nav-level-4"><a class="nav-link" href="#快捷导航栏-shortcut-右侧部分"><span class="nav-number">5.1.1.2.</span> <span class="nav-text">快捷导航栏 shortcut 右侧部分</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#快捷导航栏-shortcut-总结"><span class="nav-number">5.1.1.3.</span> <span class="nav-text">快捷导航栏 shortcut 总结</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#头部-header"><span class="nav-number">5.1.2.</span> <span class="nav-text">头部 header</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#头部-header-右侧-logo"><span class="nav-number">5.1.2.1.</span> <span class="nav-text">头部 header 右侧 logo</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#遇到的几个小问题"><span class="nav-number">5.1.2.1.1.</span> <span class="nav-text">遇到的几个小问题</span></a></li></ol></li><li class="nav-item nav-level-4"><a class="nav-link" href="#头部-header-中间部分-search"><span class="nav-number">5.1.2.2.</span> <span class="nav-text">头部 header 中间部分 search</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#总结样式的写法"><span class="nav-number">5.1.2.2.1.</span> <span class="nav-text">总结样式的写法</span></a></li></ol></li><li class="nav-item nav-level-4"><a class="nav-link" href="#头部-header-中下部分-hotwords"><span class="nav-number">5.1.2.3.</span> <span class="nav-text">头部 header 中下部分 hotwords</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#头部-header-右侧-shopcar"><span class="nav-number">5.1.2.4.</span> <span class="nav-text">头部 header 右侧 shopcar</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#头部-header-下部-navitems"><span class="nav-number">5.1.2.5.</span> <span class="nav-text">头部 header 下部 navitems</span></a></li></ol></li></ol></li></ol></li></ol></div>
+      </div>
+      <!--/noindex-->
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+  <p class="site-author-name" itemprop="name">Edison</p>
+  <div class="site-description" itemprop="description"></div>
+</div>
+<div class="site-state-wrap motion-element">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">95</span>
+          <span class="site-state-item-name">日志</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+            <a href="/categories/">
+          
+        <span class="site-state-item-count">18</span>
+        <span class="site-state-item-name">分类</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+            <a href="/tags/">
+          
+        <span class="site-state-item-count">19</span>
+        <span class="site-state-item-name">标签</span></a>
+      </div>
+  </nav>
+</div>
+
+
+
+      </div>
+
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+    </main>
+
+    <footer class="footer">
+      <div class="footer-inner">
+        
+
+<div class="copyright">
+</div>
+  <div class="powered-by">山高水远  一定相见
+  </div>
+<div></div>
+<div class="theme-info">
+  <div class="powered-by"></div>
+  <span class="post-count">至今已写62.5k字</span>
+</div>
+
+        
+
+
+
+
+
+
+
+
+      </div>
+    </footer>
+  </div>
+
+  
+  <script src="/lib/anime.min.js"></script>
+  <script src="/lib/velocity/velocity.min.js"></script>
+  <script src="/lib/velocity/velocity.ui.min.js"></script>
+
+<script src="/js/utils.js"></script>
+
+<script src="/js/motion.js"></script>
+
+
+<script src="/js/schemes/pisces.js"></script>
+
+
+<script src="/js/next-boot.js"></script>
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  
+
+</body>
+</html>

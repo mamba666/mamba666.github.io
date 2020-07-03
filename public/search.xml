@@ -1,6 +1,273 @@
 <?xml version="1.0" encoding="utf-8"?>
 <search>
   <entry>
+    <title>开发电商网站的最佳实践</title>
+    <url>/2020/07/03/%E5%BC%80%E5%8F%91%E7%94%B5%E5%95%86%E7%BD%91%E7%AB%99%E7%9A%84%E6%9C%80%E4%BD%B3%E5%AE%9E%E8%B7%B5/</url>
+    <content><![CDATA[<p>click look more</p>
+<p>本文着重描述自己在开发类似于淘宝、京东等电商网站（静态、不使用任何框架）时，所遇到的最佳实践（比如header、banner、footer、details and anymore）。</p>
+<a id="more"></a>
+
+<h1 id="前期准备工作"><a href="#前期准备工作" class="headerlink" title="前期准备工作"></a>前期准备工作</h1><p>首先要设计好各个文件夹的分工。</p>
+<ol>
+<li>图片类：图片可以分为两类，一类是样式类的，比如logo、background等；还有一类，比如电商网站的轮播图、商品图，因为这些都是需要频繁从后台更换的。所以可以分为img和upload。</li>
+<li>样式类：样式可以分为两类，一类是公共样式，比如每个页面都包含的header、footer、还有版心；另外一类是初始化样式，确保各个浏览器显示同一。所以可以分为common.css和base.css</li>
+<li>其他的就是一些iconfont、js。没啥可说的。</li>
+</ol>
+<h1 id="使用ico图标"><a href="#使用ico图标" class="headerlink" title="使用ico图标"></a>使用ico图标</h1><ol>
+<li>将ico图标放在根目录下</li>
+<li>输入如下代码：</li>
+</ol>
+<figure class="highlight html"><table><tr><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">linK</span> <span class="attr">rel</span>=<span class="string">"shortcut icon"</span> <span class="attr">href</span>=<span class="string">"favicon.ico"</span> <span class="attr">type</span>=<span class="string">"image/x-icon"</span> &gt;</span></span><br></pre></td></tr></table></figure>
+
+<h2 id="制作一个favicon"><a href="#制作一个favicon" class="headerlink" title="制作一个favicon"></a>制作一个favicon</h2><ol>
+<li>首先切图到想要的样子</li>
+<li>找到制作favicon的网站，然后按照步骤来就行，最后将ico文件放入根目录</li>
+</ol>
+<h1 id="网站的优化三大标签"><a href="#网站的优化三大标签" class="headerlink" title="网站的优化三大标签"></a>网站的优化三大标签</h1><blockquote>
+<p>SEO是由英文Search Engine Optimization缩写而来， 中文意译为“搜索引擎优化”！</p>
+</blockquote>
+<blockquote>
+<p>SEO是指通过对网站进行站内优化、网站结构调整、网站内容建设、网站代码优化等和站外优化，从而提高网站的关键词排名以及公司产品的曝光度。 简单的说就是，把产品做好，搜索引擎就会介绍客户来。</p>
+</blockquote>
+<p>以下代码举例均为JD例子</p>
+<h2 id="title"><a href="#title" class="headerlink" title="title"></a>title</h2><blockquote>
+<p>title具有不可替代性，是我们的内页第一个重要标签，是搜索引擎了解网页的入口，和对网页主题归属的最佳判断点。</p>
+</blockquote>
+<figure class="highlight html"><table><tr><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">title</span>&gt;</span>电商购物网站-正品低价、品质保障、配送及时、轻松购物！<span class="tag">&lt;/<span class="name">title</span>&gt;</span></span><br></pre></td></tr></table></figure>
+
+<h2 id="description"><a href="#description" class="headerlink" title="description"></a>description</h2><blockquote>
+<p>对于关键词的作用明显降低，但由于很多搜索引擎，仍然大量采用网页的MATA标签中描述部分作为搜索结果的“内容摘要”。 就是简要说明我们网站的主要做什么的。</p>
+</blockquote>
+<blockquote>
+<p>我们提倡，Description作为网站的总体业务和主题概括，多采用“我们是…”“我们提供…”“×××网作为…”“电话：010…”之类语句。</p>
+</blockquote>
+<figure class="highlight html"><table><tr><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">meta</span> <span class="attr">name</span>=<span class="string">"description"</span> <span class="attr">content</span>=<span class="string">"京东JD.COM-专业的综合网上购物商城,销售家电、数码通讯、电脑、家居百货、服装服饰、母婴、图书、食品等数万个品牌优质商品.便捷、诚信的服务，为您提供愉悦的网上购物体验!"</span>&gt;</span></span><br></pre></td></tr></table></figure>
+
+<h2 id="keywords"><a href="#keywords" class="headerlink" title="keywords"></a>keywords</h2><blockquote>
+<p>Keywords是页面关键词，是搜索引擎关注点之一。Keywords应该限制在6～8个关键词左右，电商类网站可以多 少许。</p>
+</blockquote>
+<figure class="highlight html"><table><tr><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">meta</span> <span class="attr">name</span>=<span class="string">"Keywords"</span> <span class="attr">content</span>=<span class="string">"网上购物,网上商城,手机,笔记本,电脑,MP3,CD,VCD,DV,相机,数码,配件,手表,存储卡,京东"</span>&gt;</span></span><br></pre></td></tr></table></figure>
+
+<h1 id="iconfont"><a href="#iconfont" class="headerlink" title="iconfont"></a>iconfont</h1><ol>
+<li>先去iconfont网站去下载自己想要的</li>
+<li>然后根据步骤引入，就可以使用了</li>
+<li>可以给每个icon图标另外加一个类，用来区别显示，比如颜色、大小等</li>
+<li>制作自己的icon，参照网站的步骤即可</li>
+</ol>
+<figure class="highlight html"><table><tr><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">svg</span> <span class="attr">class</span>=<span class="string">"icon zhengping"</span> <span class="attr">aria-hidden</span>=<span class="string">"true"</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">use</span> <span class="attr">xlink:href</span>=<span class="string">"#icon-tianmaozhengpinbaozhang</span></span></span><br><span class="line"><span class="tag"><span class="string">  "</span>&gt;</span><span class="tag">&lt;/<span class="name">use</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">svg</span>&gt;</span></span><br></pre></td></tr></table></figure>
+
+<figure class="highlight css"><table><tr><td class="code"><pre><span class="line"><span class="comment">/* iconfont样式 */</span></span><br><span class="line"><span class="selector-class">.icon</span> &#123;</span><br><span class="line">	<span class="attribute">width</span>: <span class="number">1em</span>;</span><br><span class="line">	<span class="attribute">height</span>: <span class="number">1em</span>;</span><br><span class="line">	<span class="attribute">vertical-align</span>: -<span class="number">0.15em</span>;</span><br><span class="line">	<span class="attribute">fill</span>: currentColor;</span><br><span class="line">	<span class="attribute">overflow</span>: hidden;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="selector-class">.zhengping</span> &#123;</span><br><span class="line">	<span class="attribute">width</span>: <span class="number">32px</span>;</span><br><span class="line">	<span class="attribute">height</span>: <span class="number">32px</span>;</span><br><span class="line">	<span class="attribute">color</span>: red;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h1 id="首页"><a href="#首页" class="headerlink" title="首页"></a>首页</h1><p>首页可以分为顶部、内容区、底部。而他们又可以细分成一个个小小模块。</p>
+<h2 id="顶部"><a href="#顶部" class="headerlink" title="顶部"></a>顶部</h2><h3 id="快捷导航栏-shortcut"><a href="#快捷导航栏-shortcut" class="headerlink" title="快捷导航栏 shortcut"></a>快捷导航栏 shortcut</h3><p>先分析一下，现在电商网站常见的快捷导航栏是什么样子。</p>
+<p>JD:</p>
+<p><img src="/images/30.png" alt=""></p>
+<p>TB：</p>
+<p><img src="/images/31.png" alt=""></p>
+<p>可以发现shortcut都是左右布局的。</p>
+<h4 id="快捷导航栏-shortcut-左侧部分"><a href="#快捷导航栏-shortcut-左侧部分" class="headerlink" title="快捷导航栏 shortcut 左侧部分"></a>快捷导航栏 shortcut 左侧部分</h4><p>先思考：</p>
+<ol>
+<li>首先要想这个要划分成几个模块，是三个（欢迎语句、注册、登录）还是两个（欢迎语句、注册登录）。</li>
+<li>看起来没有差，但是看了TB使用的是三个模块，这里就暂且使用TB方案。</li>
+<li>接下来就要选择使用什么样的html去实现这个：可以使用span、div、ul li等。</li>
+</ol>
+<h5 id="快捷导航栏-shortcut-左侧部分-实现技术的选择"><a href="#快捷导航栏-shortcut-左侧部分-实现技术的选择" class="headerlink" title="快捷导航栏 shortcut 左侧部分 实现技术的选择"></a>快捷导航栏 shortcut 左侧部分 实现技术的选择</h5><blockquote>
+<p>两家实现的技术选择各不相同</p>
+</blockquote>
+<p>TB：在外层使用p包裹，欢迎语句使用em，注册登录使用a。这里使用a的原因是注册登录需要跳转到别的页面。</p>
+<p>JD：直接整个shortcut都是用了ul包裹，左右两部分均为li。</p>
+<blockquote>
+<p>这里不去谈论谁好谁坏，因为只去制作左侧部分，所以选用TB方案。</p>
+</blockquote>
+<h4 id="快捷导航栏-shortcut-右侧部分"><a href="#快捷导航栏-shortcut-右侧部分" class="headerlink" title="快捷导航栏 shortcut 右侧部分"></a>快捷导航栏 shortcut 右侧部分</h4><blockquote>
+<p>两家的右侧部分都是使用的ul包裹li实现的。</p>
+</blockquote>
+<p>各自的做法：</p>
+<p>JD：每一个li之间都是用了竖直的小线去分隔开，然后在li里面包裹a（a里面是显示的文字），并且有的li在鼠标移上去时会有下拉菜单显示。</p>
+<p>TB：并没有在每个li之间都使用竖直的小线分开，而是通过相关性进行的分割。并且，它和JD不同之处在于，它是li包裹div，div在包裹a，即每个li里面比JD都要多一个div。</p>
+<p>没有谁好谁坏，这里使用JD方案。</p>
+<h4 id="快捷导航栏-shortcut-总结"><a href="#快捷导航栏-shortcut-总结" class="headerlink" title="快捷导航栏 shortcut 总结"></a>快捷导航栏 shortcut 总结</h4><ol>
+<li>当有多个颜色需要重复使用的时候，可以单独写一个类去设置，之后再用的时候，直接调用这个类就可以。</li>
+<li>li之间的竖直的小线可以使用li做出来，即每一个竖直的小线是都是一个li。</li>
+</ol>
+<figure class="highlight css"><table><tr><td class="code"><pre><span class="line"><span class="selector-class">.spacer</span>&#123;</span><br><span class="line">	<span class="attribute">overflow</span>: hidden;</span><br><span class="line">	<span class="attribute">margin</span>: <span class="number">11px</span> <span class="number">5px</span> <span class="number">0</span>;</span><br><span class="line">	<span class="attribute">width</span>: <span class="number">1px</span>;</span><br><span class="line">	<span class="attribute">height</span>: <span class="number">10px</span>;</span><br><span class="line">	<span class="attribute">background-color</span>: <span class="number">#ccc</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<ol start="3">
+<li>在使用ul li时，会垂直显示，那么如何显示成水平的呢？让每一个li都左浮动就行</li>
+</ol>
+<figure class="highlight css"><table><tr><td class="code"><pre><span class="line"><span class="selector-class">.fr</span> <span class="selector-tag">li</span> &#123;</span><br><span class="line">	<span class="attribute">float</span>: left</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<ol start="4">
+<li>在使用iconfont的下箭头时，文字会默认对齐他的底部。所以当icon图标过大，文字就会下移。但是icon实际上还是垂直居中于这个li。多用f12找问题。</li>
+</ol>
+<h3 id="头部-header"><a href="#头部-header" class="headerlink" title="头部 header"></a>头部 header</h3><p>先分析一下现在网站的头部怎么写的</p>
+<p><img src="/images/32.png" alt=""></p>
+<p><img src="/images/33.png" alt=""></p>
+<p><img src="/images/34.png" alt=""></p>
+<p>可以发现，基本上都是分为左中右三个模块，分别为logo、search、二维码或者购物车等等。</p>
+<p>以JD举例子，它是最外层一个div包裹一个div（版心），然后在包裹了logo、search等</p>
+<h4 id="头部-header-右侧-logo"><a href="#头部-header-右侧-logo" class="headerlink" title="头部 header 右侧 logo"></a>头部 header 右侧 logo</h4><blockquote>
+<p>logo并不只是放一张图片这么简单，其中有很多学问。</p>
+</blockquote>
+<p>先看看JD的logo的html结构：</p>
+<figure class="highlight html"><table><tr><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">"logo"</span></span></span><br><span class="line">    &lt;h1 class="logo_tit"&gt;</span><br><span class="line">        <span class="tag">&lt;<span class="name">a</span> <span class="attr">href</span>=<span class="string">"//www.jd.com"</span> <span class="attr">class</span>=<span class="string">"logo_tit_lk"</span> <span class="attr">clstag</span>=<span class="string">"h|keycount|head|logo_01"</span>&gt;</span>京东<span class="tag">&lt;/<span class="name">a</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;/<span class="name">h1</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br></pre></td></tr></table></figure>
+
+<ol>
+<li>可以发现里面是用了h1标签，h1又包裹了a。</li>
+<li>并且div h1 a三个标签都是一样大的</li>
+<li>由于a标签是行内，所以要使用display:block</li>
+</ol>
+<ul>
+<li>logo  里面 首先放一个 h1 标签 ，目的是为了提权，告诉搜索引擎，这个地方很重要</li>
+<li>h1里面在放一个链接，可以返回首页的，   给链接一个 大小 和  logo 的背景图片</li>
+<li>连接 里面要放文字（网站名称），为了搜索引擎收录我们。  但是文字不要显示出来<ul>
+<li>要用 text-indent  移到盒子外面 （text-indent: -9999px)   然后overflow:hidden  淘宝的做法</li>
+<li>直接给font-size: 0;  就看不到文字了，  京东的做法。</li>
+</ul>
+</li>
+<li>最后给 连接一个 title  这样鼠标放到logo 上，  就可以看到提示文字了</li>
+</ul>
+<h5 id="遇到的几个小问题"><a href="#遇到的几个小问题" class="headerlink" title="遇到的几个小问题"></a>遇到的几个小问题</h5><ol>
+<li>背景logo图过大，如何让背景图自适应容器的宽高呢？</li>
+</ol>
+<figure class="highlight css"><table><tr><td class="code"><pre><span class="line">background: url(../img/35.png) no-repeat;</span><br><span class="line"><span class="selector-tag">background-size</span>: <span class="selector-tag">contain</span>;</span><br></pre></td></tr></table></figure>
+
+<p>2.现在的logo写的没有自己现在写的这么简单，以后再去了解。</p>
+<h4 id="头部-header-中间部分-search"><a href="#头部-header-中间部分-search" class="headerlink" title="头部 header 中间部分 search"></a>头部 header 中间部分 search</h4><p>先来看看主流的search怎么做的叭</p>
+<p><img src="/images/36.png" alt=""></p>
+<p><img src="/images/37.png" alt=""></p>
+<p>尽管有小小的差异，但是都是一样的布局：左边为输入框（里面可以放一个相机的icon图标），右边为一个搜索按钮。</p>
+<p>以下为实现search框的html架构</p>
+<figure class="highlight html"><table><tr><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">"search"</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">input</span> <span class="attr">class</span>=<span class="string">"text"</span> <span class="attr">type</span>=<span class="string">"text"</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">button</span> <span class="attr">class</span>=<span class="string">"btn"</span>&gt;</span>搜索<span class="tag">&lt;/<span class="name">button</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br></pre></td></tr></table></figure>
+
+<h5 id="总结样式的写法"><a href="#总结样式的写法" class="headerlink" title="总结样式的写法"></a>总结样式的写法</h5><ol>
+<li>input框</li>
+</ol>
+<figure class="highlight css"><table><tr><td class="code"><pre><span class="line"><span class="selector-class">.text</span> &#123;</span><br><span class="line">	<span class="attribute">box-sizing</span>: border-box;</span><br><span class="line">	<span class="attribute">width</span>: <span class="number">455px</span>;</span><br><span class="line">	<span class="attribute">height</span>: <span class="number">32px</span>;</span><br><span class="line">	<span class="attribute">border</span>: <span class="number">2px</span> solid <span class="number">#E1251b</span>;</span><br><span class="line">	<span class="attribute">padding-left</span>: <span class="number">10px</span>;</span><br><span class="line">	<span class="attribute">color</span>: <span class="number">#999</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>box-sizing: border-box; ：因为value文字需要距离左边有一点距离，如果直接padding，那么整个盒子都会被撑大，使用这个属性就不会被撑大了。</li>
+</ul>
+<ol start="2">
+<li>input修改文字的颜色</li>
+</ol>
+<p>以前修改input里文字颜色，其实只能修改value的文本，一直不知道如何去修改placeholder。</p>
+<figure class="highlight css"><table><tr><td class="code"><pre><span class="line"><span class="selector-class">.text</span><span class="selector-pseudo">::placeholder</span> &#123;</span><br><span class="line">	<span class="attribute">color</span>: <span class="number">#999</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>就明确一点，在input里面的color属性是修改输入的文本颜色（也包括value值）。</li>
+<li>想要修改placeholder，就使用上面的做法。</li>
+</ul>
+<ol start="3">
+<li>button</li>
+</ol>
+<ul>
+<li>默认样式的button很丑，做一下修改，以后会有ui库，但是这里不考虑，只考虑原生。</li>
+<li>input和button之间会有一个空隙，需要解决。</li>
+<li>还有一个问题，就是input和button的四个角并不是直角，如果不设置以下就会有空隙。</li>
+<li>border-radius同时在input中设置</li>
+</ul>
+<figure class="highlight css"><table><tr><td class="code"><pre><span class="line"><span class="selector-class">.btn</span> &#123;</span><br><span class="line">	<span class="attribute">width</span>: <span class="number">82px</span>;</span><br><span class="line">	<span class="attribute">height</span>: <span class="number">36px</span>;</span><br><span class="line">	<span class="attribute">background-color</span>: <span class="number">#E1251b</span>;</span><br><span class="line">	<span class="attribute">border</span>: <span class="number">0</span>;</span><br><span class="line">	<span class="attribute">border-radius</span>: <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h4 id="头部-header-中下部分-hotwords"><a href="#头部-header-中下部分-hotwords" class="headerlink" title="头部 header 中下部分 hotwords"></a>头部 header 中下部分 hotwords</h4><p>先分析：</p>
+<p><img src="/images/38.png" alt=""></p>
+<p><img src="/images/39.png" alt=""></p>
+<p>可以发现，所有的热词，都是与input框左对齐的。接着来看看实现的细节：每一个热词都是一个a标签，所有的a标签都被一个div包裹。</p>
+<p>结构：</p>
+<figure class="highlight html"><table><tr><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">div</span>&gt;</span></span><br><span class="line">	<span class="tag">&lt;<span class="name">a</span>&gt;</span></span><br><span class="line">	<span class="tag">&lt;<span class="name">a</span>&gt;</span></span><br><span class="line">	<span class="tag">&lt;<span class="name">a</span>&gt;</span></span><br><span class="line">	<span class="tag">&lt;<span class="name">a</span>&gt;</span></span><br><span class="line">	....</span><br><span class="line"><span class="tag">&lt;/<span class="name">div</span></span></span><br></pre></td></tr></table></figure>
+
+<h4 id="头部-header-右侧-shopcar"><a href="#头部-header-右侧-shopcar" class="headerlink" title="头部 header 右侧 shopcar"></a>头部 header 右侧 shopcar</h4><p>先分析：</p>
+<p><img src="/images/40.png" alt=""></p>
+<p>其实购物车这个样式已经很少了，只有狗东还在使用。阿里系现在的购物车在快捷导航栏中了。取而代之的是一个二维码，虽然狗东也有二维码展示。</p>
+<p>并且，之前一直搞错了，其实狗东的购物车这个模块其实放在了search模块中。但是不管了，先实现它，以后举一反三即可。</p>
+<p>那么如何拆解这个shopcar结构呢？看起来挺复杂的：</p>
+<figure class="highlight html"><table><tr><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">"shopcar"</span>&gt;</span></span><br><span class="line">	<span class="tag">&lt;<span class="name">svg</span> <span class="attr">class</span>=<span class="string">"icon"</span> <span class="attr">aria-hidden</span>=<span class="string">"true"</span>&gt;</span></span><br><span class="line">		<span class="tag">&lt;<span class="name">use</span> <span class="attr">xlink:href</span>=<span class="string">"#icon-qicheqianlian-"</span>&gt;</span><span class="tag">&lt;/<span class="name">use</span>&gt;</span></span><br><span class="line">	<span class="tag">&lt;/<span class="name">svg</span>&gt;</span></span><br><span class="line">	<span class="tag">&lt;<span class="name">a</span> <span class="attr">href</span>=<span class="string">""</span>&gt;</span>我的购物车<span class="tag">&lt;/<span class="name">a</span>&gt;</span></span><br><span class="line">	<span class="tag">&lt;<span class="name">i</span>&gt;</span>0<span class="tag">&lt;/<span class="name">i</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br></pre></td></tr></table></figure>
+
+<p>其实呢，将里面分成了三个模块：购物车的icon、文本、显示数量。这里的显示数量的实现是有难度的。</p>
+<figure class="highlight css"><table><tr><td class="code"><pre><span class="line"><span class="selector-class">.shopcar</span> <span class="selector-tag">i</span> &#123;</span><br><span class="line">	<span class="attribute">position</span>: absolute;</span><br><span class="line">	<span class="attribute">top</span>: <span class="number">1px</span>;</span><br><span class="line">	<span class="attribute">left</span>: <span class="number">30px</span>;</span><br><span class="line">	<span class="attribute">padding</span>: <span class="number">1px</span> <span class="number">3px</span>;</span><br><span class="line">	<span class="attribute">line-height</span>: <span class="number">12px</span>;</span><br><span class="line">	<span class="attribute">color</span>: <span class="number">#fff</span>;</span><br><span class="line">	<span class="attribute">background-color</span>: <span class="number">#e1251b</span>;</span><br><span class="line">	<span class="attribute">border-radius</span>: <span class="number">7px</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>首先定位为absolute，让计数器可以自由的移动。</li>
+<li>使用padding和background-color来模拟红色圈圈</li>
+<li>line-height控制这个高度</li>
+</ul>
+<h4 id="头部-header-下部-navitems"><a href="#头部-header-下部-navitems" class="headerlink" title="头部 header 下部 navitems"></a>头部 header 下部 navitems</h4><p>先来看看狗东的布局：</p>
+<p><img src="/images/41.png" alt=""></p>
+<p>看着很简单对叭，实际上复杂的一批。首先在最外层包裹了div，然后通过相关性分了三个ul,然后每个li包裹一个a。但是在经过实践后，三个ul都去浮动的话，就会造成错位，最后还是写出了一个ul，后续在去想。</p>
+]]></content>
+      <categories>
+        <category>最佳实践</category>
+      </categories>
+  </entry>
+  <entry>
+    <title>6.23</title>
+    <url>/2020/06/23/6.23/</url>
+    <content><![CDATA[<p>click look more</p>
+<a id="more"></a>
+
+<blockquote>
+<p>加油</p>
+</blockquote>
+<h1 id="js中的闭包是什么？"><a href="#js中的闭包是什么？" class="headerlink" title="js中的闭包是什么？"></a>js中的闭包是什么？</h1><h2 id="几个小例子"><a href="#几个小例子" class="headerlink" title="几个小例子"></a>几个小例子</h2><ol>
+<li>首先执行x，定义了变量num，函数y 。最后返回函数y</li>
+<li>所以变量z就是函数y</li>
+<li>执行z()</li>
+<li>可能会好奇为什么打印的不是1而是2。因为函数y明明在num++之上</li>
+<li>留个悬念</li>
+</ol>
+<figure class="highlight js"><table><tr><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">x</span>(<span class="params"></span>)</span>&#123;</span><br><span class="line">	<span class="keyword">let</span> num=<span class="number">1</span></span><br><span class="line">	<span class="function"><span class="keyword">function</span> <span class="title">y</span>(<span class="params"></span>)</span>&#123;</span><br><span class="line">		<span class="built_in">console</span>.log(num)</span><br><span class="line">	&#125;</span><br><span class="line">	num++</span><br><span class="line">	<span class="keyword">return</span> y</span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">let</span> z=x()</span><br><span class="line">z()  <span class="comment">// 2</span></span><br></pre></td></tr></table></figure>
+
+<ol>
+<li>首先定义了函数x，变量z</li>
+<li>函数x定义了函数y，变量hello，返回函数y给变量z</li>
+<li>那么为什么变量hello定义在函数y之下，却可以被获取到呢？</li>
+<li>留个悬念</li>
+</ol>
+<figure class="highlight js"><table><tr><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">x</span>(<span class="params"></span>)</span>&#123;</span><br><span class="line">	<span class="keyword">let</span> y=<span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123;</span><br><span class="line">		<span class="built_in">console</span>.log(hello)</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="keyword">let</span> hello=<span class="string">"hello world"</span></span><br><span class="line">	<span class="keyword">return</span> y</span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">let</span> z=x()</span><br><span class="line">z()  <span class="comment">// hello world</span></span><br></pre></td></tr></table></figure>
+
+<h3 id="执行上下文"><a href="#执行上下文" class="headerlink" title="执行上下文"></a>执行上下文</h3><p>先来了解执行上下文的概念</p>
+<ol>
+<li>在上面的代码中，函数是被层层调用的。那么问题就是JS引擎是如何跟踪的呢？</li>
+<li>在JS中，上下文可以分为全局上下文、函数上下文。全局上下文在程序开始执行的时候就创建了；而函数上下文是在函数被执行的时候才创建。</li>
+<li>JS引擎会有一个栈去存放执行上下文。首先全局上下文入栈。当函数被执行时，全局上下文停止，函数上下文入栈执行。当函数执行完毕后，就会被销毁。然后重新执行全局上下文。反复如此。</li>
+</ol>
+<h3 id="作用域"><a href="#作用域" class="headerlink" title="作用域"></a>作用域</h3><p>继续来了解作用域。闭包和作用域是强相关的。</p>
+<ol>
+<li>在es6之前，不存在块级作用域。在es6之后，let声明的变量是具有块级作用域的</li>
+<li>也没什么好说的。需要注意的就是，要将声明的变量放在前面，防止错误！</li>
+</ol>
+<h2 id="闭包的使用"><a href="#闭包的使用" class="headerlink" title="闭包的使用"></a>闭包的使用</h2><p>一个常用的场景：封装私有变量</p>
+<p>因为原生JS不支持私有变量。虽然a是x的实例化对象，但是private是x的私有变量。虽然a不能访问private，但是a可以通过x中的方法去访问private</p>
+<figure class="highlight js"><table><tr><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">x</span>(<span class="params"></span>)</span>&#123;</span><br><span class="line">	<span class="keyword">let</span> private=<span class="number">0</span></span><br><span class="line">	<span class="keyword">this</span>.y=<span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123;</span><br><span class="line">		<span class="keyword">return</span> private</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="keyword">this</span>.z=<span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123;</span><br><span class="line">		<span class="keyword">return</span> ++private</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">let</span> a=<span class="keyword">new</span> x()</span><br><span class="line"><span class="built_in">console</span>.log(a.private)  <span class="comment">// undefined</span></span><br><span class="line"><span class="built_in">console</span>.log(a.y())  <span class="comment">// 0</span></span><br><span class="line"><span class="built_in">console</span>.log(a.z())  <span class="comment">// 1</span></span><br></pre></td></tr></table></figure>
+
+<ol>
+<li>闭包内的函数不仅可以在创建时去访问闭包内的变量，而且在执行时，还可以改变闭包的变量。</li>
+<li>闭包并不是在创建时的那一个状态，而是一个真实的封装，只要闭包存在，就可以对闭包内的变量进行修改</li>
+</ol>
+<h2 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h2><blockquote>
+<p>闭包找到的是同一地址中父级函数中对应变量最终的值</p>
+</blockquote>
+<h1 id="v-if和v-show的区别？"><a href="#v-if和v-show的区别？" class="headerlink" title="v-if和v-show的区别？"></a>v-if和v-show的区别？</h1><ol>
+<li>v-if和v-show用于视图层进行条件判断视图展示</li>
+<li>v-if的原理是根据判断条件来动态的进行增删DOM元素，v-show是根据判断条件来动态的进行显示和隐藏元素(display:none)，频繁的进行增删DOM操作会影响页面加载速度和性能。</li>
+<li>只有v-if能和v-else连用进行分支判断，v-show是不能和v-else连用的，如果出现多种条件场景的情况下，可以使用v-if来进行判断。</li>
+</ol>
+<h1 id="v-for中key值的作用？"><a href="#v-for中key值的作用？" class="headerlink" title="v-for中key值的作用？"></a>v-for中key值的作用？</h1><p>给循环项加上key值后，每一个列都会有自己的key，即唯一标识，那么计算机就能判断出在操作后的列表和之前的列表的不同了（可以知道是哪儿一项的改变）。</p>
+<p>这里挖一个坑：明天再来说。</p>
+<p>来了。看了官方文档之后总结了一下：</p>
+<ol>
+<li>key值主要用在Vue的虚拟dom算法上。在新旧节点对比时可以起到辨识的作用。（这里又挖一坑，因为之前看过diff算法）</li>
+<li>如果不用key，那么Vue就会尽量使用就地修改/复用相同元素的算法。这就会带来一个bug，就是你以为你删除了a，但是计算机认为你删除了b。</li>
+<li>那么当你使用key的时候，他是基于key的变化然后再去重新排列顺序，然后会移除key不存在的值。</li>
+<li>在很多子元素又相同的父元素时，必须要使用key，最常见的也就是v-for。</li>
+<li>还有一点，尽量避免使用index，即数组的下标做key，因为这可能会出现一个bug，最好是在数组中添加id值作为key值。</li>
+</ol>
+<h1 id="vue中插槽的作用？"><a href="#vue中插槽的作用？" class="headerlink" title="vue中插槽的作用？"></a>vue中插槽的作用？</h1><h1 id="js的执行机制？"><a href="#js的执行机制？" class="headerlink" title="js的执行机制？"></a>js的执行机制？</h1>]]></content>
+      <categories>
+        <category>面试</category>
+      </categories>
+  </entry>
+  <entry>
     <title>API接口为动态参数时</title>
     <url>/2020/06/22/API%E6%8E%A5%E5%8F%A3%E4%B8%BA%E5%8A%A8%E6%80%81%E5%8F%82%E6%95%B0%E6%97%B6/</url>
     <content><![CDATA[<p>click look more</p>
@@ -18,7 +285,7 @@
 <li><a href="http://127.0.0.1:8888/api/private/v1/" target="_blank" rel="noopener">http://127.0.0.1:8888/api/private/v1/</a></li>
 </ul>
 <p>可以看到接口中又两个冒号的参数，这就是动态参数，如果这样写会报错：</p>
-<figure class="highlight js"><table><tr><td class="code"><pre><span class="line">axios.put(<span class="string">'`http://127.0.0.1:8888/api/private/v1/users/$&#123;xxxx&#125;/state/$&#123;xxxx&#125;'</span><span class="string">`)</span></span><br></pre></td></tr></table></figure>
+<figure class="highlight js"><table><tr><td class="code"><pre><span class="line">axios.put(<span class="string">`'http://127.0.0.1:8888/api/private/v1/users/<span class="subst">$&#123;xxxx&#125;</span>/state/<span class="subst">$&#123;xxxx&#125;</span>'`</span>)</span><br></pre></td></tr></table></figure>
 
 <p>也不能这样写：</p>
 <figure class="highlight js"><table><tr><td class="code"><pre><span class="line">axios.put(<span class="string">'http://127.0.0.1:8888/api/private/v1/users/:uId/state/:type'</span>,<span class="attr">params</span>:&#123;&#125;)</span><br></pre></td></tr></table></figure>
