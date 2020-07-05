@@ -22,7 +22,7 @@
 
   <meta name="description" content="click look more 本文着重描述自己在开发类似于淘宝、京东等电商网站（静态、不使用任何框架）时，所遇到的最佳实践（比如header、banner、footer、details and anymore）。">
 <meta property="og:type" content="article">
-<meta property="og:title" content="开发电商网站的最佳实践">
+<meta property="og:title" content="开发电商网站的最佳实践（PC端）">
 <meta property="og:url" content="http://yoursite.com/2020/07/03/%E5%BC%80%E5%8F%91%E7%94%B5%E5%95%86%E7%BD%91%E7%AB%99%E7%9A%84%E6%9C%80%E4%BD%B3%E5%AE%9E%E8%B7%B5/index.html">
 <meta property="og:site_name" content="共你云雨">
 <meta property="og:description" content="click look more 本文着重描述自己在开发类似于淘宝、京东等电商网站（静态、不使用任何框架）时，所遇到的最佳实践（比如header、banner、footer、details and anymore）。">
@@ -38,8 +38,12 @@
 <meta property="og:image" content="http://yoursite.com/images/39.png">
 <meta property="og:image" content="http://yoursite.com/images/40.png">
 <meta property="og:image" content="http://yoursite.com/images/41.png">
+<meta property="og:image" content="http://yoursite.com/images/42.png">
+<meta property="og:image" content="http://yoursite.com/images/43.png">
+<meta property="og:image" content="http://yoursite.com/images/44.png">
+<meta property="og:image" content="http://yoursite.com/images/45.png">
 <meta property="article:published_time" content="2020-07-02T23:59:05.983Z">
-<meta property="article:modified_time" content="2020-07-03T15:58:28.825Z">
+<meta property="article:modified_time" content="2020-07-05T15:57:19.306Z">
 <meta property="article:author" content="Edison">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:image" content="http://yoursite.com/images/30.png">
@@ -56,7 +60,7 @@
   };
 </script>
 
-  <title>开发电商网站的最佳实践 | 共你云雨</title>
+  <title>开发电商网站的最佳实践（PC端） | 共你云雨</title>
   
 
 
@@ -184,7 +188,7 @@
     </span>
       <header class="post-header">
         <h1 class="post-title" itemprop="name headline">
-          开发电商网站的最佳实践
+          开发电商网站的最佳实践（PC端）
         </h1>
 
         <div class="post-meta">
@@ -193,10 +197,16 @@
                 <i class="fa fa-calendar-o"></i>
               </span>
               <span class="post-meta-item-text">发表于</span>
-              
 
-              <time title="创建时间：2020-07-03 07:59:05 / 修改时间：23:58:28" itemprop="dateCreated datePublished" datetime="2020-07-03T07:59:05+08:00">2020-07-03</time>
+              <time title="创建时间：2020-07-03 07:59:05" itemprop="dateCreated datePublished" datetime="2020-07-03T07:59:05+08:00">2020-07-03</time>
             </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2020-07-05 23:57:19" itemprop="dateModified" datetime="2020-07-05T23:57:19+08:00">2020-07-05</time>
+              </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
                 <i class="fa fa-folder-o"></i>
@@ -409,6 +419,53 @@
 <h4 id="头部-header-下部-navitems"><a href="#头部-header-下部-navitems" class="headerlink" title="头部 header 下部 navitems"></a>头部 header 下部 navitems</h4><p>先来看看狗东的布局：</p>
 <p><img src="/images/41.png" alt=""></p>
 <p>看着很简单对叭，实际上复杂的一批。首先在最外层包裹了div，然后通过相关性分了三个ul,然后每个li包裹一个a。但是在经过实践后，三个ul都去浮动的话，就会造成错位，最后还是写出了一个ul，后续在去想。</p>
+<h2 id="内容区"><a href="#内容区" class="headerlink" title="内容区"></a>内容区</h2><blockquote>
+<p>几家大的电商网站的内容区一般可以分为两大部分，一个是上半部分（导航、banner、以及右半部分），另一个是下半部分（一般就是一些模块，用来放商品）。</p>
+</blockquote>
+<p>这里的内容区只指定上半部分，所以，可以提前设置以下css。</p>
+<p>因为main的div使用了w版心，所以宽度不需要指定，只需要一个固定的高度，然后在来一个外边距就ok了。</p>
+<figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="selector-class">.main</span> &#123;</span><br><span class="line">	<span class="attribute">height</span>: <span class="number">465px</span>;</span><br><span class="line">	<span class="attribute">padding-top</span>: <span class="number">10px</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h3 id="导航"><a href="#导航" class="headerlink" title="导航"></a>导航</h3><blockquote>
+<p>先来看看常见的导航样式</p>
+</blockquote>
+<p><img src="/images/42.png" alt=""></p>
+<p><img src="/images/43.png" alt=""></p>
+<p>可以发现都是差不多的界面，鼠标放在左边的导航栏上就会在右边弹出一个二级菜单。并且都是使用ul li标签制作。接下来看看详细。</p>
+<h4 id="左侧导航栏-dropdown"><a href="#左侧导航栏-dropdown" class="headerlink" title="左侧导航栏 dropdown"></a>左侧导航栏 dropdown</h4><p>JD的做法是，使用ul，然后每一层都是一个li， 然后里面的文字使用a。结构如下</p>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">ul</span><br><span class="line">	li</span><br><span class="line">		a</span><br><span class="line">	li</span><br><span class="line">		a</span><br><span class="line">	....</span><br></pre></td></tr></table></figure>
+
+<h5 id="左侧导航栏-dropdown-样式"><a href="#左侧导航栏-dropdown-样式" class="headerlink" title="左侧导航栏 dropdown 样式"></a>左侧导航栏 dropdown 样式</h5><blockquote>
+<p>核心就是，通过给li设置height和line-height让每一个li都均分这个dropdown，然后再让li向右边移动一点，可以对li使用padding-left</p>
+</blockquote>
+<figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/* dropdown start */</span></span><br><span class="line"><span class="selector-class">.dropdown</span> &#123;</span><br><span class="line">	<span class="attribute">width</span>: <span class="number">209px</span>;</span><br><span class="line">	<span class="attribute">height</span>: <span class="number">100%</span>;</span><br><span class="line">	<span class="attribute">background-color</span>: <span class="number">#fff</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="selector-class">.dropdown</span> <span class="selector-tag">ul</span> <span class="selector-tag">li</span> &#123;</span><br><span class="line">	<span class="attribute">height</span>: <span class="number">31px</span>;</span><br><span class="line">	<span class="attribute">line-height</span>: <span class="number">31px</span>;</span><br><span class="line">	<span class="attribute">padding-left</span>: <span class="number">10px</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">/* 模拟鼠标放上去变色 */</span></span><br><span class="line"><span class="selector-class">.dropdown</span> <span class="selector-tag">ul</span> <span class="selector-tag">li</span><span class="selector-pseudo">:hover</span> &#123;</span><br><span class="line">	<span class="attribute">background-color</span>: <span class="number">#f1f1f1</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="selector-class">.dropdown</span> <span class="selector-tag">ul</span> <span class="selector-tag">li</span> <span class="selector-tag">a</span> &#123;</span><br><span class="line">	<span class="attribute">font-size</span>: <span class="number">14px</span>;</span><br><span class="line">	<span class="attribute">color</span>: <span class="number">#333</span></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="selector-class">.dropdown</span> <span class="selector-tag">ul</span> <span class="selector-tag">li</span> <span class="selector-tag">a</span><span class="selector-pseudo">:hover</span> &#123;</span><br><span class="line">	<span class="attribute">color</span>: <span class="number">#E1251b</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h2 id="底部区"><a href="#底部区" class="headerlink" title="底部区"></a>底部区</h2><blockquote>
+<p>因为是写common.css，所以先写footer，因为footer是每个页面都会有的公共样式</p>
+</blockquote>
+<h3 id="footer-mod-service"><a href="#footer-mod-service" class="headerlink" title="footer mod_service"></a>footer mod_service</h3><p>先来看看常见的mod_service</p>
+<p><img src="/images/44.png" alt=""></p>
+<p><img src="/images/45.png" alt=""></p>
+<p>看起来一样，实际上TB和JD做法完全不一样，这里先不讨论谁对谁错。</p>
+<p>TB：每一个模块都是一个a标签，然后链接到其他的页面</p>
+<p>JD：做的比较细，4个模块是一个ul包裹的，每个模块都是一个li，li里面还有一个div，用来包裹icon和文字。icon使用h5，文字使用p。</p>
+<p>这里以JD的做法为例子，大致的html结构</p>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">ul</span><br><span class="line">	li</span><br><span class="line">		div</span><br><span class="line">			h5</span><br><span class="line">				svg</span><br><span class="line">			a</span><br><span class="line">	li</span><br><span class="line">		div</span><br><span class="line">			h5</span><br><span class="line">				svg</span><br><span class="line">			a</span><br><span class="line">	...</span><br></pre></td></tr></table></figure>
+
+<h4 id="实现细节"><a href="#实现细节" class="headerlink" title="实现细节"></a>实现细节</h4><p>后来自己对着狗东的官网硬是写出来了一个，但是踩了很多坑，花了很久才做好。在这里总结一下。</p>
+<ol>
+<li>写一个ul，里面包裹了4个li</li>
+<li>每个li里面的架构和上面一致</li>
+<li>写了很多ul了，如果想让ul水平显示，那么只需要让每一个li向左浮动即可。</li>
+<li>在水平显示后，就要考虑所有li的布局了。</li>
+<li>使用了flex布局，要注意，这里的flex要写在ul上，因为是要对li布局。</li>
+</ol>
+<figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="selector-class">.mod_service</span> <span class="selector-tag">ul</span> &#123;</span><br><span class="line">	<span class="attribute">height</span>: <span class="number">42px</span>;</span><br><span class="line">	<span class="attribute">display</span>: flex;</span><br><span class="line">	<span class="attribute">justify-content</span>: space-around;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<ol start="6">
+<li>此时，整个布局就出来了，但是里面的h5和p还没有写样式。因为这两个都是块级标签，所以也需要浮动。</li>
+<li>最后一点要注意的是，icon下面，有一小段分割线，这是就需要去设置mod_service高度即可，然后给一个border-bottom即可</li>
+</ol>
 
     </div>
 
@@ -487,7 +544,7 @@
 
       <!--noindex-->
       <div class="post-toc-wrap sidebar-panel">
-          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#前期准备工作"><span class="nav-number">1.</span> <span class="nav-text">前期准备工作</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#使用ico图标"><span class="nav-number">2.</span> <span class="nav-text">使用ico图标</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#制作一个favicon"><span class="nav-number">2.1.</span> <span class="nav-text">制作一个favicon</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#网站的优化三大标签"><span class="nav-number">3.</span> <span class="nav-text">网站的优化三大标签</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#title"><span class="nav-number">3.1.</span> <span class="nav-text">title</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#description"><span class="nav-number">3.2.</span> <span class="nav-text">description</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#keywords"><span class="nav-number">3.3.</span> <span class="nav-text">keywords</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#iconfont"><span class="nav-number">4.</span> <span class="nav-text">iconfont</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#首页"><span class="nav-number">5.</span> <span class="nav-text">首页</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#顶部"><span class="nav-number">5.1.</span> <span class="nav-text">顶部</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#快捷导航栏-shortcut"><span class="nav-number">5.1.1.</span> <span class="nav-text">快捷导航栏 shortcut</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#快捷导航栏-shortcut-左侧部分"><span class="nav-number">5.1.1.1.</span> <span class="nav-text">快捷导航栏 shortcut 左侧部分</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#快捷导航栏-shortcut-左侧部分-实现技术的选择"><span class="nav-number">5.1.1.1.1.</span> <span class="nav-text">快捷导航栏 shortcut 左侧部分 实现技术的选择</span></a></li></ol></li><li class="nav-item nav-level-4"><a class="nav-link" href="#快捷导航栏-shortcut-右侧部分"><span class="nav-number">5.1.1.2.</span> <span class="nav-text">快捷导航栏 shortcut 右侧部分</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#快捷导航栏-shortcut-总结"><span class="nav-number">5.1.1.3.</span> <span class="nav-text">快捷导航栏 shortcut 总结</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#头部-header"><span class="nav-number">5.1.2.</span> <span class="nav-text">头部 header</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#头部-header-右侧-logo"><span class="nav-number">5.1.2.1.</span> <span class="nav-text">头部 header 右侧 logo</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#遇到的几个小问题"><span class="nav-number">5.1.2.1.1.</span> <span class="nav-text">遇到的几个小问题</span></a></li></ol></li><li class="nav-item nav-level-4"><a class="nav-link" href="#头部-header-中间部分-search"><span class="nav-number">5.1.2.2.</span> <span class="nav-text">头部 header 中间部分 search</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#总结样式的写法"><span class="nav-number">5.1.2.2.1.</span> <span class="nav-text">总结样式的写法</span></a></li></ol></li><li class="nav-item nav-level-4"><a class="nav-link" href="#头部-header-中下部分-hotwords"><span class="nav-number">5.1.2.3.</span> <span class="nav-text">头部 header 中下部分 hotwords</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#头部-header-右侧-shopcar"><span class="nav-number">5.1.2.4.</span> <span class="nav-text">头部 header 右侧 shopcar</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#头部-header-下部-navitems"><span class="nav-number">5.1.2.5.</span> <span class="nav-text">头部 header 下部 navitems</span></a></li></ol></li></ol></li></ol></li></ol></div>
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#前期准备工作"><span class="nav-number">1.</span> <span class="nav-text">前期准备工作</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#使用ico图标"><span class="nav-number">2.</span> <span class="nav-text">使用ico图标</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#制作一个favicon"><span class="nav-number">2.1.</span> <span class="nav-text">制作一个favicon</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#网站的优化三大标签"><span class="nav-number">3.</span> <span class="nav-text">网站的优化三大标签</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#title"><span class="nav-number">3.1.</span> <span class="nav-text">title</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#description"><span class="nav-number">3.2.</span> <span class="nav-text">description</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#keywords"><span class="nav-number">3.3.</span> <span class="nav-text">keywords</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#iconfont"><span class="nav-number">4.</span> <span class="nav-text">iconfont</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#首页"><span class="nav-number">5.</span> <span class="nav-text">首页</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#顶部"><span class="nav-number">5.1.</span> <span class="nav-text">顶部</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#快捷导航栏-shortcut"><span class="nav-number">5.1.1.</span> <span class="nav-text">快捷导航栏 shortcut</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#快捷导航栏-shortcut-左侧部分"><span class="nav-number">5.1.1.1.</span> <span class="nav-text">快捷导航栏 shortcut 左侧部分</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#快捷导航栏-shortcut-左侧部分-实现技术的选择"><span class="nav-number">5.1.1.1.1.</span> <span class="nav-text">快捷导航栏 shortcut 左侧部分 实现技术的选择</span></a></li></ol></li><li class="nav-item nav-level-4"><a class="nav-link" href="#快捷导航栏-shortcut-右侧部分"><span class="nav-number">5.1.1.2.</span> <span class="nav-text">快捷导航栏 shortcut 右侧部分</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#快捷导航栏-shortcut-总结"><span class="nav-number">5.1.1.3.</span> <span class="nav-text">快捷导航栏 shortcut 总结</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#头部-header"><span class="nav-number">5.1.2.</span> <span class="nav-text">头部 header</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#头部-header-右侧-logo"><span class="nav-number">5.1.2.1.</span> <span class="nav-text">头部 header 右侧 logo</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#遇到的几个小问题"><span class="nav-number">5.1.2.1.1.</span> <span class="nav-text">遇到的几个小问题</span></a></li></ol></li><li class="nav-item nav-level-4"><a class="nav-link" href="#头部-header-中间部分-search"><span class="nav-number">5.1.2.2.</span> <span class="nav-text">头部 header 中间部分 search</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#总结样式的写法"><span class="nav-number">5.1.2.2.1.</span> <span class="nav-text">总结样式的写法</span></a></li></ol></li><li class="nav-item nav-level-4"><a class="nav-link" href="#头部-header-中下部分-hotwords"><span class="nav-number">5.1.2.3.</span> <span class="nav-text">头部 header 中下部分 hotwords</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#头部-header-右侧-shopcar"><span class="nav-number">5.1.2.4.</span> <span class="nav-text">头部 header 右侧 shopcar</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#头部-header-下部-navitems"><span class="nav-number">5.1.2.5.</span> <span class="nav-text">头部 header 下部 navitems</span></a></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#内容区"><span class="nav-number">5.2.</span> <span class="nav-text">内容区</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#导航"><span class="nav-number">5.2.1.</span> <span class="nav-text">导航</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#左侧导航栏-dropdown"><span class="nav-number">5.2.1.1.</span> <span class="nav-text">左侧导航栏 dropdown</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#左侧导航栏-dropdown-样式"><span class="nav-number">5.2.1.1.1.</span> <span class="nav-text">左侧导航栏 dropdown 样式</span></a></li></ol></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#底部区"><span class="nav-number">5.3.</span> <span class="nav-text">底部区</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#footer-mod-service"><span class="nav-number">5.3.1.</span> <span class="nav-text">footer mod_service</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#实现细节"><span class="nav-number">5.3.1.1.</span> <span class="nav-text">实现细节</span></a></li></ol></li></ol></li></ol></li></ol></div>
       </div>
       <!--/noindex-->
 
@@ -543,7 +600,7 @@
 <div></div>
 <div class="theme-info">
   <div class="powered-by"></div>
-  <span class="post-count">至今已写62.5k字</span>
+  <span class="post-count">至今已写63.3k字</span>
 </div>
 
         
