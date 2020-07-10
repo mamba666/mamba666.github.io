@@ -20,15 +20,21 @@
     var CONFIG = {"hostname":"yoursite.com","root":"/","scheme":"Pisces","version":"7.7.2","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":false,"show_result":false,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":false,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},"path":"./public/search.xml"};
   </script>
 
-  <meta property="og:type" content="website">
-<meta property="og:title" content="共你云雨">
-<meta property="og:url" content="http://yoursite.com/tags/elementUI/index.html">
+  <meta name="description" content="click look more">
+<meta property="og:type" content="article">
+<meta property="og:title" content="递归">
+<meta property="og:url" content="http://yoursite.com/2020/07/10/%E9%80%92%E5%BD%92/index.html">
 <meta property="og:site_name" content="共你云雨">
+<meta property="og:description" content="click look more">
 <meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="http://yoursite.com/images/50.jpg">
+<meta property="article:published_time" content="2020-07-10T06:05:19.975Z">
+<meta property="article:modified_time" content="2020-07-10T06:46:10.137Z">
 <meta property="article:author" content="Edison">
 <meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="http://yoursite.com/images/50.jpg">
 
-<link rel="canonical" href="http://yoursite.com/tags/elementUI/">
+<link rel="canonical" href="http://yoursite.com/2020/07/10/%E9%80%92%E5%BD%92/">
 
 
 <script id="page-configurations">
@@ -36,11 +42,11 @@
   CONFIG.page = {
     sidebar: "",
     isHome : false,
-    isPost : false
+    isPost : true
   };
 </script>
 
-  <title>标签: elementUI | 共你云雨</title>
+  <title>递归 | 共你云雨</title>
   
 
 
@@ -150,110 +156,103 @@
           <div class="content">
             
 
+  <div class="posts-expand">
+      
   
   
-  
-  <div class="post-block">
-    <div class="posts-collapse">
-      <div class="collection-title">
-        <h1 class="collection-header">elementUI
-          <small>标签</small>
+  <article itemscope itemtype="http://schema.org/Article" class="post-block " lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2020/07/10/%E9%80%92%E5%BD%92/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="Edison">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="共你云雨">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          递归
         </h1>
-      </div>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+              
+
+              <time title="创建时间：2020-07-10 14:05:19 / 修改时间：14:46:10" itemprop="dateCreated datePublished" datetime="2020-07-10T14:05:19+08:00">2020-07-10</time>
+            </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/%E9%9D%A2%E8%AF%95/" itemprop="url" rel="index"><span itemprop="name">面试</span></a>
+                </span>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
 
       
-    <div class="collection-year">
-      <h1 class="collection-header">2020</h1>
+        <p>click look more</p>
+<a id="more"></a>
+
+<h1 id="Q"><a href="#Q" class="headerlink" title="Q"></a>Q</h1><p>先来看问题</p>
+<p><img src="/images/50.jpg" alt=""></p>
+<h3 id="第二题"><a href="#第二题" class="headerlink" title="第二题"></a>第二题</h3><p>其实就是一个递归的问题，但是里面又设计到了对象的遍历，踩了一些坑，记录下来。</p>
+<p>先一个点一个点分析：</p>
+<ol>
+<li>递归一个value值。这时就要注意，这个value市一个什么类型，数组？对象？</li>
+<li>假如是数组，大概率使用forEach；假如为对象，大概率使用for in</li>
+<li>如果某个值还可以继续迭代，那么就继续去迭代。并且在最后一个值为数值或者字符串的时候停下。所以这里就设计到了if的判断语句。</li>
+<li>最后返回近似克隆的对象 </li>
+</ol>
+<h4 id="注意的点"><a href="#注意的点" class="headerlink" title="注意的点"></a>注意的点</h4><ol>
+<li>在使用for…in 循环迭代时，不能直接data.key。必须使用data[key]。这里千万要记住。</li>
+<li>在递归时，最好先把需要使用到递归的先进行if判断。</li>
+</ol>
+<h4 id="代码"><a href="#代码" class="headerlink" title="代码"></a>代码</h4><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">let</span> obj=&#123;</span><br><span class="line">	a:<span class="string">"123"</span>,</span><br><span class="line">	b:&#123;</span><br><span class="line">		b1:<span class="string">"长度大于100"</span>,</span><br><span class="line">		b2:<span class="number">123</span>,</span><br><span class="line">		b3:<span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123;&#125;</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">spliceStr</span>(<span class="params">data</span>)</span>&#123;</span><br><span class="line">	<span class="keyword">for</span>(<span class="keyword">let</span> key <span class="keyword">in</span> data)&#123;</span><br><span class="line">		<span class="keyword">if</span>(<span class="keyword">typeof</span>(data[key])===<span class="string">"object"</span>)&#123;</span><br><span class="line">			spliceStr(data[key])</span><br><span class="line">		&#125;<span class="keyword">else</span> <span class="keyword">if</span>(<span class="keyword">typeof</span>(data[key])===<span class="string">"string"</span>&amp;&amp;data[key].length&gt;<span class="number">100</span>)&#123;</span><br><span class="line">			data[key]=<span class="string">""</span></span><br><span class="line">		&#125;</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="keyword">return</span> data</span><br><span class="line">&#125;</span><br><span class="line">log(spliceStr(obj))</span><br></pre></td></tr></table></figure>
     </div>
 
-  <article itemscope itemtype="http://schema.org/Article">
-    <header class="post-header">
+    
+    
+    
 
-      <div class="post-meta">
-        <time itemprop="dateCreated"
-              datetime="2020-06-22T15:21:12+08:00"
-              content="2020-06-22">
-          06-22
-        </time>
-      </div>
+      <footer class="post-footer">
 
-      <h2 class="post-title">
-          <a class="post-title-link" href="/2020/06/22/API%E6%8E%A5%E5%8F%A3%E4%B8%BA%E5%8A%A8%E6%80%81%E5%8F%82%E6%95%B0%E6%97%B6/" itemprop="url">
-            <span itemprop="name">API接口为动态参数时</span>
-          </a>
-      </h2>
+        
 
-    </header>
-  </article>
 
-  <article itemscope itemtype="http://schema.org/Article">
-    <header class="post-header">
-
-      <div class="post-meta">
-        <time itemprop="dateCreated"
-              datetime="2020-06-22T08:51:09+08:00"
-              content="2020-06-22">
-          06-22
-        </time>
-      </div>
-
-      <h2 class="post-title">
-          <a class="post-title-link" href="/2020/06/22/el-table%E4%BD%BF%E7%94%A8%E6%8F%92%E6%A7%BD%E6%98%BE%E7%A4%BA%E5%BC%80%E5%85%B3/" itemprop="url">
-            <span itemprop="name">表格内使用插槽</span>
-          </a>
-      </h2>
-
-    </header>
-  </article>
-
-  <article itemscope itemtype="http://schema.org/Article">
-    <header class="post-header">
-
-      <div class="post-meta">
-        <time itemprop="dateCreated"
-              datetime="2020-06-22T08:22:55+08:00"
-              content="2020-06-22">
-          06-22
-        </time>
-      </div>
-
-      <h2 class="post-title">
-          <a class="post-title-link" href="/2020/06/22/%E4%B8%BA%E8%A1%A8%E6%A0%BC%E9%A1%B9%E6%B7%BB%E5%8A%A0%E7%B4%A2%E5%BC%95/" itemprop="url">
-            <span itemprop="name">为表格项添加索引</span>
-          </a>
-      </h2>
-
-    </header>
-  </article>
-
-  <article itemscope itemtype="http://schema.org/Article">
-    <header class="post-header">
-
-      <div class="post-meta">
-        <time itemprop="dateCreated"
-              datetime="2020-06-16T11:24:48+08:00"
-              content="2020-06-16">
-          06-16
-        </time>
-      </div>
-
-      <h2 class="post-title">
-          <a class="post-title-link" href="/2020/06/16/%E4%BF%9D%E5%AD%98%E6%BF%80%E6%B4%BB%E7%8A%B6%E6%80%81/" itemprop="url">
-            <span itemprop="name">使用window.sessionStorage保存激活状态</span>
-          </a>
-      </h2>
-
-    </header>
-  </article>
-
+        
+    <div class="post-nav">
+      <div class="post-nav-item">
+    <a href="/2020/07/03/%E5%BC%80%E5%8F%91%E7%94%B5%E5%95%86%E7%BD%91%E7%AB%99%E7%9A%84%E6%9C%80%E4%BD%B3%E5%AE%9E%E8%B7%B5/" rel="prev" title="开发电商网站的最佳实践（PC端）">
+      <i class="fa fa-chevron-left"></i> 开发电商网站的最佳实践（PC端）
+    </a></div>
+      <div class="post-nav-item"></div>
     </div>
+      </footer>
+    
+  </article>
+  
+  
+  
+
   </div>
-  
-  
-  
-
-  
-
 
 
           </div>
@@ -304,6 +303,7 @@
 
       <!--noindex-->
       <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#Q"><span class="nav-number">1.</span> <span class="nav-text">Q</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#第二题"><span class="nav-number">1.0.1.</span> <span class="nav-text">第二题</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#注意的点"><span class="nav-number">1.0.1.1.</span> <span class="nav-text">注意的点</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#代码"><span class="nav-number">1.0.1.2.</span> <span class="nav-text">代码</span></a></li></ol></li></ol></li></ol></li></ol></div>
       </div>
       <!--/noindex-->
 
