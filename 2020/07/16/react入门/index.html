@@ -1,0 +1,505 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 4.2.0">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/logo.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/logo.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/logo.png">
+  <link rel="mask-icon" href="/images/logo.png" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+<link rel="stylesheet" href="/lib/font-awesome/css/font-awesome.min.css">
+
+<script id="hexo-configurations">
+    var NexT = window.NexT || {};
+    var CONFIG = {"hostname":"yoursite.com","root":"/","scheme":"Pisces","version":"7.7.2","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":false,"show_result":false,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":false,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},"path":"./public/search.xml"};
+  </script>
+
+  <meta name="description" content="click look more">
+<meta property="og:type" content="article">
+<meta property="og:title" content="react入门">
+<meta property="og:url" content="http://yoursite.com/2020/07/16/react%E5%85%A5%E9%97%A8/index.html">
+<meta property="og:site_name" content="共你云雨">
+<meta property="og:description" content="click look more">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="http://yoursite.com/images/50.png">
+<meta property="article:published_time" content="2020-07-16T01:00:33.564Z">
+<meta property="article:modified_time" content="2020-07-19T12:46:25.399Z">
+<meta property="article:author" content="Edison">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="http://yoursite.com/images/50.png">
+
+<link rel="canonical" href="http://yoursite.com/2020/07/16/react%E5%85%A5%E9%97%A8/">
+
+
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome : false,
+    isPost : true
+  };
+</script>
+
+  <title>react入门 | 共你云雨</title>
+  
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="container use-motion">
+    <div class="headband"></div>
+	<a href="https://github.com/mamba666" target="_blank" rel="noopener" class="github-corner" aria-label="View source on GitHub"><svg width="80" height="80" viewBox="0 0 250 250" style="fill:#151513; color:#fff; position: absolute; top: 0; border: 0; right: 0;" aria-hidden="true"><path d="M0,0 L115,115 L130,115 L142,142 L250,250 L250,0 Z"></path><path d="M128.3,109.0 C113.8,99.7 119.0,89.6 119.0,89.6 C122.0,82.7 120.5,78.6 120.5,78.6 C119.2,72.0 123.4,76.3 123.4,76.3 C127.3,80.9 125.5,87.3 125.5,87.3 C122.9,97.6 130.6,101.9 134.4,103.2" fill="currentColor" style="transform-origin: 130px 106px;" class="octo-arm"></path><path d="M115.0,115.0 C114.9,115.1 118.7,116.5 119.8,115.4 L133.7,101.6 C136.9,99.2 139.9,98.4 142.2,98.6 C133.8,88.0 127.5,74.4 143.8,58.0 C148.5,53.4 154.0,51.2 159.7,51.0 C160.3,49.4 163.2,43.6 171.4,40.1 C171.4,40.1 176.1,42.5 178.8,56.2 C183.1,58.6 187.2,61.8 190.9,65.4 C194.5,69.0 197.7,73.2 200.1,77.6 C213.8,80.2 216.3,84.9 216.3,84.9 C212.7,93.1 206.9,96.0 205.4,96.6 C205.1,102.4 203.0,107.8 198.3,112.5 C181.9,128.9 168.3,122.5 157.7,114.1 C157.9,116.9 156.7,120.9 152.7,124.9 L141.0,136.5 C139.8,137.7 141.6,141.9 141.8,141.8 Z" fill="currentColor" class="octo-body"></path></svg></a><style>.github-corner:hover .octo-arm{animation:octocat-wave 560ms ease-in-out}@keyframes octocat-wave{0%,100%{transform:rotate(0)}20%,60%{transform:rotate(-25deg)}40%,80%{transform:rotate(10deg)}}@media (max-width:500px){.github-corner:hover .octo-arm{animation:none}.github-corner .octo-arm{animation:octocat-wave 560ms ease-in-out}}</style>
+
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切换导航栏">
+      <span class="toggle-line toggle-line-first"></span>
+      <span class="toggle-line toggle-line-middle"></span>
+      <span class="toggle-line toggle-line-last"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <div>
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">共你云雨</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+    </div>
+  </div>
+</div>
+
+
+<nav class="site-nav">
+  
+  <ul id="menu" class="menu">
+        <li class="menu-item menu-item-home">
+
+    <a href="/" rel="section"><i class="fa fa-fw fa-home"></i>首页</a>
+
+  </li>
+        <li class="menu-item menu-item-tags">
+
+    <a href="/tags/" rel="section"><i class="fa fa-fw fa-tags"></i>标签</a>
+
+  </li>
+        <li class="menu-item menu-item-categories">
+
+    <a href="/categories/" rel="section"><i class="fa fa-fw fa-th"></i>分类</a>
+
+  </li>
+        <li class="menu-item menu-item-archives">
+
+    <a href="/archives/" rel="section"><i class="fa fa-fw fa-archive"></i>归档</a>
+
+  </li>
+  </ul>
+
+</nav>
+</div>
+    </header>
+
+    
+  <div class="back-to-top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+
+
+    <main class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+
+          <div class="content">
+            
+
+  <div class="posts-expand">
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block " lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2020/07/16/react%E5%85%A5%E9%97%A8/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="Edison">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="共你云雨">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          react入门
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              <time title="创建时间：2020-07-16 09:00:33" itemprop="dateCreated datePublished" datetime="2020-07-16T09:00:33+08:00">2020-07-16</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2020-07-19 20:46:25" itemprop="dateModified" datetime="2020-07-19T20:46:25+08:00">2020-07-19</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/react/" itemprop="url" rel="index"><span itemprop="name">react</span></a>
+                </span>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+        <p>click look more</p>
+<a id="more"></a>
+
+<h1 id="什么是react"><a href="#什么是react" class="headerlink" title="什么是react"></a>什么是react</h1><blockquote>
+<p>React 是一个声明式，高效且灵活的用于构建用户界面的 JavaScript 库。使用 React 可以将一些简短、独立的代码片段组合成复杂的 UI 界面，这些代码片段被称作“组件”。</p>
+</blockquote>
+<h1 id="react和vue的差异"><a href="#react和vue的差异" class="headerlink" title="react和vue的差异"></a>react和vue的差异</h1><h1 id="配置react开发环境"><a href="#配置react开发环境" class="headerlink" title="配置react开发环境"></a>配置react开发环境</h1><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">npx create-react-app my-project</span><br><span class="line"></span><br><span class="line">cd my-project</span><br><span class="line"></span><br><span class="line">npm start</span><br></pre></td></tr></table></figure>
+
+<h1 id="创建第一个react组件"><a href="#创建第一个react组件" class="headerlink" title="创建第一个react组件"></a>创建第一个react组件</h1><p>react脚手架会创建两个重要的文件夹：src和public。</p>
+<p>src里面有一个App.js，这就是一个组件。</p>
+<p>先来看看App.js的代码：</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> React <span class="keyword">from</span> <span class="string">'react'</span>;</span><br><span class="line"><span class="keyword">import</span> logo <span class="keyword">from</span> <span class="string">'./logo.svg'</span>;</span><br><span class="line"><span class="keyword">import</span> <span class="string">'./App.css'</span>;</span><br><span class="line"></span><br><span class="line"><span class="comment">// 组件的主体</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">export</span> <span class="keyword">default</span> App;</span><br></pre></td></tr></table></figure>
+
+<p>可以发现这个App.js被导入出去了，所以必然会有文件引入它。在index.js中有如下代码:</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> App <span class="keyword">from</span> <span class="string">'./App'</span></span><br><span class="line">ReactDOM.render(</span><br><span class="line">  &lt;React.StrictMode&gt;</span><br><span class="line">    &lt;App /&gt;</span><br><span class="line">  &lt;<span class="regexp">/React.StrictMode&gt;,</span></span><br><span class="line"><span class="regexp">  document.getElementById('root')</span></span><br><span class="line"><span class="regexp">)</span></span><br></pre></td></tr></table></figure>
+
+<p>可以发现App组件被引入后，就被ReactDom的render方法所使用，就被显示到了页面上。所以自己可以写一个hello world的组件：</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> React <span class="keyword">from</span> <span class="string">'react'</span></span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Welcome</span> <span class="keyword">extends</span> <span class="title">React</span>.<span class="title">Component</span> </span>&#123;</span><br><span class="line">  render() &#123;</span><br><span class="line">    <span class="keyword">return</span> <span class="xml"><span class="tag">&lt;<span class="name">h1</span>&gt;</span>hello world<span class="tag">&lt;/<span class="name">h1</span>&gt;</span></span></span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">export</span> <span class="keyword">default</span> Welcome</span><br></pre></td></tr></table></figure>
+
+<p>按照App的方法引入即可显示在页面上了。</p>
+<h1 id="JSX语法"><a href="#JSX语法" class="headerlink" title="JSX语法"></a>JSX语法</h1><h3 id="基本用法"><a href="#基本用法" class="headerlink" title="基本用法"></a>基本用法</h3><p>在上面可以看到一些类似于html的代码。如果在js中写html就会报错，但是react里并没有，所以这是一种新的语法，称之为JSX。</p>
+<p>下面是hello world组件。</p>
+<ul>
+<li>现在render函数中，定义一个todoList数组。</li>
+<li>接下来介绍<code>大括号</code>语法，在大括号中，可以是JS的表达式，并且react会自动计算。</li>
+<li>首先是<code>&lt;h1&gt;hello world&lt;/h1&gt;</code>。它直接显示在了页面上</li>
+<li>接下来的 todoList.map 方法外面包裹了一层大括号，表示这里会进行JS的计算，所以，它并不会被直接显示在页面，而是经过运算后，在页面显示结果</li>
+<li>后面的几个表达式也验证了这个想法。</li>
+</ul>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Welcome</span> <span class="keyword">extends</span> <span class="title">React</span>.<span class="title">Component</span> </span>&#123;</span><br><span class="line">  render() &#123;</span><br><span class="line">    <span class="keyword">const</span> todoList = [<span class="string">"react"</span>, <span class="string">"redux"</span>],</span><br><span class="line">    	  isLogin=<span class="literal">true</span></span><br><span class="line">    <span class="keyword">return</span> (</span><br><span class="line">      &lt;div&gt;</span><br><span class="line">        &lt;h1&gt;hello world&lt;<span class="regexp">/h1&gt;</span></span><br><span class="line"><span class="regexp">        &#123;isLogin===false?"yes":"no"&#125;</span></span><br><span class="line"><span class="regexp">        &lt;ul&gt;</span></span><br><span class="line"><span class="regexp">          &#123;</span></span><br><span class="line"><span class="regexp">            todoList.map(item =&gt;</span></span><br><span class="line"><span class="regexp">              &lt;li&gt;&#123;item&#125;&lt;/</span>li&gt;</span><br><span class="line">            )</span><br><span class="line">          &#125;</span><br><span class="line">        &lt;<span class="regexp">/ul&gt;</span></span><br><span class="line"><span class="regexp">        &lt;ul&gt;</span></span><br><span class="line"><span class="regexp">          &lt;li&gt;todoList[0]&lt;/</span>li&gt;</span><br><span class="line">          &lt;li&gt;&#123;todoList[<span class="number">1</span>]&#125;&lt;<span class="regexp">/li&gt;</span></span><br><span class="line"><span class="regexp">        &lt;/u</span>l&gt;</span><br><span class="line">        &#123;<span class="string">"hello world"</span>&#125;</span><br><span class="line">        &#123;<span class="number">1</span> + <span class="number">2</span> + <span class="number">3</span>&#125;</span><br><span class="line">      &lt;<span class="regexp">/div&gt;</span></span><br><span class="line"><span class="regexp">    )</span></span><br><span class="line"><span class="regexp">  &#125;</span></span><br><span class="line"><span class="regexp">&#125;</span></span><br></pre></td></tr></table></figure>
+
+<p><img src="/images/50.png" alt=""></p>
+<h3 id="深入JSX"><a href="#深入JSX" class="headerlink" title="深入JSX"></a>深入JSX</h3><p>JSX实际上是经过了babel的编译。</p>
+<p>先来看看<code>&lt;h1 className=&quot;hello&quot; style=&quot;color:#fff; font-size:40px;&quot;&gt;hello world&lt;/h1&gt;</code>会被编译成什么。可以发现它被解析成了三个参数：</p>
+<ul>
+<li>html标签</li>
+<li>html标签属性</li>
+<li>html内容</li>
+</ul>
+<p>然后传入给React的creatElement方法。当然里面也可以嵌套html代码，结构也是一样的。</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">React.createElement(<span class="string">"h1"</span>, &#123;</span><br><span class="line">  className: <span class="string">"hello"</span>,</span><br><span class="line">  style: <span class="string">"color:#fff; font-size:40px;"</span></span><br><span class="line">&#125;, <span class="string">"hello world"</span>);</span><br></pre></td></tr></table></figure>
+
+<h1 id="Props-State-Forms属性和状态"><a href="#Props-State-Forms属性和状态" class="headerlink" title="Props/State/Forms属性和状态"></a>Props/State/Forms属性和状态</h1><h2 id="Props"><a href="#Props" class="headerlink" title="Props"></a>Props</h2><ul>
+<li>组件就像一个函数，接受特定的输入（Props）,然后产生特定的输出。</li>
+<li>V=f(Props)</li>
+<li>Props是只读的，不能在组件中修改</li>
+</ul>
+<h2 id="State"><a href="#State" class="headerlink" title="State"></a>State</h2><ul>
+<li>属性是外部传入的，所以不可改变。但是状态是组件私有的，可以改变。</li>
+<li>调用 <code>this.setState()</code>更新State，也是唯一的途径。</li>
+<li><code>this.setState()</code>使用方法：里面传入一个对象参数，这个对象就是this.state<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">this</span>.setState(&#123;</span><br><span class="line">      likes: ++<span class="keyword">this</span>.state.likes</span><br><span class="line">    &#125;)</span><br></pre></td></tr></table></figure>
+
+</li>
+</ul>
+<p>看一段代码：</p>
+<p>这是很寻常的一个点击按钮触发点击事件的操作。但是由于这是一个回调函数，会造成 increaseLike 函数没有this，即为 undefined</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">&lt;Button size=&#123;Lsize&#125; type=<span class="string">"primary"</span> shape=<span class="string">"circle"</span></span><br><span class="line">	onClick=&#123;<span class="keyword">this</span>.increaseLikes&#125;&gt;</span><br><span class="line">	&#123;<span class="keyword">this</span>.state.likes&#125;</span><br><span class="line">	&lt;LikeTwoTone /&gt;</span><br><span class="line">&lt;<span class="regexp">/Button&gt;</span></span><br></pre></td></tr></table></figure>
+
+<p>解决办法：</p>
+<ul>
+<li>在constructor中使用bind给它绑定<code>this.increaseLikes = this.increaseLikes.bind(this)</code></li>
+<li>另外一种方法就是使用箭头函数<code>onClick={() =&gt; { this.increaseLikes() }}</code></li>
+</ul>
+<h2 id="生命周期"><a href="#生命周期" class="headerlink" title="生命周期"></a>生命周期</h2><p>生命周期钩子在react中可以分为三大类：</p>
+<ul>
+<li>Mounting   已插入真实 DOM</li>
+<li>Updating  正在被重新渲染</li>
+<li>Unmounting  已移出真实 DOM</li>
+</ul>
+<p>文档详情：</p>
+<p><a href="https://zh-hans.reactjs.org/docs/state-and-lifecycle.html#gatsby-focus-wrapper" target="_blank" rel="noopener">https://zh-hans.reactjs.org/docs/state-and-lifecycle.html#gatsby-focus-wrapper</a></p>
+<h2 id="Forms"><a href="#Forms" class="headerlink" title="Forms"></a>Forms</h2><ul>
+<li>有一个小技巧，<code>event.target.value</code>可以获取到表单的输入内容</li>
+<li>但是有两点需要注意</li>
+<li>因为绑定this有两种方法，如果使用在constructor中绑定，那么就直接写event就可。但是假如在触发事件中直接绑定，那么就需要在回调函数中传入参数。代码如下</li>
+</ul>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">onChange=&#123;(event) =&gt; &#123; <span class="keyword">this</span>.handleChange(event) &#125;&#125;</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>还有一个技巧，就是`event.preventDefault()</li>
+</ul>
+<h1 id="实例之留言本"><a href="#实例之留言本" class="headerlink" title="实例之留言本"></a>实例之留言本</h1><h2 id="状态提升"><a href="#状态提升" class="headerlink" title="状态提升"></a>状态提升</h2><blockquote>
+<p>当几个组件需要共享一份数据时，例如这个留言板，留言的内容在一个组件，而另外一个组件，需要使用这个数据，就产生了这个需求。所以可以把这个数据保存在最近的父组件中，就称为状态提升。</p>
+</blockquote>
+<blockquote>
+<p>react不同于vue的一点在于，数据是单向的，即从父组件开始，自上而下的传递数据</p>
+</blockquote>
+<h1 id="实例之TodoList"><a href="#实例之TodoList" class="headerlink" title="实例之TodoList"></a>实例之TodoList</h1><h1 id="Context介绍"><a href="#Context介绍" class="headerlink" title="Context介绍"></a>Context介绍</h1><h2 id="什么是context"><a href="#什么是context" class="headerlink" title="什么是context"></a>什么是context</h2><ul>
+<li>props属性是由上到下单向传递的</li>
+<li>context提供了在组件中共享此类值的方法</li>
+</ul>
+<blockquote>
+<p>来看看文档的描述：<code>Context 提供了一个无需为每层组件手动添加 props，就能在组件树间进行数据传递的方法。</code></p>
+</blockquote>
+<p>在一个典型的react应用中，数据大多是通过props从上而下进行传递的，但是队友某一些应用场景，如UI主题的切换，地区的偏好，这些属性是应用中大部分组件需要的。因此context就是为了解决这个问题而生的。<code>Context 提供了一种在组件之间共享此类值的方式，而不必显式地通过组件树的逐层传递 props。</code></p>
+<h2 id="context的弊端"><a href="#context的弊端" class="headerlink" title="context的弊端"></a>context的弊端</h2><p>乱用context会使代码的复用性变差，如果只是为了避免层层传递pops，可以使用<a href="https://react.docschina.org/docs/composition-vs-inheritance.html" target="_blank" rel="noopener">组件组合</a>去代替。</p>
+<h1 id="组件之间的传值"><a href="#组件之间的传值" class="headerlink" title="组件之间的传值"></a>组件之间的传值</h1><h1 id="react中使用css"><a href="#react中使用css" class="headerlink" title="react中使用css"></a>react中使用css</h1>
+    </div>
+
+    
+    
+    
+
+      <footer class="post-footer">
+
+        
+
+
+        
+    <div class="post-nav">
+      <div class="post-nav-item">
+    <a href="/2020/07/10/%E9%80%92%E5%BD%92/" rel="prev" title="递归">
+      <i class="fa fa-chevron-left"></i> 递归
+    </a></div>
+      <div class="post-nav-item">
+    <a href="/2020/07/16/react%E5%85%A5%E9%97%A8%E4%B9%8B%E7%BB%84%E4%BB%B6/" rel="next" title="react入门之组件">
+      react入门之组件 <i class="fa fa-chevron-right"></i>
+    </a></div>
+    </div>
+      </footer>
+    
+  </article>
+  
+  
+  
+
+  </div>
+
+
+          </div>
+          
+
+<script>
+  window.addEventListener('tabs:register', () => {
+    let { activeClass } = CONFIG.comments;
+    if (CONFIG.comments.storage) {
+      activeClass = localStorage.getItem('comments_active') || activeClass;
+    }
+    if (activeClass) {
+      let activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      if (activeTab) {
+        activeTab.click();
+      }
+    }
+  });
+  if (CONFIG.comments.storage) {
+    window.addEventListener('tabs:click', event => {
+      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+      let commentClass = event.target.classList[1];
+      localStorage.setItem('comments_active', commentClass);
+    });
+  }
+</script>
+
+        </div>
+          
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line toggle-line-first"></span>
+    <span class="toggle-line toggle-line-middle"></span>
+    <span class="toggle-line toggle-line-last"></span>
+  </div>
+
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#什么是react"><span class="nav-number">1.</span> <span class="nav-text">什么是react</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#react和vue的差异"><span class="nav-number">2.</span> <span class="nav-text">react和vue的差异</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#配置react开发环境"><span class="nav-number">3.</span> <span class="nav-text">配置react开发环境</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#创建第一个react组件"><span class="nav-number">4.</span> <span class="nav-text">创建第一个react组件</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#JSX语法"><span class="nav-number">5.</span> <span class="nav-text">JSX语法</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#基本用法"><span class="nav-number">5.0.1.</span> <span class="nav-text">基本用法</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#深入JSX"><span class="nav-number">5.0.2.</span> <span class="nav-text">深入JSX</span></a></li></ol></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Props-State-Forms属性和状态"><span class="nav-number">6.</span> <span class="nav-text">Props&#x2F;State&#x2F;Forms属性和状态</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#Props"><span class="nav-number">6.1.</span> <span class="nav-text">Props</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#State"><span class="nav-number">6.2.</span> <span class="nav-text">State</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#生命周期"><span class="nav-number">6.3.</span> <span class="nav-text">生命周期</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Forms"><span class="nav-number">6.4.</span> <span class="nav-text">Forms</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#实例之留言本"><span class="nav-number">7.</span> <span class="nav-text">实例之留言本</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#状态提升"><span class="nav-number">7.1.</span> <span class="nav-text">状态提升</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#实例之TodoList"><span class="nav-number">8.</span> <span class="nav-text">实例之TodoList</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Context介绍"><span class="nav-number">9.</span> <span class="nav-text">Context介绍</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#什么是context"><span class="nav-number">9.1.</span> <span class="nav-text">什么是context</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#context的弊端"><span class="nav-number">9.2.</span> <span class="nav-text">context的弊端</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#组件之间的传值"><span class="nav-number">10.</span> <span class="nav-text">组件之间的传值</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#react中使用css"><span class="nav-number">11.</span> <span class="nav-text">react中使用css</span></a></li></ol></div>
+      </div>
+      <!--/noindex-->
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+  <p class="site-author-name" itemprop="name">Edison</p>
+  <div class="site-description" itemprop="description"></div>
+</div>
+<div class="site-state-wrap motion-element">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">103</span>
+          <span class="site-state-item-name">日志</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+            <a href="/categories/">
+          
+        <span class="site-state-item-count">19</span>
+        <span class="site-state-item-name">分类</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+            <a href="/tags/">
+          
+        <span class="site-state-item-count">19</span>
+        <span class="site-state-item-name">标签</span></a>
+      </div>
+  </nav>
+</div>
+
+
+
+      </div>
+
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+    </main>
+
+    <footer class="footer">
+      <div class="footer-inner">
+        
+
+<div class="copyright">
+</div>
+  <div class="powered-by">山高水远  一定相见
+  </div>
+<div></div>
+<div class="theme-info">
+  <div class="powered-by"></div>
+  <span class="post-count">至今已写67.1k字</span>
+</div>
+
+        
+
+
+
+
+
+
+
+
+      </div>
+    </footer>
+  </div>
+
+  
+  <script src="/lib/anime.min.js"></script>
+  <script src="/lib/velocity/velocity.min.js"></script>
+  <script src="/lib/velocity/velocity.ui.min.js"></script>
+
+<script src="/js/utils.js"></script>
+
+<script src="/js/motion.js"></script>
+
+
+<script src="/js/schemes/pisces.js"></script>
+
+
+<script src="/js/next-boot.js"></script>
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  
+
+</body>
+</html>
