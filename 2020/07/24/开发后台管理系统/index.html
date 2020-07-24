@@ -22,18 +22,17 @@
 
   <meta name="description" content="click look more">
 <meta property="og:type" content="article">
-<meta property="og:title" content="双重v-for">
-<meta property="og:url" content="http://yoursite.com/2020/06/13/%E5%8F%8C%E9%87%8Dv-for/index.html">
+<meta property="og:title" content="一些记录">
+<meta property="og:url" content="http://yoursite.com/2020/07/24/%E5%BC%80%E5%8F%91%E5%90%8E%E5%8F%B0%E7%AE%A1%E7%90%86%E7%B3%BB%E7%BB%9F/index.html">
 <meta property="og:site_name" content="共你云雨">
 <meta property="og:description" content="click look more">
 <meta property="og:locale" content="zh_CN">
-<meta property="article:published_time" content="2020-06-13T03:05:57.701Z">
-<meta property="article:modified_time" content="2020-06-13T04:03:32.794Z">
+<meta property="article:published_time" content="2020-07-24T08:54:09.879Z">
+<meta property="article:modified_time" content="2020-07-24T13:34:07.235Z">
 <meta property="article:author" content="Edison">
-<meta property="article:tag" content="vue小技巧">
 <meta name="twitter:card" content="summary">
 
-<link rel="canonical" href="http://yoursite.com/2020/06/13/%E5%8F%8C%E9%87%8Dv-for/">
+<link rel="canonical" href="http://yoursite.com/2020/07/24/%E5%BC%80%E5%8F%91%E5%90%8E%E5%8F%B0%E7%AE%A1%E7%90%86%E7%B3%BB%E7%BB%9F/">
 
 
 <script id="page-configurations">
@@ -45,7 +44,7 @@
   };
 </script>
 
-  <title>双重v-for | 共你云雨</title>
+  <title>一些记录 | 共你云雨</title>
   
 
 
@@ -160,7 +159,7 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block " lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2020/06/13/%E5%8F%8C%E9%87%8Dv-for/">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2020/07/24/%E5%BC%80%E5%8F%91%E5%90%8E%E5%8F%B0%E7%AE%A1%E7%90%86%E7%B3%BB%E7%BB%9F/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="image" content="/images/avatar.gif">
@@ -173,7 +172,7 @@
     </span>
       <header class="post-header">
         <h1 class="post-title" itemprop="name headline">
-          双重v-for
+          一些记录
         </h1>
 
         <div class="post-meta">
@@ -184,7 +183,7 @@
               <span class="post-meta-item-text">发表于</span>
               
 
-              <time title="创建时间：2020-06-13 11:05:57 / 修改时间：12:03:32" itemprop="dateCreated datePublished" datetime="2020-06-13T11:05:57+08:00">2020-06-13</time>
+              <time title="创建时间：2020-07-24 16:54:09 / 修改时间：21:34:07" itemprop="dateCreated datePublished" datetime="2020-07-24T16:54:09+08:00">2020-07-24</time>
             </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -192,7 +191,7 @@
               </span>
               <span class="post-meta-item-text">分类于</span>
                 <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/vue/" itemprop="url" rel="index"><span itemprop="name">vue</span></a>
+                  <a href="/categories/vue-elementUI%E7%9A%84%E5%BC%80%E5%8F%91%E5%AE%9E%E6%93%8D/" itemprop="url" rel="index"><span itemprop="name">vue+elementUI的开发实操</span></a>
                 </span>
             </span>
 
@@ -210,26 +209,61 @@
         <p>click look more</p>
 <a id="more"></a>
 
-<blockquote>
-<p>有这么一个需求，获取到的后台数据（数组对象类型）需要渲染到多级菜单中。</p>
-</blockquote>
-<p>这就要使用到v-for循环，并且是双重的。那么怎么办呢？</p>
-<p>由于数据是从父组件中传过来的，所以子组件需要这样获取：</p>
-<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">props: &#123;</span><br><span class="line">  asideMenuList: <span class="built_in">Array</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<p>然后首先循环一级菜单，由于二级菜单是包含在一级菜单中的，所以先不管，先将一级菜单渲染出来。</p>
-<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">el-submenu</span> <span class="attr">v-for</span>=<span class="string">"(item,index) in asideMenuList"</span> <span class="attr">:key</span>=<span class="string">"index"</span> <span class="attr">index</span>=<span class="string">"index"</span>&gt;</span></span><br></pre></td></tr></table></figure>
-
-<p>那么二级菜单怎么弄呢？难道要将asideMenuList拆分出来吗？这样就麻烦了，由于item是每一个一级菜单的父元素，所以，可以直接将item拿过来用。</p>
-<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">el-menu-item</span> <span class="attr">v-for</span>=<span class="string">"(itemChild,index) in item.children"</span> <span class="attr">:key</span>=<span class="string">"index"</span> <span class="attr">index</span>=<span class="string">"1-1"</span>&gt;</span></span><br></pre></td></tr></table></figure>
-
-<p>总代码：</p>
-<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">&lt;!-- index 唯一标志 --&gt;</span></span><br><span class="line"><span class="comment">&lt;!-- 一级菜单 --&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">el-submenu</span> <span class="attr">v-for</span>=<span class="string">"(item,index) in asideMenuList"</span> <span class="attr">:key</span>=<span class="string">"index"</span> <span class="attr">index</span>=<span class="string">"index"</span>&gt;</span></span><br><span class="line">  <span class="comment">&lt;!-- 一级菜单模板区域 --&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">template</span> <span class="attr">slot</span>=<span class="string">"title"</span>&gt;</span></span><br><span class="line">    <span class="comment">&lt;!-- 一级菜单的icon和text --&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">i</span> <span class="attr">class</span>=<span class="string">"el-icon-location"</span>&gt;</span><span class="tag">&lt;/<span class="name">i</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">span</span>&gt;</span>&#123;&#123;item.authName&#125;&#125;<span class="tag">&lt;/<span class="name">span</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;/<span class="name">template</span>&gt;</span></span><br><span class="line">  <span class="comment">&lt;!-- 二级菜单 --&gt;</span></span><br><span class="line">  <span class="comment">&lt;!-- 这里想了很久，因为item取出来也是一个数组，只是item有5个</span></span><br><span class="line"><span class="comment">  如果直接 in item 就会渲染5次</span></span><br><span class="line"><span class="comment">  但是item中的children才是子菜单需要的</span></span><br><span class="line"><span class="comment">  所以直接 in item.children 就可以--&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">el-menu-item</span> <span class="attr">v-for</span>=<span class="string">"(itemChild,index) in item.children"</span> <span class="attr">:key</span>=<span class="string">"index"</span> <span class="attr">index</span>=<span class="string">"1-1"</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">template</span> <span class="attr">slot</span>=<span class="string">"title"</span>&gt;</span></span><br><span class="line">      <span class="comment">&lt;!-- 二级菜单的icon和text --&gt;</span></span><br><span class="line">      <span class="tag">&lt;<span class="name">i</span> <span class="attr">class</span>=<span class="string">"el-icon-location"</span>&gt;</span><span class="tag">&lt;/<span class="name">i</span>&gt;</span></span><br><span class="line">      <span class="tag">&lt;<span class="name">span</span>&gt;</span>&#123;&#123;itemChild.authName&#125;&#125;<span class="tag">&lt;/<span class="name">span</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;/<span class="name">template</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;/<span class="name">el-menu-item</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">el-submenu</span>&gt;</span></span><br></pre></td></tr></table></figure>
-
-<h1 id="需要注意"><a href="#需要注意" class="headerlink" title="需要注意"></a>需要注意</h1><ol>
-<li>上面的代码key都用了index，实际上如果数据里面有id的话，最好使用id。这里就不改了。</li>
-<li>elementUI的menu中的index需要字符串，但是id为数值，可以直接 id+’’就能转换为字符串</li>
+<h1 id="项目的初始化"><a href="#项目的初始化" class="headerlink" title="项目的初始化"></a>项目的初始化</h1><ol>
+<li>安装vue的脚手架工具，具体见vue文档</li>
+<li>通过ui的形式创建一个项目<code>vue ui</code></li>
+<li>elementUI</li>
 </ol>
+<ul>
+<li>安装<code>npm install element-ui -S</code></li>
+<li>按需引入elementUI<code>npm install babel-plugin-component -D</code></li>
+<li>引入element样式<code>import &#39;element-ui/lib/theme-chalk/index.css&#39;</code></li>
+<li>修改babel.config.js<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">module</span>.exports = &#123;</span><br><span class="line">  presets: [</span><br><span class="line">    <span class="string">'@vue/cli-plugin-babel/preset'</span></span><br><span class="line">  ],</span><br><span class="line">  plugins: [</span><br><span class="line">    [</span><br><span class="line">      <span class="string">'component'</span>,</span><br><span class="line">      &#123;</span><br><span class="line">        libraryName: <span class="string">'element-ui'</span>,</span><br><span class="line">        styleLibraryName: <span class="string">'theme-chalk'</span></span><br><span class="line">      &#125;</span><br><span class="line">    ]</span><br><span class="line">  ]</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+<ol start="4">
+<li>配置axios<code>npm install axios</code></li>
+</ol>
+<h1 id="登录退出功能"><a href="#登录退出功能" class="headerlink" title="登录退出功能"></a>登录退出功能</h1><ul>
+<li>业务流程</li>
+</ul>
+<ol>
+<li>登录页面输入账号密码</li>
+<li>调用后端接口进行验证</li>
+<li>通过验证后，根据后台响应跳转到项目的主页</li>
+</ol>
+<ul>
+<li>技术点</li>
+</ul>
+<ol>
+<li>http是没有状态的</li>
+<li>通过cookie在<code>客户端</code>记录状态</li>
+<li>通过session在<code>服务端</code>记录状态</li>
+<li>通过token<code>维持</code>状态</li>
+</ol>
+<ul>
+<li>需要注意的</li>
+</ul>
+<ol>
+<li>如果存在跨域，那么使用token</li>
+<li>如果不存在跨域问题，则使用cookie、session</li>
+</ol>
+<h2 id="token"><a href="#token" class="headerlink" title="token"></a>token</h2><p>token具体是怎么操作的呢？</p>
+<ol>
+<li>客户端先输入账号密码</li>
+<li>如果通过服务端的验证，那么就生成一个token值返回给客户端</li>
+<li>客户端在接收到了之后，就会存储下来</li>
+<li>在后续，客户端所有的请求都会携带这个token值</li>
+<li>服务端会根据这个token值去判断是否通过请求</li>
+</ol>
+<h2 id="自动重定向路由"><a href="#自动重定向路由" class="headerlink" title="自动重定向路由"></a>自动重定向路由</h2><p>由于登录页需要进入网站就显示，所以需要使用到路由重定向。</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 只要访问根路径，就跳转到login页面</span></span><br><span class="line">  &#123;</span><br><span class="line">    path: <span class="string">'/'</span>,</span><br><span class="line">    redirect: <span class="string">'login'</span></span><br><span class="line">  &#125;</span><br></pre></td></tr></table></figure>
+
+<h2 id="less"><a href="#less" class="headerlink" title="less"></a>less</h2><p>如果安装插件，less无法正常运行。<code>cnpm install less less-loader -D</code></p>
+<h2 id="elementui遇到的坑"><a href="#elementui遇到的坑" class="headerlink" title="elementui遇到的坑"></a>elementui遇到的坑</h2><ul>
+<li>让输入框实现密码的效果，即小圆点。在input中输入<code>type=&quot;password&quot;</code></li>
+<li>如果要做表单输入验证，即添加rules，那么rules的名字一定要和v-model绑定的数据名一样，不然会发生一个bug。</li>
+</ul>
 
     </div>
 
@@ -238,9 +272,6 @@
     
 
       <footer class="post-footer">
-          <div class="post-tags">
-              <a href="/tags/vue%E5%B0%8F%E6%8A%80%E5%B7%A7/" rel="tag"># vue小技巧</a>
-          </div>
 
         
 
@@ -248,13 +279,10 @@
         
     <div class="post-nav">
       <div class="post-nav-item">
-    <a href="/2020/06/13/%E9%80%9A%E8%BF%87API%E8%8E%B7%E5%8F%96%E6%95%B0%E6%8D%AE%E4%BB%A5%E5%8F%8A%E4%BD%BF%E7%94%A8/" rel="prev" title="通过API获取数据以及使用">
-      <i class="fa fa-chevron-left"></i> 通过API获取数据以及使用
+    <a href="/2020/07/24/%E9%9D%A2%E8%AF%95%E9%A2%98%EF%BC%883%EF%BC%89/" rel="prev" title="面试（3）">
+      <i class="fa fa-chevron-left"></i> 面试（3）
     </a></div>
-      <div class="post-nav-item">
-    <a href="/2020/06/13/%E5%88%97%E8%A1%A8%E5%BE%AA%E7%8E%AF%E4%BF%AE%E6%94%B9%E5%85%B6%E4%B8%AD%E7%9A%84icon/" rel="next" title="v-for修改固定渲染值">
-      v-for修改固定渲染值 <i class="fa fa-chevron-right"></i>
-    </a></div>
+      <div class="post-nav-item"></div>
     </div>
       </footer>
     
@@ -314,7 +342,7 @@
 
       <!--noindex-->
       <div class="post-toc-wrap sidebar-panel">
-          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#需要注意"><span class="nav-number">1.</span> <span class="nav-text">需要注意</span></a></li></ol></div>
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#项目的初始化"><span class="nav-number">1.</span> <span class="nav-text">项目的初始化</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#登录退出功能"><span class="nav-number">2.</span> <span class="nav-text">登录退出功能</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#token"><span class="nav-number">2.1.</span> <span class="nav-text">token</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#自动重定向路由"><span class="nav-number">2.2.</span> <span class="nav-text">自动重定向路由</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#less"><span class="nav-number">2.3.</span> <span class="nav-text">less</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#elementui遇到的坑"><span class="nav-number">2.4.</span> <span class="nav-text">elementui遇到的坑</span></a></li></ol></li></ol></div>
       </div>
       <!--/noindex-->
 
