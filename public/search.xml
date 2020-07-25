@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <search>
   <entry>
-    <title>一些记录</title>
+    <title>开发后台管理系统的一些记录</title>
     <url>/2020/07/24/%E5%BC%80%E5%8F%91%E5%90%8E%E5%8F%B0%E7%AE%A1%E7%90%86%E7%B3%BB%E7%BB%9F/</url>
     <content><![CDATA[<p>click look more</p>
 <a id="more"></a>
@@ -101,10 +101,85 @@
 <li>所以要使用<code>this.$refs.自己定义的表单的ref</code>去获取到表单的元素</li>
 <li>在调用resetFields方法即可</li>
 </ol>
-<ul>
-<li></li>
+<h1 id="主页"><a href="#主页" class="headerlink" title="主页"></a>主页</h1><h2 id="布局"><a href="#布局" class="headerlink" title="布局"></a>布局</h2><p>使用Container组件，需要引入4个小组件：Container、Header、Aside、Main</p>
+<h2 id="头部的布局"><a href="#头部的布局" class="headerlink" title="头部的布局"></a>头部的布局</h2><ul>
+<li>logo部分使用img标签<code>&lt;img src=&quot;../assets/logo.png&quot; alt /&gt;</code></li>
+<li>垂直居中flex布局就完事了</li>
 </ul>
-]]></content>
+<h2 id="菜单栏"><a href="#菜单栏" class="headerlink" title="菜单栏"></a>菜单栏</h2><ul>
+<li>菜单为二级菜单，可以折叠</li>
+<li>使用了NavMenu组件，需要引入3个小组件：Menu、SubMenu、MenuItem</li>
+</ul>
+<h2 id="菜单栏调用API接口"><a href="#菜单栏调用API接口" class="headerlink" title="菜单栏调用API接口"></a>菜单栏调用API接口</h2><ul>
+<li>有一点需要注意，在这种非登录页的API都需要权限，所以这里调用API的时候都需要使用到token值。<code>做法：在请求头中使用Authorization字段提供token令牌</code></li>
+</ul>
+<h2 id="为axios添加拦截器"><a href="#为axios添加拦截器" class="headerlink" title="为axios添加拦截器"></a>为axios添加拦截器</h2><p>接上一步，因为需要使用到token，所以肯定在请求之前要有一个拦截，保证其拥有获取数据的权限。</p>
+<figure class="highlight js"><table><tr><td class="code"><pre><span class="line"><span class="comment">//axios拦截器</span></span><br><span class="line">axios.interceptors.request.use(<span class="function"><span class="params">config</span>=&gt;</span>&#123;</span><br><span class="line">	<span class="comment">//为请求头对象添加token验证的Authorization字段</span></span><br><span class="line">	config.headers.Authorization=<span class="built_in">window</span>.sessionStorage.getItem(<span class="string">"token"</span>)</span><br><span class="line">	<span class="keyword">return</span> config</span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure>
+
+<h2 id="解决菜单栏下拉时全部展开的问题"><a href="#解决菜单栏下拉时全部展开的问题" class="headerlink" title="解决菜单栏下拉时全部展开的问题"></a>解决菜单栏下拉时全部展开的问题</h2><p>在 el-submenu 组件中，有一个 index 值是一个唯一标识符。由于 v-for 渲染出来的每一个 index 都是一样的，所以需要动态绑定一个唯一值。由于后端获取的数据一般都有一个 id 值，所以可以使用这个 id 值</p>
+<p>由于 index 只接收字符串，而 item.id 是一个数值，所以最简单的办法就是在后面添加一个空的字符串区转换数据类型</p>
+<figure class="highlight html"><table><tr><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">el-submenu</span> <span class="attr">v-for</span>=<span class="string">"item in menuList"</span> <span class="attr">:key</span>=<span class="string">"item.id"</span> <span class="attr">:index</span>=<span class="string">"item.id+''"</span>&gt;</span></span><br></pre></td></tr></table></figure>
+
+<h2 id="渲染二级菜单"><a href="#渲染二级菜单" class="headerlink" title="渲染二级菜单"></a>渲染二级菜单</h2><p>一级菜单就是常规操作，但是二级菜单不一样，它所依赖的对象不是 data 中定义的。而是一级菜单</p>
+<p>比如一级菜单<code>item in menuList</code>；二级菜单就是<code>subItem in item.children</code></p>
+<h2 id="自定义icon"><a href="#自定义icon" class="headerlink" title="自定义icon"></a>自定义icon</h2><p>由于菜单是循环渲染出来的，而icon图标又是死的，所以不能直接改动icon的样式，不然所有的一级菜单icon都是一个样子。所以需要自定义图标。</p>
+<figure class="highlight js"><table><tr><td class="code"><pre><span class="line"><span class="comment">//在data中自定义一个icons的对象，里面包含一级菜单需要用到的icon</span></span><br><span class="line">iconsObj: &#123;</span><br><span class="line">	<span class="comment">// 每个菜单项都有一个唯一的id值</span></span><br><span class="line">	<span class="comment">// 所以可以使用id作为键，icon作为值</span></span><br><span class="line">	<span class="comment">// 需要注意，前面的键，是后端返回的一级菜单数据的id值</span></span><br><span class="line">	<span class="number">125</span>: <span class="string">'el-icon-s-custom'</span>,</span><br><span class="line">	<span class="number">103</span>: <span class="string">'el-icon-box'</span>,</span><br><span class="line">	<span class="number">101</span>: <span class="string">'el-icon-shopping-bag-1'</span>,</span><br><span class="line">	<span class="number">102</span>: <span class="string">'el-icon-s-order'</span>,</span><br><span class="line">	<span class="number">145</span>: <span class="string">'el-icon-s-marketing'</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>在定义好了icons的数据之后怎么使用呢？这就需要用到动态绑定。<br>原先的代码为：<code>&lt;i class=&quot;el-icon-xxx&quot;&gt;&lt;/i&gt;</code>。<br>修改为：<code>&lt;i :class=&quot;iconsObj[item.id]&quot;&gt;&lt;/i&gt;</code>这里的class前面加上冒号，意思是其现在为一个动态绑定的数据，然后直接使用上面定义好的iconsObj,通过[]形式取到icon的值。</p>
+<h2 id="UI坑"><a href="#UI坑" class="headerlink" title="UI坑"></a>UI坑</h2><ul>
+<li>在elementUI中，很多组件都有一些属性，比如说Menu的collapse等，他们都是布尔值，如果直接在标签中写<code>collapse=&quot;false&quot;</code>，就会报错，因为此时false只是一个字符串，要想使它生效，就要在前面加一个冒号，表示为动态绑定值<code>:collapse=&quot;false&quot;</code></li>
+<li>关于动态绑定值在菜单栏的折叠与展开也用到了，因为 aside 有一个写死的宽度，但是这个宽度要根据是否折叠来判断宽度为多少。比如折叠了就64px，反之200px。代码：<code>&lt;el-aside :width=&quot;isCollapse?&#39;64px&#39;:&#39;200px&#39;&quot;&gt;</code></li>
+</ul>
+<h2 id="嵌套组件"><a href="#嵌套组件" class="headerlink" title="嵌套组件"></a>嵌套组件</h2><p>有一个需求是，访问home页，在没有点击侧边栏的时候就直接跳转到welcome路由，然后会在main区域显示一个welcome。</p>
+<p>首先定义一个children子路由，然后通过redirect重定向到welcome路由，就会显示welcome组件，但是，welcome只是一个占位符，所以main中就显示了welcome的组件内容。</p>
+<figure class="highlight js"><table><tr><td class="code"><pre><span class="line">&#123;</span><br><span class="line">   path: <span class="string">'/home'</span>,</span><br><span class="line">   component: Home,</span><br><span class="line">   redirect: <span class="string">'/welcome'</span>,</span><br><span class="line">   children: [</span><br><span class="line">     &#123;</span><br><span class="line">       path: <span class="string">'/welcome'</span>,</span><br><span class="line">       component: Welcome</span><br><span class="line">     &#125;</span><br><span class="line">   ]</span><br><span class="line"> &#125;</span><br></pre></td></tr></table></figure>
+
+<h2 id="菜单栏的路由链接"><a href="#菜单栏的路由链接" class="headerlink" title="菜单栏的路由链接"></a>菜单栏的路由链接</h2><p>需求是点击菜单栏的选项，main区域就会显示当前菜单所对应的组件内容。在以前就路由导航和link区跳转路由，但是由于使用了elementUI，有一个简单的方法。</p>
+<p>router：<code>是否使用 vue-router 的模式，启用该模式会在激活导航时以 index 作为 path 进行路由跳转</code></p>
+<p>既然开启了vue-router模式，那么跳转的路由就会是一个id值，为一个数值。但是路由不能这样，所以，要把二级菜单的index值替换成后端返回的path值。<code>:index=&quot;&#39;/&#39;+subItem.path+&#39;&#39;&quot;</code></p>
+<h1 id="用户列表"><a href="#用户列表" class="headerlink" title="用户列表"></a>用户列表</h1><p>就是一个展示用户列表的组件。并且显示在main区域。</p>
+<p>页面：</p>
+<ol>
+<li>顶部是面包屑导航</li>
+<li>主体内容用卡片包裹起来</li>
+<li>卡片中又有搜索框，按钮，表格展示的用户列表、跳转页面栏</li>
+</ol>
+<p>使用到的组件：</p>
+<ul>
+<li>面包屑导航：Breadcrumb、BreadcrumbItem</li>
+<li>搜索框、按钮：Input、Button</li>
+<li>表格：Table、TableColumn</li>
+</ul>
+<h2 id="根据路由展示组件"><a href="#根据路由展示组件" class="headerlink" title="根据路由展示组件"></a>根据路由展示组件</h2><p>之前已经嵌套了welcome的组件，现在还需要继续增加子菜单的路由，直接在children中写就行。之后其他的组件以此类推。</p>
+<figure class="highlight js"><table><tr><td class="code"><pre><span class="line">&#123;</span><br><span class="line">   path: <span class="string">'/home'</span>,</span><br><span class="line">   component: Home,</span><br><span class="line">   redirect: <span class="string">'/welcome'</span>,</span><br><span class="line">   children: [</span><br><span class="line">     &#123;</span><br><span class="line">       path: <span class="string">'/welcome'</span>,</span><br><span class="line">       component: Welcome</span><br><span class="line">     &#125;,</span><br><span class="line">     &#123;</span><br><span class="line">       path: <span class="string">'/users'</span>,</span><br><span class="line">       component: Users</span><br><span class="line">     &#125;</span><br><span class="line">   ]</span><br><span class="line"> &#125;</span><br></pre></td></tr></table></figure>
+
+<h2 id="二级菜单不高亮的bug"><a href="#二级菜单不高亮的bug" class="headerlink" title="二级菜单不高亮的bug"></a>二级菜单不高亮的bug</h2><p>在前面的做完后，发现点击二级菜单没有高亮了。</p>
+<p>使用default-active解决。default-active:<code>当前激活菜单的 index</code></p>
+<p>解决思路：</p>
+<ol>
+<li>首先给二级菜单绑定事件，让其被点击的时候，在sessionStorage中存储下这个路由的值。</li>
+<li>由于default-active是根据当前激活菜单的index值去判断是否高亮的。所以，将点击事件的参数写为二级菜单的index值。</li>
+<li>将index值传入函数后，就通过sessionStorage去存储这个index值。同时将data中定义好的activePath赋值<code>this.activePath=activePath</code>。由于menu中的default-active已经动态绑定了activePath的值，所以可以被高亮。</li>
+<li>接着在钩子函数created中将activePath的值从sessionStorage中取出来<code>this.activePath = window.sessionStorage.getItem(&#39;activePath&#39;)</code>。这时即使刷新了页面，还是会保持高亮。</li>
+</ol>
+<h2 id="样式的位置"><a href="#样式的位置" class="headerlink" title="样式的位置"></a>样式的位置</h2><ul>
+<li>如果组件要覆盖自己的默认样式，就要写到全局样式文件中。</li>
+<li>在重置box-shadow时，遇到了不生效的问题，此时可以使用!important<code>box-shadow: 0 1px 1px rgba(0, 0, 0, 0.15) !important;</code></li>
+</ul>
+<h2 id="get请求带参数写法"><a href="#get请求带参数写法" class="headerlink" title="get请求带参数写法"></a>get请求带参数写法</h2><p>api接口规定了一个get请求，必须携带三个参数，之前都是没有参数的。</p>
+<figure class="highlight js"><table><tr><td class="code"><pre><span class="line"><span class="comment">// 常规的async await</span></span><br><span class="line">   <span class="keyword">async</span> getUserList() &#123;</span><br><span class="line">    <span class="comment">//不同的是，这次类似于post请求，在接口后带了一个对象。</span></span><br><span class="line">     <span class="keyword">const</span> &#123; <span class="attr">data</span>: res &#125; = <span class="keyword">await</span> <span class="keyword">this</span>.$http.get(<span class="string">'users'</span>, &#123;</span><br><span class="line">     	<span class="comment">//params的值就是this.queryInfo</span></span><br><span class="line">     	<span class="comment">//queryInfo定义在data数据中</span></span><br><span class="line">       params: <span class="keyword">this</span>.queryInfo</span><br><span class="line">     &#125;)</span><br><span class="line">     <span class="built_in">console</span>.log(res)</span><br><span class="line">   &#125;</span><br></pre></td></tr></table></figure>
+
+<h2 id="数据的改造"><a href="#数据的改造" class="headerlink" title="数据的改造"></a>数据的改造</h2><p>表格中需要渲染的状态是一个布尔值，但是要渲染成开关的样式，所以就涉及到了数据的改造。</p>
+<ul>
+<li>由于状态的数据是每一行都存在的，所以，只要获取到这一行的数据，就可以找到状态。</li>
+<li>这里需要使用到<code>作用域插槽</code></li>
+<li>通过scope.row就可以获取到当前行的所有数据。</li>
+<li>然后将scoped绑定到switch组件上就可。</li>
+<li>在指定了作用域插槽后，会将prop覆盖掉</li>
+</ul>
+<figure class="highlight html"><table><tr><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">el-table-column</span> <span class="attr">label</span>=<span class="string">"状态"</span> <span class="attr">prop</span>=<span class="string">"mg_state"</span>&gt;</span></span><br><span class="line">	<span class="tag">&lt;<span class="name">template</span> <span class="attr">v-slot</span>=<span class="string">"scope"</span>&gt;</span></span><br><span class="line">		<span class="tag">&lt;<span class="name">el-switch</span> <span class="attr">v-model</span>=<span class="string">"scope.row.mg_state"</span>&gt;</span><span class="tag">&lt;/<span class="name">el-switch</span>&gt;</span></span><br><span class="line">	<span class="tag">&lt;/<span class="name">template</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">el-table-column</span>&gt;</span></span><br></pre></td></tr></table></figure>
+
+<h2 id=""><a href="#" class="headerlink" title=""></a></h2>]]></content>
       <categories>
         <category>vue+elementUI的开发实操</category>
       </categories>
