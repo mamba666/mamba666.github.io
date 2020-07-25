@@ -28,7 +28,7 @@
 <meta property="og:description" content="click look more">
 <meta property="og:locale" content="zh_CN">
 <meta property="article:published_time" content="2020-07-24T08:54:09.879Z">
-<meta property="article:modified_time" content="2020-07-24T13:34:07.235Z">
+<meta property="article:modified_time" content="2020-07-25T02:19:54.848Z">
 <meta property="article:author" content="Edison">
 <meta name="twitter:card" content="summary">
 
@@ -181,10 +181,16 @@
                 <i class="fa fa-calendar-o"></i>
               </span>
               <span class="post-meta-item-text">发表于</span>
-              
 
-              <time title="创建时间：2020-07-24 16:54:09 / 修改时间：21:34:07" itemprop="dateCreated datePublished" datetime="2020-07-24T16:54:09+08:00">2020-07-24</time>
+              <time title="创建时间：2020-07-24 16:54:09" itemprop="dateCreated datePublished" datetime="2020-07-24T16:54:09+08:00">2020-07-24</time>
             </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2020-07-25 10:19:54" itemprop="dateModified" datetime="2020-07-25T10:19:54+08:00">2020-07-25</time>
+              </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
                 <i class="fa fa-folder-o"></i>
@@ -260,9 +266,52 @@
 <figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 只要访问根路径，就跳转到login页面</span></span><br><span class="line">  &#123;</span><br><span class="line">    path: <span class="string">'/'</span>,</span><br><span class="line">    redirect: <span class="string">'login'</span></span><br><span class="line">  &#125;</span><br></pre></td></tr></table></figure>
 
 <h2 id="less"><a href="#less" class="headerlink" title="less"></a>less</h2><p>如果安装插件，less无法正常运行。<code>cnpm install less less-loader -D</code></p>
+<h2 id="登录"><a href="#登录" class="headerlink" title="登录"></a>登录</h2><p>在发起登录时，不应该直接请求后端，而是应该在前端实现<code>预验证</code></p>
+<p>这里使用validate方法（对整个表单进行校验的方法，参数为一个回调函数。该回调函数会在校验结束后被调用，并传入两个参数：是否校验成功和未通过校验的字段。若不传入回调函数，则会返回一个 promise）</p>
+<p>这个方法会返回一个布尔值，这个布尔值是根据之前的rules是否成功来判断的。如果rules通过，返回true，反之返回false。然后根据布尔值去进行下一步的操作</p>
+<h2 id="axios的优化"><a href="#axios的优化" class="headerlink" title="axios的优化"></a>axios的优化</h2><ol>
+<li>先全局引入axios<code>import axios from &quot;axios&quot;</code></li>
+<li>给axios一个基准地址<code>axios.defaults.baseURL = &#39;http://127.0.0.1:8888/api/private/v1/&#39;</code></li>
+<li>将axios挂载到vue原型，方便调用<code>Vue.prototype.$http = axios</code></li>
+<li>由于axios返回的结果是一个promise对象，所以可以使用async await。<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">this</span>.$refs.loginRef.validate(<span class="keyword">async</span> valid =&gt; &#123;</span><br><span class="line">	<span class="keyword">if</span> (valid) &#123;</span><br><span class="line">		<span class="keyword">const</span> result = <span class="keyword">await</span> <span class="keyword">this</span>.$http.post(<span class="string">'login'</span>, <span class="keyword">this</span>.form)</span><br><span class="line">		<span class="built_in">console</span>.log(result)</span><br><span class="line">	&#125;</span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure></li>
+<li>最后result返回的是axios封装好了的一个对象，但是我们只需要后端返回的data对象，所以可以使用解构赋值<code>const {data:res} = await this.$http.post(&#39;login&#39;, this.form)</code>。意思是将await出来的数据里面的data赋值给res。</li>
+</ol>
+<h2 id="弹框提示"><a href="#弹框提示" class="headerlink" title="弹框提示"></a>弹框提示</h2><p>message组件有一点不同，需要全局挂载，类似于之前的axios,在导入组件之后，写如下代码：<br><code>Vue.prototype.$message=Message</code></p>
+<h2 id="登录成功之后"><a href="#登录成功之后" class="headerlink" title="登录成功之后"></a>登录成功之后</h2><p>技术点：</p>
+<ol>
+<li>将登录成功之后的token，保存在客户端的sessionStorage中</li>
+</ol>
+<ul>
+<li>项目中所有其他的接口，都必须在登录成功之后才能访问</li>
+<li>token只应该在当前的网站打开期间生效，所以保存在sessionStorage中</li>
+<li>localStorage是长久的存储机制，而sessionStorage是会话其间生效的机制</li>
+</ul>
+<ol start="2">
+<li>通过编程式导航，跳转到后台的主页 /home</li>
+<li>代码如下</li>
+</ol>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">window</span>.sessionStorage.setItem(<span class="string">'token'</span>, res.data.token)</span><br><span class="line"><span class="keyword">this</span>.$router.push(<span class="string">'/home'</span>)</span><br></pre></td></tr></table></figure>
+
+<h2 id="路由导航守卫"><a href="#路由导航守卫" class="headerlink" title="路由导航守卫"></a>路由导航守卫</h2><p>通过路由导航守卫控制页面的访问权限</p>
+<p>需求：<code>由于所有接口都需要登录，所以访问任何页面如果没有登录，那么都是没有权限的。如果没有权限，那么一旦访问需要权限的页面，就自动跳转到登录页</code></p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//to:将要访问  from:从哪儿来   next:放行函数</span></span><br><span class="line"><span class="comment">//为路由对象添加beforeEach导航守卫</span></span><br><span class="line">router.beforeEach(<span class="function">(<span class="params">to,<span class="keyword">from</span>,next</span>)=&gt;</span>&#123;</span><br><span class="line">	<span class="comment">//如果访问首登录页，直接放行</span></span><br><span class="line">	<span class="keyword">if</span>(to.path===<span class="string">"/login"</span>) <span class="keyword">return</span> next()</span><br><span class="line">	<span class="comment">//从sessionStorage中获取token值</span></span><br><span class="line">	<span class="keyword">const</span> tokenStr=<span class="built_in">window</span>.sessionStorage.getItem(<span class="string">"token"</span>)</span><br><span class="line">	<span class="comment">//如果没有token，则强制跳转到登录页</span></span><br><span class="line">	<span class="keyword">if</span>(!tokenStr) <span class="keyword">return</span> next(<span class="string">"/login"</span>)</span><br><span class="line">	next()</span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure>
+
+<h2 id="退出登录"><a href="#退出登录" class="headerlink" title="退出登录"></a>退出登录</h2><p>只需要销毁token即可</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//清空token</span></span><br><span class="line"><span class="built_in">window</span>.sessionStorage.clear()</span><br><span class="line"><span class="comment">//跳转登录页</span></span><br><span class="line"><span class="keyword">this</span>.$router.push(<span class="string">"/login"</span>)</span><br></pre></td></tr></table></figure>
+
 <h2 id="elementui遇到的坑"><a href="#elementui遇到的坑" class="headerlink" title="elementui遇到的坑"></a>elementui遇到的坑</h2><ul>
 <li>让输入框实现密码的效果，即小圆点。在input中输入<code>type=&quot;password&quot;</code></li>
 <li>如果要做表单输入验证，即添加rules，那么rules的名字一定要和v-model绑定的数据名一样，不然会发生一个bug。</li>
+<li>重置按钮的使用。</li>
+</ul>
+<ol>
+<li>使用resetFields方法（对整个表单进行重置，将所有字段值重置为初始值并移除校验结果）</li>
+<li>在按钮上绑定一个事件，但是要注意，这个事件触发时，this指向整个组件</li>
+<li>所以要使用<code>this.$refs.自己定义的表单的ref</code>去获取到表单的元素</li>
+<li>在调用resetFields方法即可</li>
+</ol>
+<ul>
+<li></li>
 </ul>
 
     </div>
@@ -342,7 +391,7 @@
 
       <!--noindex-->
       <div class="post-toc-wrap sidebar-panel">
-          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#项目的初始化"><span class="nav-number">1.</span> <span class="nav-text">项目的初始化</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#登录退出功能"><span class="nav-number">2.</span> <span class="nav-text">登录退出功能</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#token"><span class="nav-number">2.1.</span> <span class="nav-text">token</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#自动重定向路由"><span class="nav-number">2.2.</span> <span class="nav-text">自动重定向路由</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#less"><span class="nav-number">2.3.</span> <span class="nav-text">less</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#elementui遇到的坑"><span class="nav-number">2.4.</span> <span class="nav-text">elementui遇到的坑</span></a></li></ol></li></ol></div>
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#项目的初始化"><span class="nav-number">1.</span> <span class="nav-text">项目的初始化</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#登录退出功能"><span class="nav-number">2.</span> <span class="nav-text">登录退出功能</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#token"><span class="nav-number">2.1.</span> <span class="nav-text">token</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#自动重定向路由"><span class="nav-number">2.2.</span> <span class="nav-text">自动重定向路由</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#less"><span class="nav-number">2.3.</span> <span class="nav-text">less</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#登录"><span class="nav-number">2.4.</span> <span class="nav-text">登录</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#axios的优化"><span class="nav-number">2.5.</span> <span class="nav-text">axios的优化</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#弹框提示"><span class="nav-number">2.6.</span> <span class="nav-text">弹框提示</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#登录成功之后"><span class="nav-number">2.7.</span> <span class="nav-text">登录成功之后</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#路由导航守卫"><span class="nav-number">2.8.</span> <span class="nav-text">路由导航守卫</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#退出登录"><span class="nav-number">2.9.</span> <span class="nav-text">退出登录</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#elementui遇到的坑"><span class="nav-number">2.10.</span> <span class="nav-text">elementui遇到的坑</span></a></li></ol></li></ol></div>
       </div>
       <!--/noindex-->
 
@@ -398,7 +447,7 @@
 <div></div>
 <div class="theme-info">
   <div class="powered-by"></div>
-  <span class="post-count">至今已写68.6k字</span>
+  <span class="post-count">至今已写69.4k字</span>
 </div>
 
         
