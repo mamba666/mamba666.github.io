@@ -149,6 +149,9 @@
 <li>面包屑导航：Breadcrumb、BreadcrumbItem</li>
 <li>搜索框、按钮：Input、Button</li>
 <li>表格：Table、TableColumn</li>
+<li>文字提示：Tooltip</li>
+<li>分页：Pagination</li>
+<li>对话框：Dialog</li>
 </ul>
 <h2 id="根据路由展示组件"><a href="#根据路由展示组件" class="headerlink" title="根据路由展示组件"></a>根据路由展示组件</h2><p>之前已经嵌套了welcome的组件，现在还需要继续增加子菜单的路由，直接在children中写就行。之后其他的组件以此类推。</p>
 <figure class="highlight js"><table><tr><td class="code"><pre><span class="line">&#123;</span><br><span class="line">   path: <span class="string">'/home'</span>,</span><br><span class="line">   component: Home,</span><br><span class="line">   redirect: <span class="string">'/welcome'</span>,</span><br><span class="line">   children: [</span><br><span class="line">     &#123;</span><br><span class="line">       path: <span class="string">'/welcome'</span>,</span><br><span class="line">       component: Welcome</span><br><span class="line">     &#125;,</span><br><span class="line">     &#123;</span><br><span class="line">       path: <span class="string">'/users'</span>,</span><br><span class="line">       component: Users</span><br><span class="line">     &#125;</span><br><span class="line">   ]</span><br><span class="line"> &#125;</span><br></pre></td></tr></table></figure>
@@ -179,7 +182,114 @@
 </ul>
 <figure class="highlight html"><table><tr><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">el-table-column</span> <span class="attr">label</span>=<span class="string">"状态"</span> <span class="attr">prop</span>=<span class="string">"mg_state"</span>&gt;</span></span><br><span class="line">	<span class="tag">&lt;<span class="name">template</span> <span class="attr">v-slot</span>=<span class="string">"scope"</span>&gt;</span></span><br><span class="line">		<span class="tag">&lt;<span class="name">el-switch</span> <span class="attr">v-model</span>=<span class="string">"scope.row.mg_state"</span>&gt;</span><span class="tag">&lt;/<span class="name">el-switch</span>&gt;</span></span><br><span class="line">	<span class="tag">&lt;/<span class="name">template</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">el-table-column</span>&gt;</span></span><br></pre></td></tr></table></figure>
 
-<h2 id=""><a href="#" class="headerlink" title=""></a></h2>]]></content>
+<h2 id="鼠标悬浮的提示框"><a href="#鼠标悬浮的提示框" class="headerlink" title="鼠标悬浮的提示框"></a>鼠标悬浮的提示框</h2><p>有一个需求是鼠标放上去就提示文字信息，因为有一些按钮不太方便理解。</p>
+<p>这里使用tooltip的组件即可。但是有一个小问题，如果文字提示的方向是top，那么鼠标放上去时弹出的文字提示会覆盖掉上面的按钮。所以需要自动隐藏。</p>
+<p>解决方案：<code>使用enterable：鼠标是否可以进入到tooltip中</code>。这里也要注意enterable也需要动态绑定，因为是布尔值。<code>:enterable=&quot;false&quot;</code></p>
+<h2 id="使用tooltip"><a href="#使用tooltip" class="headerlink" title="使用tooltip"></a>使用tooltip</h2><p>tooltip是分页器组件，在使用是，点击页码尺寸和页码都会触发事件，这时在事件中就可以将之前定义好的接口所需要的函数重新赋值，然后再次调用接口请求数据即可。千万不要只重新赋值，不然页面不会重新渲染。</p>
+<h2 id="接口中有参数的解决方案"><a href="#接口中有参数的解决方案" class="headerlink" title="接口中有参数的解决方案"></a>接口中有参数的解决方案</h2><p>现在有一个接口：<code>users/:uId/state/:type</code>。<br>一般为了方便，都会使用模板字符串改写为：</p>
+<figure class="highlight js"><table><tr><td class="code"><pre><span class="line"><span class="comment">// 监听用户状态发生的改变</span></span><br><span class="line"><span class="keyword">async</span> userStatechange(userInfo) &#123;</span><br><span class="line">  <span class="keyword">const</span> &#123; <span class="attr">data</span>: res &#125; = <span class="keyword">await</span> <span class="keyword">this</span>.$http.put(</span><br><span class="line">    <span class="string">`users/<span class="subst">$&#123;userInfo.id&#125;</span>/state/<span class="subst">$&#123;userInfo.mg_state&#125;</span>`</span></span><br><span class="line">  )</span><br><span class="line">  <span class="keyword">if</span> (res.meta.status !== <span class="number">200</span>) &#123;</span><br><span class="line">    <span class="comment">// 虽然这里更新失败，但是前端的页面已经更新成功了，所以还要将状态取反</span></span><br><span class="line">    userInfo.mg_state = !userInfo.mg_state</span><br><span class="line">    <span class="keyword">return</span> <span class="keyword">this</span>.$message.error(<span class="string">'更新用户状态失败'</span>)</span><br><span class="line">  &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">    <span class="keyword">this</span>.$message.success(<span class="string">'更新成功'</span>)</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h2 id="搜索框的清空"><a href="#搜索框的清空" class="headerlink" title="搜索框的清空"></a>搜索框的清空</h2><p>input组件提供了一个属性：<code>clearable:在输入文本后，后面会出现一个按钮，点击后就可以清空输入的文本</code>。</p>
+<p>但是清空后，并没有重新渲染页面，还是在之前的页面。所以还提供了一个事件：<code>clear:再点击清空按钮时，立即触发</code></p>
+<p>所以可以这么写:</p>
+<figure class="highlight html"><table><tr><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">el-input</span> @<span class="attr">clear</span>=<span class="string">"clear"</span> <span class="attr">v-model</span>=<span class="string">"queryInfo.query"</span> <span class="attr">clearable</span> <span class="attr">placeholder</span>=<span class="string">"请输入内容"</span>&gt;</span></span><br></pre></td></tr></table></figure>
+
+<figure class="highlight js"><table><tr><td class="code"><pre><span class="line"><span class="comment">// 清空搜索框，并且重新请求数据</span></span><br><span class="line">clear() &#123;</span><br><span class="line">	<span class="keyword">this</span>.getUserList()</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h2 id="自定义校验规则"><a href="#自定义校验规则" class="headerlink" title="自定义校验规则"></a>自定义校验规则</h2><p>在添加用户的时候，需要输入邮箱和手机号，由于这两个比较特殊，所以需要用到自定义校验规则</p>
+<ul>
+<li>首先定义两个自定义的校验规则。使用test方法去测试是否正确</li>
+</ul>
+<figure class="highlight js"><table><tr><td class="code"><pre><span class="line"><span class="comment">// 自定义校验规则</span></span><br><span class="line"><span class="keyword">const</span> checkEmail = <span class="function">(<span class="params">rule, value, callback</span>) =&gt;</span> &#123;</span><br><span class="line">  <span class="keyword">const</span> regEmail = <span class="regexp">/^([a-zA-Z0-9_-])+@([a-zA-Z0-9_-])+(\.[a-zA-Z0-9_-])+/</span></span><br><span class="line">  <span class="keyword">if</span> (regEmail.test(value)) &#123;</span><br><span class="line">    <span class="keyword">return</span> callback()</span><br><span class="line">  &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">    callback(<span class="keyword">new</span> <span class="built_in">Error</span>(<span class="string">'请输入合法的邮箱地址'</span>))</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">const</span> checkMobile = <span class="function">(<span class="params">rule, value, callback</span>) =&gt;</span> &#123;</span><br><span class="line">  <span class="keyword">const</span> regMobile = <span class="regexp">/^(0|86|17951)?(13[0-9]|15[0123456789]|17[678]|18(0-9)|14[57])[0-9]&#123;8&#125;$/</span></span><br><span class="line">  <span class="keyword">if</span> (regMobile.test(value)) &#123;</span><br><span class="line">    <span class="keyword">return</span> callback()</span><br><span class="line">  &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">    callback(<span class="keyword">new</span> <span class="built_in">Error</span>(<span class="string">'请输入合法的手机号'</span>))</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>然后添加到rules的规则中。使用validator指定之前定义好的校验的规则</li>
+</ul>
+<figure class="highlight js"><table><tr><td class="code"><pre><span class="line">email: [</span><br><span class="line">    &#123; <span class="attr">required</span>: <span class="literal">true</span>, <span class="attr">message</span>: <span class="string">'请输入邮箱'</span>, <span class="attr">trigger</span>: <span class="string">'blur'</span> &#125;,</span><br><span class="line">    &#123; <span class="attr">validator</span>: checkEmail, <span class="attr">trigger</span>: <span class="string">'blur'</span> &#125;</span><br><span class="line">],</span><br><span class="line">mobile: [</span><br><span class="line">    &#123; <span class="attr">required</span>: <span class="literal">true</span>, <span class="attr">message</span>: <span class="string">'请输入手机号'</span>, <span class="attr">trigger</span>: <span class="string">'blur'</span> &#125;,</span><br><span class="line">    &#123; <span class="attr">validator</span>: checkMobile, <span class="attr">trigger</span>: <span class="string">'blur'</span> &#125;</span><br><span class="line">]</span><br></pre></td></tr></table></figure>
+
+<h2 id="添加用户之后的bug"><a href="#添加用户之后的bug" class="headerlink" title="添加用户之后的bug"></a>添加用户之后的bug</h2><p>在添加用户后，不管取消还是确定，再次打开的时候，表单里还是上一次填的数据，所以要进行一次清空操作。</p>
+<ul>
+<li>首先监听对话框的关闭事件</li>
+<li>在关闭事件中重置表单</li>
+</ul>
+<figure class="highlight js"><table><tr><td class="code"><pre><span class="line"><span class="comment">// 首先监听到表单的close事件，然后绑定一个函数addDialogClosed</span></span><br><span class="line"><span class="comment">// 清空添加用户的数据</span></span><br><span class="line">addDialogClosed() &#123;</span><br><span class="line">	<span class="comment">//addFormRef是表单的ref，然后调用resetFields</span></span><br><span class="line">	<span class="keyword">this</span>.$refs.addFormRef.resetFields()</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h1 id="修改用户数据"><a href="#修改用户数据" class="headerlink" title="修改用户数据"></a>修改用户数据</h1><ul>
+<li>首先点击修改的按钮，然后弹出来一个dialog对话框组件。</li>
+<li>然后对话框里面有三个输入框，分别为用户名、邮箱、手机号。</li>
+<li>用户名：用户名不可修改，可在input组件中使用disabled属性将其设置为不可修改</li>
+<li>三个输入框的内容需要通过调用API去查询，然后渲染出来</li>
+<li>但是需要id作为参数，因为要通过id去查询。</li>
+<li>由于修改的按钮在作用域插槽中，所以可以通过<code>scope.row.id</code>作为参数传入事件绑定的函数</li>
+<li>然后就可以查询了，并且将查询的值赋值给data中的editForm</li>
+</ul>
+<figure class="highlight js"><table><tr><td class="code"><pre><span class="line"><span class="comment">// 展示修改用户信息</span></span><br><span class="line"><span class="keyword">async</span> showEditDialog(id) &#123;</span><br><span class="line">  <span class="keyword">const</span> &#123; <span class="attr">data</span>: res &#125; = <span class="keyword">await</span> <span class="keyword">this</span>.$http.get(<span class="string">'users/'</span> + id)</span><br><span class="line">  <span class="keyword">if</span> (res.meta.status !== <span class="number">200</span>) &#123;</span><br><span class="line">    <span class="keyword">return</span> <span class="keyword">this</span>.$message.error(<span class="string">'查询用户信息失败'</span>)</span><br><span class="line">  &#125;</span><br><span class="line">  <span class="keyword">this</span>.editForm = res.data</span><br><span class="line">  <span class="keyword">this</span>.editDialogVisible = <span class="literal">true</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>此时弹出的对话框就有了初始的数据，然后在开始填写</li>
+<li>在点击确定的时候，就要调用API去修改，因为这里也是向服务器修改数据，所以也需要一个预验证去校验是否正确。</li>
+</ul>
+<figure class="highlight js"><table><tr><td class="code"><pre><span class="line"><span class="comment">// 提交修改</span></span><br><span class="line">    editUser() &#123;</span><br><span class="line">      <span class="keyword">this</span>.$refs.editFormRef.validate(<span class="keyword">async</span> valid =&gt; &#123;</span><br><span class="line">        <span class="keyword">if</span> (!valid) <span class="keyword">return</span></span><br><span class="line">        <span class="keyword">const</span> &#123; <span class="attr">data</span>: res &#125; = <span class="keyword">await</span> <span class="keyword">this</span>.$http.put(</span><br><span class="line">          <span class="string">'users/'</span> + <span class="keyword">this</span>.editForm.id,</span><br><span class="line">          &#123;</span><br><span class="line">            email: <span class="keyword">this</span>.editForm.email,</span><br><span class="line">            mobile: <span class="keyword">this</span>.editForm.mobile</span><br><span class="line">          &#125;</span><br><span class="line">        )</span><br><span class="line">        <span class="keyword">if</span> (res.meta.status !== <span class="number">200</span>) &#123;</span><br><span class="line">          <span class="built_in">console</span>.log(res.meta.status)</span><br><span class="line">          <span class="keyword">return</span> <span class="keyword">this</span>.$message.error(<span class="string">'修改失败'</span>)</span><br><span class="line">        &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">          <span class="keyword">this</span>.editDialogVisible = <span class="literal">false</span></span><br><span class="line">          <span class="keyword">this</span>.getUserList()</span><br><span class="line">          <span class="keyword">this</span>.$message.success(<span class="string">'修改成功'</span>)</span><br><span class="line">        &#125;</span><br><span class="line">      &#125;)</span><br><span class="line">    &#125;</span><br></pre></td></tr></table></figure>
+
+<h2 id="put请求，一个必须参数，两个非必须参数"><a href="#put请求，一个必须参数，两个非必须参数" class="headerlink" title="put请求，一个必须参数，两个非必须参数"></a>put请求，一个必须参数，两个非必须参数</h2><p>那么怎么写呢？</p>
+<figure class="highlight js"><table><tr><td class="code"><pre><span class="line"><span class="keyword">this</span>.$http.put(<span class="string">'users/'</span>+<span class="string">'必须的参数'</span>,&#123;</span><br><span class="line">	非必须的参数键:非必须参数的值</span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure>
+
+<h1 id="删除用户数据"><a href="#删除用户数据" class="headerlink" title="删除用户数据"></a>删除用户数据</h1><ul>
+<li>点击删除按钮就调用删除的API</li>
+<li>但是要注意，删除是敏感操作，所以要在删除前让用户再次确认</li>
+<li>这就需要使用到MessageBox弹框组件</li>
+<li>在按需引入组件后，还需要挂载到Vue原型上<code>Vue.prototype.confirm=MessageBox.confirm</code></li>
+<li><code>this.$confirm</code>返回的是一个promise对象，所以可以使用async await 优化</li>
+<li>要注意最后返回的值！</li>
+</ul>
+<figure class="highlight js"><table><tr><td class="code"><pre><span class="line"><span class="comment">// 删除用户信息</span></span><br><span class="line"><span class="keyword">async</span> deleteUser(id) &#123;</span><br><span class="line">  <span class="built_in">console</span>.log(id)</span><br><span class="line">  <span class="keyword">const</span> confirmResult = <span class="keyword">await</span> <span class="keyword">this</span>.$confirm(</span><br><span class="line">    <span class="string">'此操作将永久用户信息, 是否继续?'</span>,</span><br><span class="line">    <span class="string">'删除用户信息'</span>,</span><br><span class="line">    &#123;</span><br><span class="line">      confirmButtonText: <span class="string">'确定'</span>,</span><br><span class="line">      cancelButtonText: <span class="string">'取消'</span>,</span><br><span class="line">      type: <span class="string">'warning'</span></span><br><span class="line">    &#125;</span><br><span class="line">  ).catch(<span class="function"><span class="params">err</span> =&gt;</span> err)</span><br><span class="line">  <span class="comment">// 确定就返回一个confirm字符串</span></span><br><span class="line">  <span class="comment">// 取消就报错，所以上面加了catch捕获错误</span></span><br><span class="line">  <span class="comment">// 加了catch后返回一个cancel字符串</span></span><br><span class="line">  <span class="comment">// 那么现在就可以使用返回的字符串去判断是否删除信息</span></span><br><span class="line">  <span class="comment">// console.log(confirmResult)</span></span><br><span class="line">  <span class="keyword">if</span> (confirmResult !== <span class="string">'confirm'</span>) &#123;</span><br><span class="line">    <span class="keyword">return</span> <span class="keyword">this</span>.$message.error(<span class="string">'取消删除'</span>)</span><br><span class="line">  &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">    <span class="keyword">const</span> &#123; <span class="attr">data</span>: res &#125; = <span class="keyword">await</span> <span class="keyword">this</span>.$http.delete(<span class="string">'users/'</span> + id)</span><br><span class="line">    <span class="keyword">if</span> (res.meta.status !== <span class="number">200</span>) &#123;</span><br><span class="line">      <span class="keyword">return</span> <span class="keyword">this</span>.$message.error(<span class="string">'删除用户'</span>)</span><br><span class="line">    &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">      <span class="keyword">this</span>.getUserList()</span><br><span class="line">      <span class="keyword">return</span> <span class="keyword">this</span>.$message.success(<span class="string">'删除成功'</span>)</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h1 id="权限列表"><a href="#权限列表" class="headerlink" title="权限列表"></a>权限列表</h1><ul>
+<li>组件：</li>
+<li>Tag标签</li>
+</ul>
+<h2 id="渲染tag标签"><a href="#渲染tag标签" class="headerlink" title="渲染tag标签"></a>渲染tag标签</h2><ul>
+<li>首先这里拿到的数据是一个数值，但是要根据数值去选择使用什么样式的tag标签</li>
+<li>由于是在table中嵌套了一个tag组件，所以可以使用作用域插槽</li>
+<li>然后使用v-show去判断展示什么。</li>
+</ul>
+<figure class="highlight html"><table><tr><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">el-table-column</span> <span class="attr">label</span>=<span class="string">"权限等级"</span> <span class="attr">prop</span>=<span class="string">"level"</span>&gt;</span></span><br><span class="line">	<span class="tag">&lt;<span class="name">template</span> <span class="attr">v-slot</span>=<span class="string">"scope"</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">el-tag</span> <span class="attr">v-if</span>=<span class="string">"scope.row.level==='0'"</span>&gt;</span>一级权限<span class="tag">&lt;/<span class="name">el-tag</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">el-tag</span> <span class="attr">v-if</span>=<span class="string">"scope.row.level==='1'"</span> <span class="attr">type</span>=<span class="string">"success"</span>&gt;</span>二级权限<span class="tag">&lt;/<span class="name">el-tag</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">el-tag</span> <span class="attr">v-if</span>=<span class="string">"scope.row.level==='2'"</span> <span class="attr">type</span>=<span class="string">"warning"</span>&gt;</span>三级权限<span class="tag">&lt;/<span class="name">el-tag</span>&gt;</span></span><br><span class="line">	<span class="tag">&lt;/<span class="name">template</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">el-table-column</span>&gt;</span></span><br></pre></td></tr></table></figure>
+
+<h1 id="角色列表"><a href="#角色列表" class="headerlink" title="角色列表"></a>角色列表</h1><h2 id="表格展开操作"><a href="#表格展开操作" class="headerlink" title="表格展开操作"></a>表格展开操作</h2><ul>
+<li>表格前面不再是index索引，而是一个尖括号，点击后可以展开。<code>type=&quot;expand&quot;</code></li>
+<li>展开后显示的是当前角色所拥有的权限。</li>
+<li><code>&lt;pre&gt;&lt;/pre&gt;</code>作用是将一坨数据格式化，清晰方便。</li>
+</ul>
+<figure class="highlight html"><table><tr><td class="code"><pre><span class="line"><span class="comment">&lt;!-- 天秀操作，可展开,具体是角色下的权限 --&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">el-table-column</span> <span class="attr">type</span>=<span class="string">"expand"</span>&gt;</span></span><br><span class="line">		<span class="tag">&lt;<span class="name">template</span> <span class="attr">v-slot</span>=<span class="string">"scope"</span>&gt;</span></span><br><span class="line">			<span class="tag">&lt;<span class="name">pre</span>&gt;</span>&#123;&#123;scope.row&#125;&#125;<span class="tag">&lt;/<span class="name">pre</span>&gt;</span></span><br><span class="line">		<span class="tag">&lt;/<span class="name">template</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">el-table-column</span>&gt;</span></span><br></pre></td></tr></table></figure>
+
+<h2 id="多层数据的提取"><a href="#多层数据的提取" class="headerlink" title="多层数据的提取"></a>多层数据的提取</h2><p>后端经常返回很多层的数据，就是嵌套的数据，那么就需要通过一定的方法将其提取出来。</p>
+<p>这里有三层，其实方法和之前主页的二级菜单渲染是一样的。</p>
+<h2 id="角色列表展开项的美化"><a href="#角色列表展开项的美化" class="headerlink" title="角色列表展开项的美化"></a>角色列表展开项的美化</h2><ul>
+<li>css选择器。以下是两个标签中class的定义。跟以前的class完全不一样。</li>
+<li>具体什么意思呢？</li>
+</ul>
+<ol>
+<li>首先，class前面有冒号，所以就是一个动态的值，不是死的数据。</li>
+<li>第一个类表示首先添加一个bdbottom的类，然后通过三元表达式去判断（i1为第一层for循环的索引，i2同理）是否成立，然后根据结果调用。</li>
+<li>比如第一个class的意思就是索引是否为0，即是否为第一个渲染的元素？是的话就添加一个bdtop的类，不是的话就不操作。<br><code>:class=&quot;[&#39;bdbottom&#39;,i1===0?&#39;bdtop&#39;:&#39;&#39;,&#39;vcenter&#39;]&quot;</code><br><code>:class=&quot;[i2===0?&#39;&#39;:&#39;bdtop&#39;,&#39;vcenter&#39;]&quot;</code></li>
+</ol>
+<h2 id="标签的删除"><a href="#标签的删除" class="headerlink" title="标签的删除"></a>标签的删除</h2><ul>
+<li>为tag标签添加一个属性closeable即可。</li>
+<li>同时，tag标签有两个事件：click和close。</li>
+</ul>
+<p>有一点是在删除之后，权限展开的效果会被自动关闭。那是因为直接请求了重新渲染整个列表，而实际上只需要取到第三级的权限列表然后赋值即可</p>
+<h2 id="渲染树形数据结构"><a href="#渲染树形数据结构" class="headerlink" title="渲染树形数据结构"></a>渲染树形数据结构</h2><ul>
+<li>在分配权限中，返回的是一个树形的数据结构</li>
+<li>要使用到Tree树形控件</li>
+</ul>
+<p>渲染完成后优化Tree组件：</p>
+<ul>
+<li>使用show-checkbox可以使数据前面加上复选框。但是选择后只是打了个勾，并没有实际的含义，所以这里用到Tree组件的node-key属性<code>每个树节点用来作为唯一标识的属性，整棵树应该是唯一的</code></li>
+<li>使用default-expand-all属性<code>是否默认展开所有节点</code>即可展开树形结构</li>
+<li>使用default-checked-keys属性<code>默认勾选的节点的 key 的数组</code>即可勾选已存在的节点。值得注意的是，需要传入id值。那么这个id值怎么获取呢？只需要获取第三级就行，因为一二级都是半选状态，只要三级有，那么一二级也有。所以在获取三级权限数据时，将id添加到数据中</li>
+<li>使用递归函数去获取三级节点的id</li>
+</ul>
+]]></content>
       <categories>
         <category>vue+elementUI的开发实操</category>
       </categories>
