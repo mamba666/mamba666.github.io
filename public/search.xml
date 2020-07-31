@@ -1,6 +1,209 @@
 <?xml version="1.0" encoding="utf-8"?>
 <search>
   <entry>
+    <title>面试最终版</title>
+    <url>/2020/07/31/%E9%9D%A2%E8%AF%95%E9%A2%98%EF%BC%88%E6%9C%80%E7%BB%88%E7%89%88%EF%BC%89/</url>
+    <content><![CDATA[<p>click look more</p>
+<a id="more"></a>
+
+<h1 id="ES6新特性"><a href="#ES6新特性" class="headerlink" title="ES6新特性"></a>ES6新特性</h1><h2 id="var-let-const"><a href="#var-let-const" class="headerlink" title="var let const"></a>var let const</h2><ol>
+<li>关于变量提升的问题</li>
+</ol>
+<p>可以明确，let和const不存在变量提升，var存在变量提升。</p>
+<p>先来看这段代码</p>
+<figure class="highlight js"><table><tr><td class="code"><pre><span class="line">(<span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123;</span><br><span class="line">	log(a) <span class="comment">//undefined</span></span><br><span class="line">	<span class="keyword">var</span> a=<span class="number">1</span></span><br><span class="line">	log(a) <span class="comment">//1</span></span><br><span class="line">	log(b) <span class="comment">//undefined</span></span><br><span class="line">	<span class="keyword">var</span> b=<span class="number">2</span></span><br><span class="line">	log(b) <span class="comment">//2</span></span><br><span class="line">&#125;)();</span><br><span class="line"></span><br><span class="line">(<span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123;</span><br><span class="line">	log(c) <span class="comment">//Cannot access 'c' before initialization</span></span><br><span class="line">	<span class="keyword">let</span> c=<span class="number">1</span></span><br><span class="line">	log(c) <span class="comment">//1</span></span><br><span class="line">	log(d) <span class="comment">//Cannot access 'd' before initialization</span></span><br><span class="line">	<span class="keyword">let</span> d=<span class="number">2</span></span><br><span class="line">	log(d) <span class="comment">//2</span></span><br><span class="line">&#125;)()</span><br></pre></td></tr></table></figure>
+
+<p>可以得出一个结论。即使在var之前使用变量也不会报错，但是使用let就会报错。Cannot access ‘d’ before initialization（无法在初始化之前访问d）。那么为什么会报错呢？初始化之前又是什么呢？</p>
+<ul>
+<li>什么是暂时性死区：即不能在初始化之前就使用变量，不然就报错。</li>
+</ul>
+<h3 id="JS变量的过程"><a href="#JS变量的过程" class="headerlink" title="JS变量的过程"></a>JS变量的过程</h3><p>JS变量会有三个过程：创建create、初始化initialize 和赋值assign</p>
+<p>这里以var的那个函数举例子</p>
+<ol>
+<li>进入函数，为函数创建一个环境。</li>
+<li>找到 fn 中所有用 var 声明的变量，在这个环境中「创建」这些变量（即 a 和 b）。</li>
+<li>将这些变量「初始化」为 undefined。</li>
+<li>开始执行代码</li>
+</ol>
+<p>所以，在没有执行代码之前，使用var声明的变量即使被使用，也会被显示为undefined。</p>
+<h2 id="class"><a href="#class" class="headerlink" title="class"></a>class</h2><blockquote>
+<p>基本上，ES6 的class可以看作只是一个语法糖，它的绝大部分功能，ES5 都可以做到，新的class写法只是让对象原型的写法更加清晰、更像面向对象编程的语法而已。</p>
+</blockquote>
+<p>使用原生实现class，可以发现class就是通过原型实现的</p>
+<figure class="highlight js"><table><tr><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">A</span>(<span class="params">x,y</span>)</span>&#123;</span><br><span class="line">	<span class="keyword">this</span>.x=x</span><br><span class="line">	<span class="keyword">this</span>.y=y</span><br><span class="line">&#125;</span><br><span class="line">A.prototype.say=<span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123;</span><br><span class="line">	alert(<span class="string">"hello world"</span>)</span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">let</span> a=<span class="keyword">new</span> A()</span><br><span class="line">a.say()</span><br></pre></td></tr></table></figure>
+
+<h3 id="Object-getPrototypeOf"><a href="#Object-getPrototypeOf" class="headerlink" title="Object.getPrototypeOf()"></a>Object.getPrototypeOf()</h3><p>这个方法是直接在原型对象上添加方法，以后的所有基于它的实例对象都会继承这个方法。</p>
+<figure class="highlight js"><table><tr><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">A</span></span>&#123;&#125;</span><br><span class="line"><span class="keyword">let</span> a=<span class="keyword">new</span> A</span><br><span class="line">log(<span class="built_in">Object</span>.getPrototypeOf(a)===A&#123;&#125;)  <span class="comment">//true</span></span><br></pre></td></tr></table></figure>
+
+<h3 id="proto"><a href="#proto" class="headerlink" title="proto"></a><strong>proto</strong></h3><p>通过 下面的diamagnetic可以发现，Object.getPrototypeOf和<strong>proto</strong>作用是一样的。但是最好使用Object.getPrototypeOf代替<strong>proto</strong>。</p>
+<p>因为<strong>proto</strong>并不是语言的本身特性，而是浏览器自带的，所以为了避免产生环境依赖，最好使用Object.getPrototypeOf代替之</p>
+<figure class="highlight js"><table><tr><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">A</span></span>&#123;&#125;</span><br><span class="line"><span class="keyword">let</span> a=<span class="keyword">new</span> A</span><br><span class="line">log(<span class="built_in">Object</span>.getPrototypeOf(a)) <span class="comment">//A&#123;&#125;</span></span><br><span class="line">log(a.__proto__) <span class="comment">//A&#123;&#125;</span></span><br></pre></td></tr></table></figure>
+
+<h2 id="export-import"><a href="#export-import" class="headerlink" title="export/import"></a>export/import</h2><blockquote>
+<p>模块功能主要由两个命令构成：export和import。export命令用于规定模块的对外接口，import命令用于输入其他模块提供的功能。</p>
+</blockquote>
+<figure class="highlight js"><table><tr><td class="code"><pre><span class="line"><span class="comment">// profile.js</span></span><br><span class="line"><span class="keyword">var</span> firstName = <span class="string">'Michael'</span>;</span><br><span class="line"><span class="keyword">var</span> lastName = <span class="string">'Jackson'</span>;</span><br><span class="line"><span class="keyword">var</span> year = <span class="number">1958</span>;</span><br><span class="line"></span><br><span class="line"><span class="keyword">export</span> &#123; firstName, lastName, year &#125;;</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>通常情况下，export输出的变量就是本来的名字，但是可以使用as关键字重命名。</li>
+</ul>
+<figure class="highlight js"><table><tr><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">v1</span>(<span class="params"></span>) </span>&#123; ... &#125;</span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">v2</span>(<span class="params"></span>) </span>&#123; ... &#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">export</span> &#123;</span><br><span class="line">  v1 <span class="keyword">as</span> streamV1,</span><br><span class="line">  v2 <span class="keyword">as</span> streamV2,</span><br><span class="line">  v2 <span class="keyword">as</span> streamLatestVersion</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>export输出的是动态实时的值，而之前的commonJS是缓存的值，不存在动态更新。</li>
+</ul>
+<figure class="highlight js"><table><tr><td class="code"><pre><span class="line"><span class="comment">// 先输出bar，500ms后输出baz</span></span><br><span class="line"><span class="keyword">export</span> <span class="keyword">var</span> foo = <span class="string">'bar'</span>;</span><br><span class="line">setTimeout(<span class="function"><span class="params">()</span> =&gt;</span> foo = <span class="string">'baz'</span>, <span class="number">500</span>);</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>在其他模块使用export定义接口之后，就需要import加载这个其他模块。</li>
+</ul>
+<h2 id="new-Set"><a href="#new-Set" class="headerlink" title="new Set"></a>new Set</h2><blockquote>
+<p>ES6 提供了新的数据结构 Set。它类似于数组，但是成员的值都是唯一的，没有重复的值。</p>
+</blockquote>
+<figure class="highlight js"><table><tr><td class="code"><pre><span class="line"><span class="keyword">const</span> <span class="keyword">set</span> = new Set([1, 2, 3, 4, 4]);</span><br><span class="line">log([...<span class="keyword">set</span>]) //[1,2,3,4]</span><br><span class="line">// add方法  添加某个值，返回 Set 结构本身。</span><br><span class="line"><span class="keyword">set</span>.add(1).add(7)</span><br><span class="line">log([...<span class="keyword">set</span>]) //[ 1, 2, 3, 4, 7 ]</span><br><span class="line">// delete方法  删除某个值，返回一个布尔值，表示删除是否成功。</span><br><span class="line">log(<span class="keyword">set</span>.delete(7))  // true</span><br><span class="line">// has方法 返回一个布尔值，表示该值是否为Set的成员。</span><br><span class="line">log(<span class="keyword">set</span>.has(7)) //false 之前已经被delete</span><br><span class="line">log(<span class="keyword">set</span>.has(6)) //false 不存在6</span><br><span class="line">log(<span class="keyword">set</span>.has(1)) //true</span><br><span class="line">//clear方法  清除所有成员，没有返回值 </span><br><span class="line"><span class="keyword">set</span>.clear()</span><br><span class="line">log([...<span class="keyword">set</span>]) //[]  空</span><br><span class="line">// size属性，返回实例对象的成员总数</span><br><span class="line">const items = new Set([1, 2, 3, 4, 5, 5, 5, 5]);</span><br><span class="line">log(items.size) // 5</span><br></pre></td></tr></table></figure>
+
+<h2 id="Symbol"><a href="#Symbol" class="headerlink" title="Symbol"></a>Symbol</h2><ol>
+<li>为什么要引入Symbol?</li>
+</ol>
+<p>假如从别人那里获取了一个新的对象，但是想添加一个新的方法，那么这个创建的名字很可能就会重复。如果有一种机制，保证每个属性的名字都是独一无二的就好了，这样就从根本上防止属性名的冲突。</p>
+<ol start="2">
+<li>什么是Symbol？</li>
+</ol>
+<p>Symbol是ES6引入的，是JS的第七种数据类型（前六种分别为undefined、null、Boolean、String、Object、Number）。</p>
+<ol start="3">
+<li>如何使用Symbol？</li>
+</ol>
+<figure class="highlight js"><table><tr><td class="code"><pre><span class="line"><span class="comment">// 直接使用Symbol</span></span><br><span class="line"><span class="keyword">let</span> s=<span class="built_in">Symbol</span>()</span><br><span class="line">log(s) <span class="comment">// Symbol()</span></span><br><span class="line"><span class="comment">// 给Symbol带一个参数，必须是字符串、数值、对象</span></span><br><span class="line"><span class="comment">// 如果 Symbol 的参数是一个对象，就会调用该对象的toString方法，将其转为字符串，然后才生成一个 Symbol 值。</span></span><br><span class="line"><span class="keyword">let</span> a=<span class="built_in">Symbol</span>(<span class="string">"hello"</span>)</span><br><span class="line"><span class="keyword">let</span> n=<span class="built_in">Symbol</span>(<span class="number">1</span>)</span><br><span class="line"><span class="keyword">let</span> o=<span class="built_in">Symbol</span>(&#123;&#125;)</span><br><span class="line">log(a) <span class="comment">// Symbol(hello)</span></span><br><span class="line">log(n) <span class="comment">// Symbol(1)</span></span><br><span class="line">log(o) <span class="comment">// Symbol(Obejct)</span></span><br><span class="line"><span class="comment">// 注意，Symbol函数的参数只是表示对当前 Symbol 值的描述，因此相同参数的Symbol函数的返回值是不相等的。</span></span><br></pre></td></tr></table></figure>
+
+<h3 id="es2019新增description"><a href="#es2019新增description" class="headerlink" title="es2019新增description"></a>es2019新增description</h3><p>在之前，想要读取Symbol的描述，就需要将其转为字符串输出，不是很方便。而是用description就方便很多</p>
+<figure class="highlight js"><table><tr><td class="code"><pre><span class="line"><span class="comment">// 旧</span></span><br><span class="line"><span class="keyword">const</span> sym = <span class="built_in">Symbol</span>(<span class="string">'foo'</span>);</span><br><span class="line"><span class="built_in">String</span>(sym) <span class="comment">// "Symbol(foo)"</span></span><br><span class="line">sym.toString() <span class="comment">// "Symbol(foo)"</span></span><br><span class="line"></span><br><span class="line"><span class="comment">//新</span></span><br><span class="line"><span class="keyword">const</span> sym = <span class="built_in">Symbol</span>(<span class="string">'foo'</span>);</span><br><span class="line">sym.description <span class="comment">// "foo"</span></span><br></pre></td></tr></table></figure>
+
+<h1 id="http-amp-ajax"><a href="#http-amp-ajax" class="headerlink" title="http&amp;ajax"></a>http&amp;ajax</h1><h2 id="TCP-IP-三次握手和四次挥手"><a href="#TCP-IP-三次握手和四次挥手" class="headerlink" title="TCP/IP 三次握手和四次挥手"></a>TCP/IP 三次握手和四次挥手</h2><ul>
+<li>三次握手</li>
+</ul>
+<ol>
+<li>客户端向服务的发送SYN码数据包，<code>表示客户端要向服务的建立连接</code></li>
+<li>服务的收到客户端的连接请求后，会发送ACK码数据包给客户端，<code>表示连接请求已经收到，再次向客户端确认是否需要真的简历连接</code></li>
+<li>客户端在收到ACK码后会检验其是否正确。如果正确，则客户端会再次发送ACK码数据包给服务端，表示确立连接。</li>
+<li>在以上三次握手都成功后，才会真的建立起连接，并且发送数据。</li>
+</ol>
+<ul>
+<li>四次挥手</li>
+</ul>
+<ol>
+<li>当客户端发送完数据后，会给服务端发送FIN码数据包，表示数据已经传递完了</li>
+<li>当服务的收到之后，会发生ACK码数据包给客户端，表示已经知道数据传送完了。客户端收到之后，就会关闭传送的通道</li>
+<li>服务端会发送一个FIN，表示告知客户端数据已经发送完毕</li>
+<li>当客户端收到FIN之后，会发送一个ACK。表示客户端已经知道数据发送完毕。然后客户端会关闭到传送的通道</li>
+</ol>
+<h2 id="http常用的状态码"><a href="#http常用的状态码" class="headerlink" title="http常用的状态码"></a>http常用的状态码</h2><ol>
+<li>2xx ：表示成功</li>
+</ol>
+<ul>
+<li>200 OK</li>
+<li>204 请求成功，但是服务端没有内容返回</li>
+</ul>
+<ol start="2">
+<li><p>3xx ：重定向</p>
+</li>
+<li><p>4xx ：客户端错误</p>
+</li>
+</ol>
+<ul>
+<li>400 参数传递不当</li>
+<li>401 权限不够</li>
+<li>403 服务端已经理解了请求，但是拒绝响应</li>
+<li>404 客户端请求的资源或者数据不存在，一般原因有两个：写错了接口、服务端还没部署</li>
+</ul>
+<ol start="4">
+<li>5xx ：服务端错误</li>
+</ol>
+<ul>
+<li>500 服务端内部错误</li>
+<li>502 网关错误</li>
+</ul>
+<h2 id="浏览器从输入url到页面显示都发生了什么"><a href="#浏览器从输入url到页面显示都发生了什么" class="headerlink" title="浏览器从输入url到页面显示都发生了什么"></a>浏览器从输入url到页面显示都发生了什么</h2><p>大致的步骤：</p>
+<ol>
+<li>首先根据域名通过DNS查询到IP</li>
+<li>通过IP向服务器发起TCP连接</li>
+<li>向服务器发起请求</li>
+<li>服务器返回内容</li>
+<li>浏览器解析渲染页面并且显示</li>
+<li>关闭连接</li>
+</ol>
+<h2 id="http和https的区别"><a href="#http和https的区别" class="headerlink" title="http和https的区别"></a>http和https的区别</h2><ol>
+<li>https协议是由ssl+htpp协议构建的可进行加密传输、身份认知的网络协议，比http安全。</li>
+<li>http是超文本传输协议，而https是具有安全性的ssl加密传输协议</li>
+<li>连接方式也不同，端口号也不同（http为80，https为443）</li>
+</ol>
+<p>https：保护内容隐私；可确认对方的身份；防止内容篡改</p>
+<h2 id="浏览器的缓存（强缓存、协商缓存）"><a href="#浏览器的缓存（强缓存、协商缓存）" class="headerlink" title="浏览器的缓存（强缓存、协商缓存）"></a>浏览器的缓存（强缓存、协商缓存）</h2><ul>
+<li>什么是浏览器缓存呢？</li>
+</ul>
+<p>简单来说，就是浏览器保存通过http获取到的数据，即将数据存储在本地（浏览器中）。</p>
+<ul>
+<li>缓存的资源去哪儿了呢?</li>
+</ul>
+<p>memory cache：将资源缓存到内存，等待下次访问时，就直接从内存中获取。适合存放JS脚本、字体、图片等<br>disk cache：将资源保存到磁盘中，等待下次访问时，就直接从磁盘中获取。适合存放css文件等</p>
+<ul>
+<li>三级缓存原理（访问缓存的优先级）</li>
+</ul>
+<ol>
+<li>现在内存中查询</li>
+<li>再去磁盘中查询</li>
+<li>再去网路请求</li>
+<li>再将请求的数据缓存</li>
+</ol>
+<h2 id="get和post的区别"><a href="#get和post的区别" class="headerlink" title="get和post的区别"></a>get和post的区别</h2><p>get：一般用域信息的获取<br>post：一般用于修改服务器上的资源</p>
+<h2 id="同源策略问题"><a href="#同源策略问题" class="headerlink" title="同源策略问题"></a>同源策略问题</h2><ul>
+<li>什么是源策略？</li>
+</ul>
+<ol>
+<li>同源策略是JS的重要安全度量标准，主要是为了防止某个文档从多个不同源去装载。</li>
+<li>同源策略指的是协议、端口、域名都要相同，缺一不可。</li>
+</ol>
+<ul>
+<li>为什么会有同源策略？</li>
+</ul>
+<p>比如说，有一个坏人，将银行的登陆页面嵌入到他的山寨页面中，当用户输入真的用户名、密码后，坏人就可以通过JS读取到表单输入的内容。这样信息就被盗取了。</p>
+<h2 id="解决跨域问题"><a href="#解决跨域问题" class="headerlink" title="解决跨域问题"></a>解决跨域问题</h2><ul>
+<li><p>jsonp</p>
+</li>
+<li><p>原理：利用script标签没有跨域限制的漏洞</p>
+</li>
+<li><p>cors</p>
+</li>
+<li><p>关键点在于cors需要浏览器和客户端同时支持。</p>
+</li>
+<li><p>但是关键在于后端。只需要设置：<code>Access-Control-Allow-Origin</code>就可以开启cors</p>
+</li>
+<li><p>nginx</p>
+</li>
+<li><p>websocket</p>
+</li>
+</ul>
+<h1 id="防抖函数-amp-节流函数"><a href="#防抖函数-amp-节流函数" class="headerlink" title="防抖函数&amp;节流函数"></a>防抖函数&amp;节流函数</h1><p>之前一直不懂什么是防抖和节流。其实顾名思义，假设有一个需求，是鼠标停止时页面弹出alert，但是如果不进行防抖或者节流，鼠标只要一移动就会不断的发生弹出事件。</p>
+<p>概念：</p>
+<ul>
+<li>函数节流: 频繁触发,但只在特定的时间内才执行一次代码</li>
+<li>函数防抖: 频繁触发,但只在特定的时间内没有触发执行条件才执行一次代码</li>
+</ul>
+<p>可以发现，两者前提都是频繁的触发。节流就是只执行一次代码；防抖就是在某一个时间点内没有被触发时执行代码。</p>
+<h1 id="Vue"><a href="#Vue" class="headerlink" title="Vue"></a>Vue</h1><h2 id="什么是生命周期"><a href="#什么是生命周期" class="headerlink" title="什么是生命周期"></a>什么是生命周期</h2><p>Vue实例从创建到销毁的过程就是生命周期</p>
+<h2 id="生命周期的作用"><a href="#生命周期的作用" class="headerlink" title="生命周期的作用"></a>生命周期的作用</h2><p>生命周期中由多个钩子函数，可以使得在控制vue逻辑时更加方便。比如说创建的时候要发生什么，更新的时候发生什么。</p>
+<h2 id="生命周期有几个阶段"><a href="#生命周期有几个阶段" class="headerlink" title="生命周期有几个阶段"></a>生命周期有几个阶段</h2><p>总共有八个阶段</p>
+<p>创建前后：beforeCreate、created<br>载入前后：beforeMount、mounted<br>更新前后：beforeUpdate、updated<br>销毁前后：beforeDestroy、destroyed</p>
+<h2 id="第一次页面加载会触发什么钩子函数"><a href="#第一次页面加载会触发什么钩子函数" class="headerlink" title="第一次页面加载会触发什么钩子函数"></a>第一次页面加载会触发什么钩子函数</h2><p>beforeCreate、created、beforeMount、mounted</p>
+<h2 id="DOM渲染在哪儿个周期中完成"><a href="#DOM渲染在哪儿个周期中完成" class="headerlink" title="DOM渲染在哪儿个周期中完成"></a>DOM渲染在哪儿个周期中完成</h2><p>mounted</p>
+<h2 id="生命周期分别适合什么场景"><a href="#生命周期分别适合什么场景" class="headerlink" title="生命周期分别适合什么场景"></a>生命周期分别适合什么场景</h2><p>beforeCreate：可以在这里加上loading事件<br>created：可以在这里写loading结束事件，异步请求也适合在这里，比如请求数据<br>mounted：挂载元素，获取dom节点<br>boforeDestroy：可以做一个确认停止的确认框<br>nextTick：更新数据后立即操作dom</p>
+<h2 id="v-show和v-if的区别"><a href="#v-show和v-if的区别" class="headerlink" title="v-show和v-if的区别"></a>v-show和v-if的区别</h2><p>v-show是css切换（display：none），适合频繁操作<br>v-if是操作dom（销毁和重新创建），适合在较少改变时使用</p>
+<h2 id="vue组件data为什么必须是函数"><a href="#vue组件data为什么必须是函数" class="headerlink" title="vue组件data为什么必须是函数"></a>vue组件data为什么必须是函数</h2><p>因为组件是可以复用的。JS里对象是引用的关系，假如data是一个对象，那么子组件就会互相污染。所以组件的data必须是函数。</p>
+]]></content>
+      <categories>
+        <category>面试</category>
+      </categories>
+  </entry>
+  <entry>
     <title>开发后台管理系统的一些记录</title>
     <url>/2020/07/24/%E5%BC%80%E5%8F%91%E5%90%8E%E5%8F%B0%E7%AE%A1%E7%90%86%E7%B3%BB%E7%BB%9F/</url>
     <content><![CDATA[<p>click look more</p>
